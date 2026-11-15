@@ -5,8 +5,8 @@
   "timezone": "Asia/Calcutta",
   "delivery_kind": "implementation_in_progress",
   "implementation_started": true,
-  "current_task_id": "T23",
-  "next_action": "Decide whether to attach a paid Render disk at /data or disclose ephemeral graph state; then record the narrated Loom, make the GitHub repo public as planned, verify both links, and submit before the exact cutoff.",
+  "current_task_id": "T27",
+  "next_action": "Finish T23 delivery: user makes GitHub public, records Loom, confirms cutoff and submission; choose paid Render disk or disclose free ephemeral graph state. Verify final links and record actual submission confirmation.",
   "current_phase": "P6",
   "scope": "Solo Track 1; gap-driven evidence ingestion on a controlled executable app",
   "verified_facts": [
@@ -23,7 +23,8 @@
     "T23: five focused Git commits pushed to the user-specified private GitHub repository; remote main verified.",
     "T23: 180-second silent headless rehearsal and source/evidence package integrity verified; no public submission claim.",
     "T23: Render deploy 5320daf reported Live; public health, landing, workspace, results and live HydraDB graph returned HTTP 200.",
-    "T23: Public isolated Chromium passed 8 landing and 9 workspace workflow checks; hosted API completed trigger, abstain, learn and HydraDB traversal."
+    "T23: Public isolated Chromium passed 8 landing and 9 workspace workflow checks; hosted API completed trigger, abstain, learn and HydraDB traversal.",
+    "T27: exploratory local Qdrant/FastEmbed vector baseline scored 12/36 from round 1 onward on reused controlled cases; adaptive HydraDB scored 24/36 then 36/36. This is a narrow, non-confirmatory comparison with different topology representation."
   ],
   "unverified": [
     "LLM credentials/provider/spending cap (optional, not used)",
@@ -2026,6 +2027,128 @@
         "artifacts/ui/latest-landing.json": "5aeb885ba4e4b45d94e5ac2dd0e4e5c2d33f7a29846e6ef7b9cbd4b0744e9553",
         "artifacts/ui/latest-attempt.json": "42ee42254cfcacd0aacaa5c01a5dc7ca58480db2087128445d73ec8c98ae5223"
       }
+    },
+    {
+      "id": "T27",
+      "phase": "P6",
+      "title": "Exploratory same-evidence vector-store comparison",
+      "depends_on": [
+        "T22",
+        "T26"
+      ],
+      "status": "DONE",
+      "required": true,
+      "expected_outputs": [
+        "protocol/vector-exploratory-v1.json",
+        "protocol/vector-exploratory-v2.json",
+        "artifacts/eval/vector-exploratory/latest.json",
+        "artifacts/T27-vector-verify.log"
+      ],
+      "changed_files": [
+        ".gitattributes",
+        "HANDOFF.md",
+        "README.md",
+        "STATE.json",
+        "artifacts/eval/vector-exploratory/latest.json",
+        "docs/BUILD_PLAN.md",
+        "docs/DECISIONS.md",
+        "docs/EVALUATION.md",
+        "docs/LOOM_SCRIPT.md",
+        "docs/REFERENCES.md",
+        "docs/SUBMISSION.md",
+        "protocol/vector-exploratory-v1.json",
+        "protocol/vector-exploratory-v2.json",
+        "requirements-vector.txt",
+        "scripts/evaluate_vector_exploratory.py",
+        "scripts/package_submission.py",
+        "scripts/verify_submission.py",
+        "scripts/verify_vector_exploratory.py",
+        "src/faultline/evaluation/vector_baseline.py"
+      ],
+      "checks": [
+        {
+          "command": ".venv/Scripts/python.exe scripts/evaluate_vector_exploratory.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T27-vector-evaluation.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/evaluate_vector_exploratory.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T27-vector-evaluation-v2.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_evaluation.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T27-v1-unchanged-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_vector_exploratory.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T27-vector-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T27-package-prechange-fail.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/package_submission.py; .venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T27-package-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_vector_exploratory.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T27-vector-verify-final.log"
+        }
+      ],
+      "evidence_paths": [
+        "artifacts/T27-package-prechange-fail.log",
+        "artifacts/T27-package-verify.log",
+        "artifacts/T27-v1-unchanged-verify.log",
+        "artifacts/T27-vector-evaluation-v2.log",
+        "artifacts/T27-vector-evaluation.log",
+        "artifacts/T27-vector-verify-final.log",
+        "artifacts/T27-vector-verify.log"
+      ],
+      "limitations": [
+        "Retrospective exploratory: reused heldout cases, one synthetic topology, Qdrant local mode and fixed BGE text representation; vector corpus omits eight seeded topology claims; no general or fully information-equivalent vector superiority claim."
+      ],
+      "blocker": null,
+      "next_action": "Finish T23 delivery: user makes GitHub public, records Loom, confirms cutoff and submission; choose paid Render disk or disclose free ephemeral graph state. Verify final links and record actual submission confirmation.",
+      "artifact_sha256": {
+        "protocol/vector-exploratory-v1.json": "69e57c36a1c39e14df03e53b73c9ab78a19989109553f16e9d32ee3052ceb80b",
+        "protocol/vector-exploratory-v2.json": "be0de5a246a656911c9670db73ef571bcdaa001857e99923bff0a984d17538b7",
+        "requirements-vector.txt": "4cdd8bf2187c09a4a719b52cd5790a7914376dcdb764e79567fa069453ac30d7",
+        "src/faultline/evaluation/vector_baseline.py": "d5e7b95aa033a3d4dac2b72ecbae4d588e049e6e61077f94b6d26d2fd24614e9",
+        "scripts/evaluate_vector_exploratory.py": "858f90c1ec76b94a86e41fc168ef69254ec645c6487ffba7e6f28e36d76f9018",
+        "scripts/verify_vector_exploratory.py": "7d1a3a65065c230a917bfe27f7a42dc0b20a2646fe9e6e0afb5ad50e9141e7a4",
+        "artifacts/eval/vector-exploratory/latest.json": "2c7b03f397587a21687b1694cf1f1d0fdad2d10b9ac1135a0c03ce82691bbf51",
+        "README.md": "3cb4ffd6193c208ad3d7655a75426226ab824586813d56f3f5e9be3a5f1622c7",
+        "docs/EVALUATION.md": "2eb95c4757b906b6e98f00f637a101bf5cbafec293d33cd64960009f1cf2e7e9",
+        "docs/BUILD_PLAN.md": "27927ffb23cf91b26cb0cc748f1228ff98265198ef347ac1f6756ae1eb2f2be7",
+        "docs/DECISIONS.md": "06d94357ddb4cd45c867c5c696a7d77ff723dfeeae4deff8d50f255d73b007dc",
+        "docs/SUBMISSION.md": "b254bbef482a737d44ba6b31423212af31624d3160ebc73d272ca4d338742476",
+        "docs/LOOM_SCRIPT.md": "1dcd717d765ce66034c03539b4e11fc2c56a11c9f4a9e2dfac3fbbce7287a078",
+        "scripts/package_submission.py": "40b5156f48601838998d29074d664cac7fab58b3d3106aec7dc765ec0064a432",
+        "scripts/verify_submission.py": "351498e69d15a46930e5e5da49b0b7abf457777d14210de62940bcfe1ebb022f",
+        "docs/REFERENCES.md": "d6229f2105509f3509a77635aaa37d0cfd8a202bc36c730c8e05fe56f0ab290d",
+        ".gitattributes": "98a1e3621fc7200bed6904649a51dad2f1d9184920fea17f44693e02b1d1ea0c"
+      }
     }
   ],
   "check_record_template": {
@@ -2037,7 +2160,7 @@
     "summary": "Never replace real output with invented success"
   },
   "experiment": null,
-  "last_verified_implementation_task": "T26",
+  "last_verified_implementation_task": "T27",
   "session_log": [
     {
       "at": "2026-11-14T05:40:40.503Z",
@@ -2785,6 +2908,62 @@
       "status": "BLOCKED",
       "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
       "output": "artifacts/T23-render-live-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T11:02:43.607712+00:00",
+      "task": "T27",
+      "status": "IN_PROGRESS",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T11:10:42.674371+00:00",
+      "task": "T27",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/evaluate_vector_exploratory.py",
+      "output": "artifacts/T27-vector-evaluation.log"
+    },
+    {
+      "at": "2026-11-15T11:10:43.203683+00:00",
+      "task": "T27",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/evaluate_vector_exploratory.py",
+      "output": "artifacts/T27-vector-evaluation-v2.log"
+    },
+    {
+      "at": "2026-11-15T11:10:43.733355+00:00",
+      "task": "T27",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_evaluation.py",
+      "output": "artifacts/T27-v1-unchanged-verify.log"
+    },
+    {
+      "at": "2026-11-15T11:10:44.267185+00:00",
+      "task": "T27",
+      "status": "DONE",
+      "command": ".venv/Scripts/python.exe scripts/verify_vector_exploratory.py",
+      "output": "artifacts/T27-vector-verify.log"
+    },
+    {
+      "at": "2026-11-15T11:11:40.226302+00:00",
+      "task": "T27",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T27-package-prechange-fail.log"
+    },
+    {
+      "at": "2026-11-15T11:12:01.104230+00:00",
+      "task": "T27",
+      "status": "DONE",
+      "command": ".venv/Scripts/python.exe scripts/package_submission.py; .venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T27-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T11:13:02.102897+00:00",
+      "task": "T27",
+      "status": "DONE",
+      "command": ".venv/Scripts/python.exe scripts/verify_vector_exploratory.py",
+      "output": "artifacts/T27-vector-verify-final.log"
     }
   ],
   "delivery_deadline": {

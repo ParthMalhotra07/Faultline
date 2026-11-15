@@ -21,6 +21,8 @@ A seed defines scenario order and random source selection. Start with three pred
 
 Frozen versus adaptive measures acquired knowledge plus structure. Adaptive versus random measures acquisition policy. Same-evidence retrieval plus edge ablation measures graph structure. Do not conflate these conclusions.
 
+The November 15 retrospective vector comparison is separate from frozen v1. `protocol/vector-exploratory-v2.json` fixes the Qdrant local vector store, FastEmbed model and file hash, acquired-record corpus, public query, candidate restriction, abstention and scoring before the completed run. `scripts/verify_vector_exploratory.py` recounts all 252 raw predictions and source snapshot hashes. The first frozen exploratory runner stopped at round 3 on an invalid manifest-round assertion and produced no aggregate; its partial output and failure log are preserved. Version 2 changes only that assertion. Both versions reuse the original held-out cases, so neither is a fresh confirmatory test. The vector corpus includes acquired record text, whereas HydraDB also has eight seeded topology claims and traverses them; do not describe this as equal information or as proof against all vector systems.
+
 ## Per-snapshot test
 Reconstruct an isolated graph from the frozen manifest. Reset sandbox to a healthy version, inject one held-out fault privately, run acceptance checks, construct public observations and public change records, diagnose read-only, and score the selected origin. Restore sandbox before the next case. Do not let evaluation ingest or update persistent learned claims. Record graph manifest before/after; hashes must match. Incident observations may be ephemeral or isolated per case.
 

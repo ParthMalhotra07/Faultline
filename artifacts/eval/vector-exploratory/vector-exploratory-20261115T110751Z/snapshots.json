@@ -1,0 +1,149 @@
+[
+  {
+    "seed": 17,
+    "round": 0,
+    "acquisition_round": 0,
+    "source_snapshot_sha256": "43460e8dcda9751429db8e00e9b1f8c14643f83b30db302942b176506e49a54c",
+    "acquired_records": 0
+  },
+  {
+    "seed": 17,
+    "round": 1,
+    "acquisition_round": 1,
+    "source_snapshot_sha256": "6ac62c7d53d54c1c869f5c961539a4b5850c81645b5ccf6ad7a49a415f03a621",
+    "acquired_records": 2
+  },
+  {
+    "seed": 17,
+    "round": 2,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "efda370ed937932df97a401c9e843d51e87af16c59dd9ddbcd97a2f939ecfd1e",
+    "acquired_records": 3
+  },
+  {
+    "seed": 17,
+    "round": 3,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "efda370ed937932df97a401c9e843d51e87af16c59dd9ddbcd97a2f939ecfd1e",
+    "acquired_records": 3
+  },
+  {
+    "seed": 17,
+    "round": 4,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "efda370ed937932df97a401c9e843d51e87af16c59dd9ddbcd97a2f939ecfd1e",
+    "acquired_records": 3
+  },
+  {
+    "seed": 17,
+    "round": 5,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "efda370ed937932df97a401c9e843d51e87af16c59dd9ddbcd97a2f939ecfd1e",
+    "acquired_records": 3
+  },
+  {
+    "seed": 17,
+    "round": 6,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "efda370ed937932df97a401c9e843d51e87af16c59dd9ddbcd97a2f939ecfd1e",
+    "acquired_records": 3
+  },
+  {
+    "seed": 29,
+    "round": 0,
+    "acquisition_round": 0,
+    "source_snapshot_sha256": "70bd2c3f1a398ba82cfb1abce1bcd64aab57b9769a992d9e1dc78fa630eda022",
+    "acquired_records": 0
+  },
+  {
+    "seed": 29,
+    "round": 1,
+    "acquisition_round": 1,
+    "source_snapshot_sha256": "05bb75815212b05dfff6e8e2256aebc64e7f373e7cd999f1cfee4c3f56d4cc7c",
+    "acquired_records": 2
+  },
+  {
+    "seed": 29,
+    "round": 2,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2753eb8718bf3e9945bb64f742de2b0f669dfd50065490a39a52dd78aeeb5f24",
+    "acquired_records": 3
+  },
+  {
+    "seed": 29,
+    "round": 3,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2753eb8718bf3e9945bb64f742de2b0f669dfd50065490a39a52dd78aeeb5f24",
+    "acquired_records": 3
+  },
+  {
+    "seed": 29,
+    "round": 4,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2753eb8718bf3e9945bb64f742de2b0f669dfd50065490a39a52dd78aeeb5f24",
+    "acquired_records": 3
+  },
+  {
+    "seed": 29,
+    "round": 5,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2753eb8718bf3e9945bb64f742de2b0f669dfd50065490a39a52dd78aeeb5f24",
+    "acquired_records": 3
+  },
+  {
+    "seed": 29,
+    "round": 6,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2753eb8718bf3e9945bb64f742de2b0f669dfd50065490a39a52dd78aeeb5f24",
+    "acquired_records": 3
+  },
+  {
+    "seed": 43,
+    "round": 0,
+    "acquisition_round": 0,
+    "source_snapshot_sha256": "ee5aebec5ec4c3e8189f2f157849043ec16f66c6d0c58370ef48303d5ac80144",
+    "acquired_records": 0
+  },
+  {
+    "seed": 43,
+    "round": 1,
+    "acquisition_round": 1,
+    "source_snapshot_sha256": "f08a20c4e40055ed1941ac13b325aa5a036a01df86af6a48bd8cecab6a28eac8",
+    "acquired_records": 2
+  },
+  {
+    "seed": 43,
+    "round": 2,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2059e9eacfb72cc0dc9fa4055b772e4836d1c4119fdbddc08d452f8f8d6e67bc",
+    "acquired_records": 3
+  },
+  {
+    "seed": 43,
+    "round": 3,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2059e9eacfb72cc0dc9fa4055b772e4836d1c4119fdbddc08d452f8f8d6e67bc",
+    "acquired_records": 3
+  },
+  {
+    "seed": 43,
+    "round": 4,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2059e9eacfb72cc0dc9fa4055b772e4836d1c4119fdbddc08d452f8f8d6e67bc",
+    "acquired_records": 3
+  },
+  {
+    "seed": 43,
+    "round": 5,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2059e9eacfb72cc0dc9fa4055b772e4836d1c4119fdbddc08d452f8f8d6e67bc",
+    "acquired_records": 3
+  },
+  {
+    "seed": 43,
+    "round": 6,
+    "acquisition_round": 2,
+    "source_snapshot_sha256": "2059e9eacfb72cc0dc9fa4055b772e4836d1c4119fdbddc08d452f8f8d6e67bc",
+    "acquired_records": 3
+  }
+]

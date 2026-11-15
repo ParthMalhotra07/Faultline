@@ -1,12 +1,12 @@
 # Current handoff
 
-Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22, T24, T25, T26. Current task: T23 (BLOCKED).
+Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22, T24, T25, T26, T27. Current task: T27 (DONE).
 Consult STATE.json for exact checks, artifact hashes, changed files, and limitations.
 Failed checks remain preserved in artifacts and the task ledger.
 
 ## Next executable step
 
-Decide whether to attach a paid Render disk at /data or disclose ephemeral graph state; then record the narrated Loom, make the GitHub repo public as planned, verify both links, and submit before the exact cutoff.
+Finish T23 delivery: user makes GitHub public, records Loom, confirms cutoff and submission; choose paid Render disk or disclose free ephemeral graph state. Verify final links and record actual submission confirmation.
 
 ## Blockers
 

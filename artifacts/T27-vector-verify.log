@@ -1,0 +1,9 @@
+PASS: 252 predictions, 21 unchanged source snapshots, 7 recounted rounds; failed v1 attempt retained
+round | vector correct/36 | graph correct/36
+0 | 0 | 0
+1 | 12 | 24
+2 | 12 | 36
+3 | 12 | 36
+4 | 12 | 36
+5 | 12 | 36
+6 | 12 | 36

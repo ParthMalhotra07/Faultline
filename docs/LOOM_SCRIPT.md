@@ -37,7 +37,9 @@ learning incident, adaptive acquisition scored 24 of 36, equal-budget random
 16 of 36, and the frozen graph zero. Once both available sources were known,
 adaptive and random both reached 36 of 36. Removing one graph dependency
 reduced final correct answers to 24 of 36; same-evidence token overlap reached
-12 of 36. This is a small synthetic sandbox, not a general accuracy claim.”
+12 of 36. A separate retrospective Qdrant vector comparison of acquired
+record text also reached 12 of 36. It uses reused synthetic cases, and the
+graph also has seeded topology; this is not a general accuracy claim.”
 
 **2:40–3:00 — Buyer and limits.** “The first potential buyer is a small
 platform team repeatedly rediscovering shared dependencies. A shadow-mode

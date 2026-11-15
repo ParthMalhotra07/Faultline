@@ -1,0 +1,8 @@
+{
+  "python": "3.12.10",
+  "qdrant_client": "1.20.0",
+  "fastembed": "0.9.1",
+  "onnxruntime": "1.32.0",
+  "model_revision": "aa8f8b060edb00e03bfdd08813a2949946c8ba55",
+  "model_onnx_sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431"
+}

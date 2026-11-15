@@ -1,0 +1,10 @@
+seed 17 round 0: 12 cases, 0 acquired records
+seed 17 round 1: 12 cases, 2 acquired records
+seed 17 round 2: 12 cases, 3 acquired records
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\evaluate_vector_exploratory.py", line 123, in <module>
+    run()
+  File "C:\Users\am\Desktop\Faultline\scripts\evaluate_vector_exploratory.py", line 71, in run
+    assert snapshot['round'] == round_no
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError

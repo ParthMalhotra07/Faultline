@@ -73,6 +73,18 @@ The original completed run is `artifacts/eval/v1-20261114T060320Z-2f47a2/`: 1,04
 
 The first completed scoring process exited with an error during temporary-directory cleanup after saving its complete results. Those artifacts independently pass `verify_evaluation.py`. Earlier failed startup/scoring attempts are retained. Original text-baseline rows inherited graph timing/citation metadata; corrected rows mark text timing unmeasured and remove those citations, while preserving the originals. No selected answer or scoring count changed. An exact-protocol rerun completed with identical 29 aggregate points and 1,044 structural prediction rows; `artifacts/eval/latest.json` selects it.
 
+An additional **retrospective exploratory** comparison indexes the acquired config-access records in a local Qdrant vector collection with FastEmbed BGE-small. It uses the public incident only to query and rank recent public change targets; private expected answers reach only the outer scorer. Across the same 36 predictions per round, vector retrieval scored 0/36 before acquisition and 12/36 at every later point; adaptive HydraDB scored 0/36, 24/36, then 36/36 from round 2. The 252 raw vector predictions and 21 snapshot hashes are independently recounted by `scripts/verify_vector_exploratory.py`. This tests one fixed vector text representation on the already used synthetic cases. The graph also has eight seeded topology claims; the vector index contains only acquired record text, so this is **not** a full information-equivalent vector architecture or a fresh held-out win. The first exploratory attempt failed on a snapshot-round assertion before aggregation and is retained with its error; v2 corrected that runner check without changing retrieval or scoring rules. See `protocol/vector-exploratory-v2.json` and `artifacts/eval/vector-exploratory/latest.json`.
+
+To reproduce the optional exploratory comparator after installing the base project:
+
+```powershell
+.venv/Scripts/python.exe -m pip install -r requirements-vector.txt
+.venv/Scripts/python.exe scripts/evaluate_vector_exploratory.py
+.venv/Scripts/python.exe scripts/verify_vector_exploratory.py
+```
+
+The first run downloads a published embedding model into ignored `.runtime/vector-models`; the runner checks the pinned ONNX file hash and package versions. It writes a separate exploratory run and never changes frozen v1.
+
 To run the unchanged frozen experiment again:
 
 ```powershell

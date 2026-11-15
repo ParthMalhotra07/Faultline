@@ -11,12 +11,14 @@ paths=[]
 for folder in ['src','web','scripts','fixtures','protocol','docs']:
     paths += [p for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
 for name in ['README.md','AGENTS.md','START_HERE.md','HANDOFF.md','STATE.json','pyproject.toml',
-             'requirements.lock','requirements-repro.txt','requirements-ui.txt','.gitignore',
+             'requirements.lock','requirements-repro.txt','requirements-ui.txt',
+             'requirements-vector.txt','.gitignore','.gitattributes',
              '.dockerignore','Dockerfile.demo']:
     paths.append(root/name)
 paths += [p for p in (root/'tests').rglob('*.py')]
 latest=json.loads((root/'artifacts/eval/latest.json').read_text())
 paths += [p for p in (root/latest['directory']).iterdir() if p.is_file()]
+paths += [p for p in (root/'artifacts/eval/vector-exploratory').rglob('*') if p.is_file()]
 load=json.loads((root/'artifacts/load/latest.json').read_text())
 paths += [p for p in (root/load['directory']).iterdir() if p.is_file()]
 ui=json.loads((root/'artifacts/ui/latest-attempt.json').read_text())

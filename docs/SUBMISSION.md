@@ -38,6 +38,16 @@ retrieval. Removing pricing-to-currency graph claims reduced final top-1 to
 24/36. These controlled results show genuine improvement and graph dependence
 inside this sandbox, while the tiny two-source topology limits generality.
 
+An exploratory Qdrant/FastEmbed comparison on the same previously used cases
+indexes only acquired config-access record text. It scored 12/36 from the first
+acquisition onward versus the adaptive HydraDB method's 24/36 then 36/36.
+The 252 vector predictions and 21 source snapshots were recounted from raw
+artifacts. This is a fixed narrow vector setup, **not** a fresh held-out result
+or a general vector-store defeat. HydraDB also uses eight seeded topology
+claims that the vector corpus does not contain. The first exploratory runner
+failed before aggregation; v2 corrected its snapshot-round check and preserves
+the failed attempt. See the separate protocol and verifier in README.md.
+
 The graph does real work in HydraDB: bounded paths traverse reified Claim nodes
 and join source-hashed Evidence nodes to connect failing endpoints, services and
 candidate configuration changes. The public response returns these exact path,

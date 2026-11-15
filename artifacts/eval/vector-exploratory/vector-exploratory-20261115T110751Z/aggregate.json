@@ -1,0 +1,141 @@
+{
+  "label": "RETROSPECTIVE EXPLORATORY; existing controlled heldout reused",
+  "source_run": "v1-20261114T064609Z-31b50c",
+  "model": "BAAI/bge-small-en-v1.5",
+  "vector_store": "QdrantClient(:memory:) local vector collection",
+  "rows": [
+    {
+      "round": 0,
+      "vector": {
+        "correct": 0,
+        "total": 36,
+        "accuracy": 0.0,
+        "abstentions": 36,
+        "errors": 0,
+        "wrong": 0
+      },
+      "adaptive_graph": {
+        "correct": 0,
+        "total": 36
+      },
+      "acquired_records": [
+        0
+      ]
+    },
+    {
+      "round": 1,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 24,
+        "total": 36
+      },
+      "acquired_records": [
+        2
+      ]
+    },
+    {
+      "round": 2,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 36,
+        "total": 36
+      },
+      "acquired_records": [
+        3
+      ]
+    },
+    {
+      "round": 3,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 36,
+        "total": 36
+      },
+      "acquired_records": [
+        3
+      ]
+    },
+    {
+      "round": 4,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 36,
+        "total": 36
+      },
+      "acquired_records": [
+        3
+      ]
+    },
+    {
+      "round": 5,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 36,
+        "total": 36
+      },
+      "acquired_records": [
+        3
+      ]
+    },
+    {
+      "round": 6,
+      "vector": {
+        "correct": 12,
+        "total": 36,
+        "accuracy": 0.3333333333333333,
+        "abstentions": 0,
+        "errors": 0,
+        "wrong": 24
+      },
+      "adaptive_graph": {
+        "correct": 36,
+        "total": 36
+      },
+      "acquired_records": [
+        3
+      ]
+    }
+  ],
+  "limitations": [
+    "Existing heldout cases and acquired snapshots were already used for v1 evaluation; this is retrospective exploratory evidence only.",
+    "The comparator tests one local Qdrant collection, one published embedding model and one fixed text representation. It does not represent every possible vector architecture, hybrid retriever or tuned prompt.",
+    "The corpus contains only two or three acquired config-access records after round 0 and has a single small synthetic application topology.",
+    "The graph method and vector method use the same acquired evidence, but graph traversal uses the frozen topology and relationship semantics while this comparator ranks record text by cosine similarity.",
+    "Scores are measured on 12 controlled cases repeated across three acquisition seeds; this is not real incident or customer validation."
+  ]
+}

@@ -25,6 +25,13 @@ with zipfile.ZipFile(archive) as z:
     assert len(names)==manifest['files']
     assert {'README.md','STATE.json','HANDOFF.md','Dockerfile.demo','docs/SUBMISSION.md',
         'docs/HOSTING.md','protocol/v1/protocol.json','src/faultline/graph/store.py'}<=names
+    vector_latest=json.loads(z.read('artifacts/eval/vector-exploratory/latest.json'))
+    assert {'requirements-vector.txt','protocol/vector-exploratory-v2.json',
+        'src/faultline/evaluation/vector_baseline.py',
+        'scripts/evaluate_vector_exploratory.py',
+        'scripts/verify_vector_exploratory.py',
+        f"{vector_latest['directory']}/aggregate.json",
+        f"{vector_latest['directory']}/predictions.jsonl"}<=names
     assert not any(part in {'.runtime','.venv','.git','.aws','.codex','__pycache__'}
         for name in names for part in Path(name).parts)
     assert not any(Path(name).name in {'auth-token','.env'} or Path(name).name.startswith('.env.') for name in names)

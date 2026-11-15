@@ -1,0 +1,7 @@
+{
+  "status": "FAILED",
+  "reason": "Runner asserted snapshot manifest round equals evaluation round; manifest round remains last acquisition round when no new evidence acquired. No aggregate produced.",
+  "first_failed_evaluation_round": 3,
+  "scored_result": false,
+  "log": "artifacts/T27-vector-evaluation.log"
+}
