@@ -127,3 +127,12 @@ fallback. The verified official cloudflared binary was downloaded to ignored
 public tunnel with “blocked by policy.” No tunnel process or public URL was
 created. Do not retry the same exposure through another terminal route; use
 an approved durable hosting account for the live-link requirement.
+
+ADR-018 — USER-REQUESTED 2026-11-15: adapt the visual language of the user's
+Origyn frontend (github.com/ParthMalhotra07/origyn, inspected reference commit
+44ffbdc) for FAULTLINE. The dark workspace shell, compact navigation, quiet
+panels, and lane-based evidence graph are adapted in the existing buildless UI.
+FAULTLINE's identity, real API-backed investigation, HydraDB traversal, measured
+results, and replay labeling remain the product content. No Origyn backend,
+research workflow, fixture data, or model outputs are imported. This is a
+post-freeze presentation change and does not create a new evaluation version.

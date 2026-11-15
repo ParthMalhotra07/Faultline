@@ -32,7 +32,8 @@ The implementation uses a Python standard-library loopback HTTP server and a
 buildless HTML/CSS/JavaScript UI. The headless development-transfer gate passed
 before UI implementation. Browser QA now runs in isolated headless Chromium via
 the official pinned Playwright container, without controlling the active desktop.
-All 46 Python tests pass; the fresh environment demo is recorded in
+The configured Python suite passed 47 tests in `artifacts/T24-python-tests-configured.log`.
+The fresh environment demo is recorded in
 artifacts/T22-clean-demo.log. UI report artifacts include screenshots, trace,
 video, actual API-to-rendered-graph checks, mobile layout and explicit errors.
 
@@ -53,9 +54,10 @@ is token overlap, not semantic search. The structural ablation is separate from
 acquisition-policy comparison. Every displayed count comes from actual artifacts.
 
 Recorded development replay is a labeled fallback and does not mutate live state.
-The silent UI QA video is not a narrated pitch. A dedicated three-minute silent
-rehearsal/fallback now exists at `artifacts/submission/fallback-demo.webm`; its
-report says PASS with zero console/page errors. It is not a Loom upload.
+The silent UI QA video is not a narrated pitch. The three-minute silent
+rehearsal/fallback at `artifacts/submission/fallback-demo.webm` was refreshed
+after the Origyn-inspired layout change; its report says PASS with zero
+console/page errors. It is not a Loom upload.
 
 ## Buyer pitch, still a hypothesis
 

@@ -10,4 +10,5 @@ artifacts/submission/
 *.webm
 *.zip
 artifacts/ui/**/video/
+artifacts/ui/*/*.png
 artifacts/T23-docker-build.log

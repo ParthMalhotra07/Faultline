@@ -34,6 +34,12 @@ HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651
 
 The web controls operate the live demo process. CLI sandbox state is a separate ephemeral process; its reset does not restore the web process. Do not use a second CLI writer against the running web experiment. Use the web reset controls for that scope.
 
+The workspace presentation adapts the dark navigation and evidence-card language
+from the user's [Origyn frontend](https://github.com/ParthMalhotra07/origyn)
+(reference commit `44ffbdc`). FAULTLINE's controls and data remain backed by
+this repository's HydraDB graph and measured experiment. On a narrow screen,
+swipe the graph and result chart to view their full width.
+
 ## Verification and evidence
 
 ```powershell

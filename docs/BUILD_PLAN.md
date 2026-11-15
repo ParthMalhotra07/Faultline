@@ -363,3 +363,13 @@ If G2 fails, inspect development evidence and adjust one design choice at a time
 Before T15, reduce to two flows/two resources/six held-out cases if necessary and record the amendment. After protocol freeze, do not silently shrink the denominator or redefine success. Extra LLM prose, animations, containerization and integrations are first to cut. T21 can be explicitly SKIPPED and does not block required completion.
 
 At T23 complete a submission-ready package. Submission itself requires an actual confirmation and must not be inferred from prepared artifacts.
+
+### T24 — Adapt Origyn frontend design for FAULTLINE
+
+Phase: P6. Depends on: T19, T22. Required by the user's November 15 design request; T23 remains blocked on external public-delivery prerequisites.
+
+Build: Inspect the user's Origyn frontend at github.com/ParthMalhotra07/origyn. Bring its workspace layout, restrained dark palette, typography, navigation and evidence-graph treatment into FAULTLINE while keeping FAULTLINE identity, real HydraDB responses, existing sandbox controls and measured evaluation artifacts. Do not import Origyn's backend, mock data, research-domain workflows, or evaluation labels.
+
+Acceptance: Real trigger → abstain → bounded learn → restore → transfer remains usable; actual returned graph nodes/edges and measured counts render; replay stays labeled; desktop and mobile layouts are readable; no unexpected console/page errors. Capture and inspect rendered screenshots. Record source reference commit and actual test output. Rebuild the demo image if frontend assets are packaged there.
+
+Completion evidence: exact commands, exits, browser report/screenshots, changed files and remaining limitations in STATE.json and HANDOFF.md. Do not treat T23's public-host blockers as solved by a visual change.

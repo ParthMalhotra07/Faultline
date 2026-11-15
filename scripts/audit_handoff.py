@@ -14,7 +14,10 @@ for t in tasks.values():
         assert all(tasks[d]['status']=='DONE' for d in t['depends_on']),t['id']
         assert all(any(root.glob(p)) if any(c in p for c in '*?[') else (root/p).exists() for p in t['expected_outputs']),t['id']
         assert any(c['exit_code']==0 and c.get('output_path') and (root/c['output_path']).exists() for c in t['checks']),t['id']
-        for name,sha in t.get('artifact_sha256',{}).items():latest[name]=(t['id'],sha)
+        for name,sha in t.get('artifact_sha256',{}).items():
+            latest[name]=(t['id'],sha)
+            # A later completed task supersedes a blocked task's earlier check.
+            current_verified.pop(name,None)
     if t['status'] in ('IN_PROGRESS','BLOCKED') and any(c['exit_code']==0 and c.get('output_path') and
             (root/c['output_path']).exists() for c in t['checks']):
         for name,sha in t.get('artifact_sha256',{}).items():
