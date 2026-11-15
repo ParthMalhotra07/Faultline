@@ -43,13 +43,16 @@ transfer. See `artifacts/T23-render-*.log`.
 
 In Render's web-service settings, select **Docker** and `Dockerfile.demo` as
 the Dockerfile path. Leave the Docker command unset. For the new image, set
-`PORT=10000` explicitly or leave `PORT` unset; remove any earlier `PORT=8765`
-override. Set `FAULTLINE_PUBLIC_ORIGIN=https://faultline-j7kn.onrender.com`
-exactly, and configure `HYDRADB_TOKEN` as a freshly generated 32+ character
+`PORT=10000` explicitly or leave `PORT` unset; the entrypoint also corrects an
+earlier `PORT=8765` override on Render. Set
+`FAULTLINE_PUBLIC_ORIGIN=https://faultline-j7kn.onrender.com` exactly, and
+configure `HYDRADB_TOKEN` as a freshly generated 32+ character
 secret in Render's Environment tab. Do not put its value in chat or Git.
 Set the HTTP health-check path to `/api/health`. The image binds to `0.0.0.0`
 and the configured `PORT`. A Render health check uses the service's public
-`onrender.com` Host, so the exact public origin also permits health reads.
+`onrender.com` Host. Render's own `RENDER_EXTERNAL_URL` takes precedence at
+runtime for this service, so its public Host is used even if an older dashboard
+origin is stale.
 After the new deploy reports Live, run the public URL commands below with the
 Render origin and `--timeout 90` for possible free-instance cold starts, and
 inspect the browser at `/` and `/workspace`.

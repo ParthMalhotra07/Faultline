@@ -1,6 +1,11 @@
 #!/bin/sh
 set -eu
 : "${HYDRADB_TOKEN:?Configure the same private token for the bundled graph engine and app}"
+# Render supplies the canonical public URL. Use it for exact Host/Origin checks
+# so a stale dashboard value cannot leave the service unhealthy.
+if [ "${RENDER:-}" = true ] && [ -n "${RENDER_EXTERNAL_URL:-}" ]; then
+    export FAULTLINE_PUBLIC_ORIGIN="$RENDER_EXTERNAL_URL"
+fi
 : "${FAULTLINE_PUBLIC_ORIGIN:?Configure the exact HTTPS public app origin}"
 
 mkdir -p /data/store /data/cache /data/experiments /app/.runtime
