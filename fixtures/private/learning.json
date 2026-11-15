@@ -1,0 +1,104 @@
+[
+  {
+    "case_id": "learning-01",
+    "fault_key": "config:currency",
+    "fault_value": -2,
+    "expected_origin_id": "config:currency",
+    "failing_endpoints": [
+      "endpoint:checkout",
+      "endpoint:refunds"
+    ],
+    "amount": 100,
+    "observed_at_ms": 100000,
+    "change_order": [
+      "config:currency",
+      "config:billing",
+      "config:inventory"
+    ]
+  },
+  {
+    "case_id": "learning-02",
+    "fault_key": "config:billing",
+    "fault_value": false,
+    "expected_origin_id": "config:billing",
+    "failing_endpoints": [
+      "endpoint:checkout",
+      "endpoint:refunds",
+      "endpoint:renewals"
+    ],
+    "amount": 101,
+    "observed_at_ms": 101000,
+    "change_order": [
+      "config:billing",
+      "config:inventory",
+      "config:currency"
+    ]
+  },
+  {
+    "case_id": "learning-03",
+    "fault_key": "config:inventory",
+    "fault_value": false,
+    "expected_origin_id": "config:inventory",
+    "failing_endpoints": [
+      "endpoint:checkout"
+    ],
+    "amount": 102,
+    "observed_at_ms": 102000,
+    "change_order": [
+      "config:inventory",
+      "config:currency",
+      "config:billing"
+    ]
+  },
+  {
+    "case_id": "learning-04",
+    "fault_key": "config:currency",
+    "fault_value": "invalid",
+    "expected_origin_id": "config:currency",
+    "failing_endpoints": [
+      "endpoint:checkout",
+      "endpoint:refunds"
+    ],
+    "amount": 103,
+    "observed_at_ms": 103000,
+    "change_order": [
+      "config:currency",
+      "config:billing",
+      "config:inventory"
+    ]
+  },
+  {
+    "case_id": "learning-05",
+    "fault_key": "config:billing",
+    "fault_value": null,
+    "expected_origin_id": "config:billing",
+    "failing_endpoints": [
+      "endpoint:checkout",
+      "endpoint:refunds",
+      "endpoint:renewals"
+    ],
+    "amount": 104,
+    "observed_at_ms": 104000,
+    "change_order": [
+      "config:billing",
+      "config:inventory",
+      "config:currency"
+    ]
+  },
+  {
+    "case_id": "learning-06",
+    "fault_key": "config:inventory",
+    "fault_value": null,
+    "expected_origin_id": "config:inventory",
+    "failing_endpoints": [
+      "endpoint:checkout"
+    ],
+    "amount": 105,
+    "observed_at_ms": 105000,
+    "change_order": [
+      "config:inventory",
+      "config:currency",
+      "config:billing"
+    ]
+  }
+]

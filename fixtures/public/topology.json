@@ -1,0 +1,58 @@
+{
+  "entities": [
+    "endpoint:checkout",
+    "endpoint:refunds",
+    "endpoint:renewals",
+    "service:checkout",
+    "service:refunds",
+    "service:renewals",
+    "service:pricing",
+    "service:billing",
+    "config:currency",
+    "config:billing",
+    "config:inventory"
+  ],
+  "relationships": [
+    [
+      "endpoint:checkout",
+      "HANDLED_BY",
+      "service:checkout"
+    ],
+    [
+      "endpoint:refunds",
+      "HANDLED_BY",
+      "service:refunds"
+    ],
+    [
+      "endpoint:renewals",
+      "HANDLED_BY",
+      "service:renewals"
+    ],
+    [
+      "service:checkout",
+      "CALLS",
+      "service:pricing"
+    ],
+    [
+      "service:checkout",
+      "CALLS",
+      "service:billing"
+    ],
+    [
+      "service:refunds",
+      "CALLS",
+      "service:pricing"
+    ],
+    [
+      "service:refunds",
+      "CALLS",
+      "service:billing"
+    ],
+    [
+      "service:renewals",
+      "CALLS",
+      "service:billing"
+    ]
+  ],
+  "omission_policy": "Config access evidence is not initially ingested; no observed READS_CONFIG edges."
+}

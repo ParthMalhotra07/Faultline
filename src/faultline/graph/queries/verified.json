@@ -1,0 +1,20 @@
+{
+  "smoke_seed": "MERGE (a:Smoke {id: $src})-[:SMOKE]->(b:Smoke {id: $dst})",
+  "smoke_path": "MATCH (a:Smoke {id: $src})-[:SMOKE]->(b)-[:SMOKE]->(c) RETURN c.id AS id LIMIT 10",
+  "smoke_edges": "MATCH (a:Smoke {id: $src})-[:SMOKE]->(b) RETURN b.id AS id LIMIT 10",
+  "smoke_update": "MATCH (n:Smoke {id: $id}) SET n.version = $version",
+  "smoke_read": "MATCH (n:Smoke {id: $id}) RETURN n.version AS version LIMIT 10",
+  "smoke_delete": "MATCH (n:Smoke {id: $id}) DETACH DELETE n",
+  "smoke_invalid": "THIS IS NOT CYPHER",
+  "nodes": "UNWIND $rows AS row MERGE (n {id: row.id}) SET n:Entity, n.key = row.key, n.version = row.version",
+  "evidence_node": "UNWIND $rows AS row MERGE (n {id: row.id}) SET n:Evidence, n.key = row.key, n.version = row.version, n.sha256 = row.sha256",
+  "claim_node": "UNWIND $rows AS row MERGE (n {id: row.id}) SET n:Claim, n.key = row.key, n.version = row.version, n.kind = row.kind, n.state = row.state",
+  "claim_from": "MERGE (a:Claim {id: $claim})-[:FROM_ENTITY]->(b:Entity {id: $entity})",
+  "claim_to": "MERGE (a:Claim {id: $claim})-[:TO_ENTITY]->(b:Entity {id: $entity})",
+  "claim_support": "MERGE (a:Claim {id: $claim})-[:SUPPORTED_BY]->(b:Evidence {id: $evidence})",
+  "claim_commit": "MATCH (c:Claim {id: $id}) SET c.state = $state",
+  "owned_delete": "MATCH (n {id: $id}) DETACH DELETE n",
+  "paths_1": "MATCH (n0:Entity {id: $src})<-[:FROM_ENTITY]-(c1:Claim)-[:TO_ENTITY]->(n1:Entity), (c1)-[:SUPPORTED_BY]->(e1:Evidence) WHERE c1.state = 'committed' AND c1.version = $version AND e1.version = $version RETURN n0.key AS n0, n1.key AS n1, c1.key AS c1, e1.key AS e1 LIMIT 1001",
+  "paths_2": "MATCH (n0:Entity {id: $src})<-[:FROM_ENTITY]-(c1:Claim)-[:TO_ENTITY]->(n1:Entity)<-[:FROM_ENTITY]-(c2:Claim)-[:TO_ENTITY]->(n2:Entity), (c1)-[:SUPPORTED_BY]->(e1:Evidence), (c2)-[:SUPPORTED_BY]->(e2:Evidence) WHERE c1.state = 'committed' AND c1.version = $version AND e1.version = $version AND c2.state = 'committed' AND c2.version = $version AND e2.version = $version RETURN n0.key AS n0, n1.key AS n1, n2.key AS n2, c1.key AS c1, c2.key AS c2, e1.key AS e1, e2.key AS e2 LIMIT 1001",
+  "paths_3": "MATCH (n0:Entity {id: $src})<-[:FROM_ENTITY]-(c1:Claim)-[:TO_ENTITY]->(n1:Entity)<-[:FROM_ENTITY]-(c2:Claim)-[:TO_ENTITY]->(n2:Entity)<-[:FROM_ENTITY]-(c3:Claim)-[:TO_ENTITY]->(n3:Entity), (c1)-[:SUPPORTED_BY]->(e1:Evidence), (c2)-[:SUPPORTED_BY]->(e2:Evidence), (c3)-[:SUPPORTED_BY]->(e3:Evidence) WHERE c1.state = 'committed' AND c1.version = $version AND e1.version = $version AND c2.state = 'committed' AND c2.version = $version AND e2.version = $version AND c3.state = 'committed' AND c3.version = $version AND e3.version = $version RETURN n0.key AS n0, n1.key AS n1, n2.key AS n2, n3.key AS n3, c1.key AS c1, c2.key AS c2, c3.key AS c3, e1.key AS e1, e2.key AS e2, e3.key AS e3 LIMIT 1001"
+}
