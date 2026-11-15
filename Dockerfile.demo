@@ -1,0 +1,19 @@
+# Single-container judge demo: pinned open-source HydraDB engine plus Python UI.
+FROM ghcr.io/hydra-db/hydradb@sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880
+USER root
+RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv python3-pip curl && rm -rf /var/lib/apt/lists/*
+WORKDIR /app
+COPY pyproject.toml README.md ./
+COPY src ./src
+COPY scripts ./scripts
+COPY web ./web
+COPY fixtures ./fixtures
+COPY artifacts/eval/latest.json ./artifacts/eval/latest.json
+COPY artifacts/eval/v1-20261114T064609Z-31b50c/aggregate.json ./artifacts/eval/v1-20261114T064609Z-31b50c/aggregate.json
+COPY artifacts/pilot-transfer/result.json ./artifacts/pilot-transfer/result.json
+RUN python3 -m venv /opt/faultline-venv && /opt/faultline-venv/bin/pip install --no-cache-dir setuptools==80.9.0 pydantic==2.12.5 && /opt/faultline-venv/bin/pip install --no-build-isolation --no-deps -e .
+COPY scripts/run_hosted.sh /usr/local/bin/run-faultline-hosted
+RUN chmod +x /usr/local/bin/run-faultline-hosted
+ENV PATH="/opt/faultline-venv/bin:${PATH}" PORT=8765
+EXPOSE 8765
+ENTRYPOINT ["/usr/local/bin/run-faultline-hosted"]

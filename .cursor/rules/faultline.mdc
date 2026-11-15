@@ -1,0 +1,14 @@
+---
+description: FAULTLINE project scope, evidence discipline, and continuation protocol
+alwaysApply: true
+---
+
+Read AGENTS.md and follow it across this project.
+At session start read START_HERE.md, HANDOFF.md, and STATE.json.
+Use docs/BUILD_PLAN.md for task order and acceptance criteria.
+Use docs/ARCHITECTURE.md for interfaces and trust boundaries.
+Use docs/EVALUATION.md before modifying data, scoring, or learning behavior.
+Do not invent completion, commands, library APIs, evidence, or benchmark values.
+Verify the actual HydraDB interface before writing dependent code.
+Keep at most one task IN_PROGRESS and update the handoff after each verified task.
+Do not import ReliefGrid architecture into this standalone project.
