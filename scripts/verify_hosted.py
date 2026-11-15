@@ -11,6 +11,7 @@ p.add_argument('--base',default='http://127.0.0.1:18765')
 p.add_argument('--origin',default='https://faultline.example')
 p.add_argument('--phase',choices=['first','after'],required=True)
 p.add_argument('--state',default='.runtime/host-smoke/manifest.json')
+p.add_argument('--timeout',type=int,default=30,help='HTTP timeout in seconds; allow free-host cold starts')
 p.add_argument('--railway-healthcheck',action='store_true',help='Also probe Railway healthcheck Host isolation')
 a=p.parse_args()
 host=urlsplit(a.origin).netloc
@@ -23,7 +24,7 @@ def request(path, body=None, origin=a.origin, host_override=None):
     req=urllib.request.Request(a.base+path,headers=headers,
         data=None if body is None else json.dumps(body).encode())
     try:
-        with urllib.request.urlopen(req,timeout=30) as response:
+        with urllib.request.urlopen(req,timeout=a.timeout) as response:
             return response.status,json.load(response)
     except urllib.error.HTTPError as exc:
         return exc.code,json.load(exc)

@@ -51,7 +51,8 @@ Set the HTTP health-check path to `/api/health`. The image binds to `0.0.0.0`
 and the configured `PORT`. A Render health check uses the service's public
 `onrender.com` Host, so the exact public origin also permits health reads.
 After the new deploy reports Live, run the public URL commands below with the
-Render origin and inspect the browser at `/` and `/workspace`.
+Render origin and `--timeout 90` for possible free-instance cold starts, and
+inspect the browser at `/` and `/workspace`.
 
 **Persistence constraint:** Render currently permits persistent disks only
 on paid web services. The user's screenshot shows a free instance, so `/data`
@@ -136,6 +137,11 @@ $origin = 'https://<your-actual-railway-domain>'
 # Restart the Railway service in its dashboard, retaining the same /data volume.
 .venv/Scripts/python.exe scripts/verify_hosted.py --base $origin --origin $origin --phase after --state .runtime/railway-public-manifest.json
 ```
+
+For Render, set `$origin = 'https://faultline-j7kn.onrender.com'`, use a
+Render-specific local state path, and append `--timeout 90` to both commands.
+Only run the `after` phase after a restart with an attached persistent disk;
+the free instance cannot establish that persistence claim.
 
 The Railway healthcheck Host probe is for a directly reachable local container:
 add `--railway-healthcheck` to `verify_hosted.py` in that local check. The public

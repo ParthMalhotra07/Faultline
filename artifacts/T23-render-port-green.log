@@ -1,0 +1,1 @@
+PASS: RENDER=true with no explicit PORT binds port 10000 and answers /api/health

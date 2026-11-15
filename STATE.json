@@ -5,8 +5,8 @@
   "timezone": "Asia/Calcutta",
   "delivery_kind": "implementation_in_progress",
   "implementation_started": true,
-  "current_task_id": "T26",
-  "next_action": "Deploy the verified Dockerfile.demo image on Railway with one persistent /data volume, configure HYDRADB_TOKEN and FAULTLINE_PUBLIC_ORIGIN in Railway, then verify the public HTTPS link and graph persistence; the user will make the repo public and record Loom before submission.",
+  "current_task_id": "T23",
+  "next_action": "Check Render Deploys for source bcd1f9d and Live status; if the old ae667f7 deploy is still stuck, cancel it and deploy latest main. Then run public health, landing browser, and hosted workflow checks; decide whether to mount a paid /data disk.",
   "current_phase": "P6",
   "scope": "Solo Track 1; gap-driven evidence ingestion on a controlled executable app",
   "verified_facts": [
@@ -34,7 +34,7 @@
   "blockers": [
     {
       "task": "T23",
-      "prerequisite": "Railway is selected, but no account deployment or live HTTPS URL has been verified.; The GitHub repo must remain private until the user manually makes it public before submission.; The user will record the narrated Loom after deployment; no share link exists yet.; The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.; The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available."
+      "prerequisite": "The user-supplied first Render deploy at ae667f7 is waiting for port 10000 health while its app listens on 8765; corrected bcd1f9d is pushed but no public response or Live status has been verified.; The shown Render free instance has no persistent disk; /data graph state may reset after spin-down or redeploy. A paid disk decision is pending.; The GitHub repo remains private by user instruction and does not yet qualify as a public submission link.; The user will record a narrated Loom after deployment; no link is available yet.; X post is user-reported only; other social publication and the exact submission cutoff are unverified."
     }
   ],
   "gates": [
@@ -1313,6 +1313,7 @@
         "docs/DEMO.md",
         "docs/HOSTING.md",
         "docs/LOOM_SCRIPT.md",
+        "docs/REFERENCES.md",
         "docs/SOCIAL_POSTS.md",
         "docs/SUBMISSION.md",
         "docs/WORK_LOG.md",
@@ -1417,6 +1418,48 @@
           "exit_code": 0,
           "status": "PASS",
           "output_path": "artifacts/T25-package-verify.log"
+        },
+        {
+          "command": "docker build -f Dockerfile.demo -t faultline-demo:render-local .",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-image-build.log"
+        },
+        {
+          "command": "docker run --name faultline-render-check -e RENDER=true -p 127.0.0.1:18770:10000 faultline-demo:render-local; GET /api/health",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-port-green.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase first --state .runtime/render-check/manifest.json",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-hosted-first.log"
+        },
+        {
+          "command": "docker restart faultline-render-check; .venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase after --state .runtime/render-check/manifest.json",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-hosted-after.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase after --state .runtime/render-check/manifest.json --timeout 90",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-timeout-option.log"
+        },
+        {
+          "command": "git ls-remote origin refs/heads/main; git rev-parse HEAD",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T23-render-push.log"
         }
       ],
       "evidence_paths": [
@@ -1430,6 +1473,13 @@
         "artifacts/T23-package-format.log",
         "artifacts/T23-public-origin-real-green.log",
         "artifacts/T23-rehearsal.log",
+        "artifacts/T23-render-hosted-after.log",
+        "artifacts/T23-render-hosted-first.log",
+        "artifacts/T23-render-image-build.log",
+        "artifacts/T23-render-port-green.log",
+        "artifacts/T23-render-public-health-attempt.log",
+        "artifacts/T23-render-push.log",
+        "artifacts/T23-render-timeout-option.log",
         "artifacts/T23-submission-local-verify.log",
         "artifacts/T23-tunnel-policy-rejection.txt",
         "artifacts/T24-package-verify.log",
@@ -1438,22 +1488,22 @@
         "artifacts/submission/rehearsal.json"
       ],
       "limitations": [
-        "Railway is selected, but no account deployment or live HTTPS URL has been verified.",
-        "The GitHub repo must remain private until the user manually makes it public before submission.",
-        "The user will record the narrated Loom after deployment; no share link exists yet.",
-        "The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.",
-        "The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available."
+        "The user-supplied first Render deploy at ae667f7 is waiting for port 10000 health while its app listens on 8765; corrected bcd1f9d is pushed but no public response or Live status has been verified.",
+        "The shown Render free instance has no persistent disk; /data graph state may reset after spin-down or redeploy. A paid disk decision is pending.",
+        "The GitHub repo remains private by user instruction and does not yet qualify as a public submission link.",
+        "The user will record a narrated Loom after deployment; no link is available yet.",
+        "X post is user-reported only; other social publication and the exact submission cutoff are unverified."
       ],
-      "blocker": "Railway is selected, but no account deployment or live HTTPS URL has been verified.; The GitHub repo must remain private until the user manually makes it public before submission.; The user will record the narrated Loom after deployment; no share link exists yet.; The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.; The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available.",
-      "next_action": "User connects the private repo to Railway, sets Dockerfile.demo, one /data volume, PORT=8765, HYDRADB_TOKEN, FAULTLINE_PUBLIC_ORIGIN and FAULTLINE_RAILWAY_HEALTHCHECK=1, then provides the public HTTPS URL for the checks in docs/HOSTING.md. Keep GitHub private until the user toggles it; Loom follows the live URL.",
+      "blocker": "The user-supplied first Render deploy at ae667f7 is waiting for port 10000 health while its app listens on 8765; corrected bcd1f9d is pushed but no public response or Live status has been verified.; The shown Render free instance has no persistent disk; /data graph state may reset after spin-down or redeploy. A paid disk decision is pending.; The GitHub repo remains private by user instruction and does not yet qualify as a public submission link.; The user will record a narrated Loom after deployment; no link is available yet.; X post is user-reported only; other social publication and the exact submission cutoff are unverified.",
+      "next_action": "Check Render Deploys for source bcd1f9d and Live status; if the old ae667f7 deploy is still stuck, cancel it and deploy latest main. Then run public health, landing browser, and hosted workflow checks; decide whether to mount a paid /data disk.",
       "artifact_sha256": {
         "README.md": "7c11439173eef2966cb26390bb57eac3b450f1724e7b73c1d47240c01320910f",
         "START_HERE.md": "2eaa584635dfad9efe7afd68396f381a70de6d51a969022b2e4c9e6a743dbe21",
         "docs/CONTEXT.md": "7305e82347839b7ffc5ce9c95d44372e79973169ca6de6dbb6583dec6e114601",
-        "docs/DECISIONS.md": "c7602907ae171b059c0142c45fdd8a5391ca2c907e41a72bbfd925012ede19f1",
+        "docs/DECISIONS.md": "12cd824d59bc8c75e8371646b08adf3ca42ed8b8e73cd417faee40faee72cdfd",
         "docs/DEMO.md": "825dbaaef54dff8504d9cc11f8193bf408ba162a673604d02531b04bc290e056",
-        "docs/HOSTING.md": "a2e30bd15a4bb93e417b8427eb4fc97ae323297c34086d63ba352bfe9b204ee4",
-        "docs/SUBMISSION.md": "cf850c6e4b1c8ed87962ff639fcc0d7c2598e36731f396aa843dca55e37ac925",
+        "docs/HOSTING.md": "8f23de338afaa76e78939e6754eeb82c9ef951fe28fb512f0425d00f4aee4bc0",
+        "docs/SUBMISSION.md": "098a2093c9778b7c3bc7f07b25fc85e35dcfc2e39d041b348f9c63d05546ed84",
         "docs/SOCIAL_POSTS.md": "687fadc17a602a59775cfa3f73d23f5b6dd6233f3e81f31220a87853bc68d645",
         "docs/WORK_LOG.md": "e818d6b1da6cbcafe5eba78cc338f7525f23364fe4858c98f4df7d662031d0f8",
         "docs/LOOM_SCRIPT.md": "49d21513ef79fc7a343a3c27a1a1b4e59d3778b0de75eec2edc9cd35a09f285a",
@@ -1463,12 +1513,13 @@
         "scripts/record_task.py": "1373462654f5fa21898b7f0a5c3d1471fdd332480e140614668cf069e9bb2954",
         "scripts/audit_handoff.py": "473f51986d7b2abd95d1007a8f9e5a22c39a0c6832c9d6770fa709ffee030b55",
         "scripts/verify_submission.py": "93029adc579ff10cf6ba6638f905eec895ae4053ee832c0c4f7669477a8ac761",
-        "Dockerfile.demo": "baab33733b9a86da731c0169faa1742d4e265929ac84e6b4959d5e5b085afde0",
-        "scripts/run_hosted.sh": "60d25ceba7f193294d9cbb349c1ab0137e6a4c7a6f4c7129f845358d799bbf4f",
-        "scripts/verify_hosted.py": "9078ca0134d7f1e175cf95b61da755465003a8bc2de28df4f861545292d46969",
+        "Dockerfile.demo": "21028aa88a6902e78f32c74bea7b3bbe181f11f0e747b33211f97589459098ab",
+        "scripts/run_hosted.sh": "f48b356e70a814e3464be6ec7143b407b1383c09d1678dc7df03704ffc9bcb7d",
+        "scripts/verify_hosted.py": "8cc02f67c986949dacea21afe61415c410d409153fdbed3b084c56c76a4e0598",
         "scripts/package_submission.py": "339c8281290c8262bf5f568e858e70e1fb79020499771a086dbc374e46c7726a",
         ".dockerignore": "5c78c8625e075c4de08f9bdac41aa589da96aae4a44f2a74456c2c92104c8b08",
-        ".gitignore": "fc79013331f49032b926f412e9e1cdd2748d015e4552b25de33ee184d4a7dc1e"
+        ".gitignore": "fc79013331f49032b926f412e9e1cdd2748d015e4552b25de33ee184d4a7dc1e",
+        "docs/REFERENCES.md": "dd5353106447a00b2ae491310a97001ec296493e0c6b2de5801815ac8f723469"
       }
     },
     {
@@ -2523,6 +2574,62 @@
       "status": "DONE",
       "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
       "output": "artifacts/T26-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T10:31:49.667474+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T10:34:08.498896+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": "docker build -f Dockerfile.demo -t faultline-demo:render-local .",
+      "output": "artifacts/T23-render-image-build.log"
+    },
+    {
+      "at": "2026-11-15T10:34:09.075694+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": "docker run --name faultline-render-check -e RENDER=true -p 127.0.0.1:18770:10000 faultline-demo:render-local; GET /api/health",
+      "output": "artifacts/T23-render-port-green.log"
+    },
+    {
+      "at": "2026-11-15T10:34:09.635161+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase first --state .runtime/render-check/manifest.json",
+      "output": "artifacts/T23-render-hosted-first.log"
+    },
+    {
+      "at": "2026-11-15T10:34:10.215977+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": "docker restart faultline-render-check; .venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase after --state .runtime/render-check/manifest.json",
+      "output": "artifacts/T23-render-hosted-after.log"
+    },
+    {
+      "at": "2026-11-15T10:36:40.731474+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18770 --origin https://faultline.example --phase after --state .runtime/render-check/manifest.json --timeout 90",
+      "output": "artifacts/T23-render-timeout-option.log"
+    },
+    {
+      "at": "2026-11-15T10:36:41.360782+00:00",
+      "task": "T23",
+      "status": "IN_PROGRESS",
+      "command": "git ls-remote origin refs/heads/main; git rev-parse HEAD",
+      "output": "artifacts/T23-render-push.log"
+    },
+    {
+      "at": "2026-11-15T10:36:41.957802+00:00",
+      "task": "T23",
+      "status": "BLOCKED",
+      "command": "",
+      "output": "artifacts/T23-render-public-health-attempt.log"
     }
   ],
   "delivery_deadline": {
@@ -2545,7 +2652,7 @@
       "github": "https://github.com/ParthMalhotra07/Faultline (private; not qualifying)",
       "loom": null
     },
-    "deployment_choice": "User chose Railway, Dockerfile.demo, one persistent /data volume, and port 8765; no live URL supplied yet.",
+    "deployment_choice": "User switched from Railway to a Render Docker web service at https://faultline-j7kn.onrender.com. First ae667f7 build started but remained in progress because Render checked port 10000 while FAULTLINE listened on 8765. Corrected commit bcd1f9d was pushed; its local Render-mode image passed port 10000 and HydraDB workflow checks. Public deployment is not yet verified. The shown free instance has no persistent disk.",
     "repo_visibility_plan": "Keep the GitHub repository private until the user manually makes it public before submission.",
     "loom_plan": "User will record narrated Loom with docs/LOOM_SCRIPT.md after the deployment URL is active."
   }
