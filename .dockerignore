@@ -18,3 +18,12 @@ artifacts/**
 *.zip
 .env
 .env.*
+.cursor/
+AGENTS.md
+CLAUDE.md
+START_HERE.md
+HANDOFF.md
+HANDOFF_VALIDATION.json
+STATE.json
+scripts/audit_handoff.py
+scripts/record_task.py

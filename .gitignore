@@ -12,3 +12,16 @@ artifacts/submission/
 artifacts/ui/**/video/
 artifacts/ui/*/*.png
 artifacts/T23-docker-build.log
+
+# Local agent workspace and task handoff; retain on this PC.
+/.cursor/
+/AGENTS.md
+/CLAUDE.md
+/START_HERE.md
+/HANDOFF.md
+/HANDOFF_VALIDATION.json
+/STATE.json
+/docs/BUILD_PLAN.md
+/docs/WORK_LOG.md
+/scripts/audit_handoff.py
+/scripts/record_task.py

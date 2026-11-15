@@ -163,7 +163,7 @@ Checkout/shared currency → Trigger → Investigate (abstains) → Inspect & le
 Investigate (selects currency without another inspection). Also check Results
 and Replay, browser console, and mobile width. Then restart the service and
 verify learned graph persistence. Record the URL, provider, image digest,
-timestamp and actual check output in `STATE.json` before calling the link usable.
+timestamp and actual check output in a deployment log before calling the link usable.
 
 The local source bundle and three-minute silent fallback video are in
 `artifacts/submission/`. A Loom walkthrough still needs narration and an actual

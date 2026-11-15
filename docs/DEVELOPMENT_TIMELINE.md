@@ -24,8 +24,7 @@ times (IST):
 - 12:15:25 — [T22 clean demo](../artifacts/T22-clean-demo.log) recorded a fresh
   demo run and restart persistence.
 
-`STATE.json` records commands, outputs and artifact hashes for the completed
-tasks. These local timestamps and logs document work done before Git setup;
+The recorded artifact logs document checks and work done before Git setup;
 filesystem timestamps are mutable and cannot substitute for a historical Git
 commit or an organizer's own timestamped record. Use the repository's true Git
 history and these separate artifacts when explaining the sequence.

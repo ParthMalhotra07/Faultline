@@ -23,8 +23,13 @@ with zipfile.ZipFile(archive) as z:
     assert z.testzip() is None
     names=set(z.namelist())
     assert len(names)==manifest['files']
-    assert {'README.md','STATE.json','HANDOFF.md','Dockerfile.demo','docs/SUBMISSION.md',
+    assert {'README.md','Dockerfile.demo','docs/SUBMISSION.md',
         'docs/HOSTING.md','protocol/v1/protocol.json','src/faultline/graph/store.py'}<=names
+    internal={'AGENTS.md','CLAUDE.md','START_HERE.md','HANDOFF.md',
+        'HANDOFF_VALIDATION.json','STATE.json','.cursor/rules/faultline.mdc',
+        'docs/BUILD_PLAN.md','docs/WORK_LOG.md',
+        'scripts/audit_handoff.py','scripts/record_task.py'}
+    assert not (internal & names), 'Internal workspace files entered the source archive'
     vector_latest=json.loads(z.read('artifacts/eval/vector-exploratory/latest.json'))
     assert {'requirements-vector.txt','protocol/vector-exploratory-v2.json',
         'src/faultline/evaluation/vector_baseline.py',

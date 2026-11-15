@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\verify_submission.py", line 32, in <module>
+    assert not (internal & names), 'Internal workspace files entered the source archive'
+           ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Internal workspace files entered the source archive

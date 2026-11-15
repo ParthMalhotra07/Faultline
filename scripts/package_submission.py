@@ -7,10 +7,13 @@ import zipfile
 
 root=Path(__file__).resolve().parents[1]
 out=root/'artifacts/submission';out.mkdir(parents=True,exist_ok=True)
+internal={'docs/BUILD_PLAN.md','docs/WORK_LOG.md',
+          'scripts/audit_handoff.py','scripts/record_task.py'}
 paths=[]
 for folder in ['src','web','scripts','fixtures','protocol','docs']:
-    paths += [p for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts]
-for name in ['README.md','AGENTS.md','START_HERE.md','HANDOFF.md','STATE.json','pyproject.toml',
+    paths += [p for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts
+              and p.relative_to(root).as_posix() not in internal]
+for name in ['README.md','pyproject.toml',
              'requirements.lock','requirements-repro.txt','requirements-ui.txt',
              'requirements-vector.txt','.gitignore','.gitattributes',
              '.dockerignore','Dockerfile.demo']:
@@ -45,7 +48,7 @@ manifest=dict(prepared_at=datetime.now(timezone.utc).isoformat(),archive=archive
     deadline_date='2026-11-15',timezone='Asia/Calcutta',exact_cutoff=None,
     organizer_format=['usable live app link','open-source GitHub repo','Loom walkthrough'],
     submitted=False,published=False,
-    privacy='Whitelist package excludes runtime credentials, environment files, virtualenvs, user/browser profiles and config backups',
+    privacy='Whitelist package excludes local agent workspace, runtime credentials, environment files, virtualenvs, user/browser profiles and config backups',
     private_evaluator='Gold fixtures/raw predictions included for reproducibility; public API and learner do not serve/read these files',
     fallback_video='fallback-demo.webm',rehearsal='rehearsal.json',
     remaining=['Confirm exact organizer cutoff','Resolve or disclose free Render instance storage limits',

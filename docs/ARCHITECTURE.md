@@ -76,7 +76,7 @@ A snapshot is an immutable application manifest of seed hash, source hashes, act
 ## Proposed CLI contract
 python -m faultline doctor; reset --scope sandbox|experiment; diagnose --case PUBLIC_ID; learn --case LEARNING_ID; evaluate --protocol PATH; serve.
 
-These commands do not exist yet. T03/T04/T11/T14/T17 create and document them. Keep actual verified commands in STATE.json; no success claim based on this specification.
+This is a proposed interface contract, not a claim that every command is implemented. Use the runnable commands in README.md and the scripts directory; verify behavior from recorded artifacts.
 
 ## API/UI boundary
 The public API exposes health, current app observations, investigations, allowlisted source inspection, current explanation subgraph, and aggregate benchmark artifacts. Fault controls are local developer/demo controls restricted to the sandbox. No private manifests, arbitrary Cypher, shell commands, credential values, or arbitrary file paths are exposed. The UI renders backend-returned paths, not a separately invented topology. Missing benchmark output means omit the chart until real data exists.
