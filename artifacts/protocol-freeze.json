@@ -1,0 +1,6 @@
+{
+  "frozen_at": "2026-11-14T06:00:13.102714+00:00",
+  "protocol": "protocol/v1/protocol.json",
+  "sha256": "63e44ebba5e8e4b46dd7ce7dd1fb0e839dc6f12d1ea3dae8dbf551776bf8d388",
+  "checksum_correction": "Windows write_text newline translation corrected before first held-out run; protocol bytes and rules unchanged"
+}

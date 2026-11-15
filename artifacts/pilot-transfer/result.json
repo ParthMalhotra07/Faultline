@@ -1,0 +1,590 @@
+{
+  "status": "PASS",
+  "label": "development pilot only; no held-out accuracy measurement",
+  "monitoring": "A monitors checkout+renewals; B monitors refunds+renewals; each executes all real flows",
+  "before": {
+    "investigation_id": "investigation:structural",
+    "snapshot_manifest_hash": "796ede5e8a6dd566b974e9fe8af63b4812a236368854fa19f28697896dfcf764",
+    "ranked_candidates": [
+      {
+        "entity_id": "config:billing",
+        "failing_coverage": 0,
+        "healthy_contradictions": 0,
+        "shortest_path": 999
+      },
+      {
+        "entity_id": "config:currency",
+        "failing_coverage": 0,
+        "healthy_contradictions": 0,
+        "shortest_path": 999
+      },
+      {
+        "entity_id": "config:inventory",
+        "failing_coverage": 0,
+        "healthy_contradictions": 0,
+        "shortest_path": 999
+      }
+    ],
+    "selected_origin_id": null,
+    "status": "insufficient_evidence",
+    "explanation_paths": [],
+    "evidence_ids": [],
+    "gap_reason": "No candidate has a complete supporting path",
+    "elapsed_ms": 78.00000000861473
+  },
+  "learning": {
+    "public_input": {
+      "observations": [
+        {
+          "observation_id": "obs:checkout:100000",
+          "observed_at_ms": 100000,
+          "endpoint_id": "endpoint:checkout",
+          "status": "failing",
+          "symptom_code": "acceptance_failed",
+          "message": "Acceptance check failed",
+          "evidence_id": "evidence:acceptance:checkout:100000"
+        },
+        {
+          "observation_id": "obs:renewals:100000",
+          "observed_at_ms": 100000,
+          "endpoint_id": "endpoint:renewals",
+          "status": "healthy",
+          "symptom_code": "ok",
+          "message": "Acceptance check passed",
+          "evidence_id": "evidence:acceptance:renewals:100000"
+        }
+      ],
+      "changes": [
+        {
+          "change_id": "change:0:100000",
+          "changed_at_ms": 99900,
+          "target_entity_id": "config:currency",
+          "public_summary": "Configuration deployment observed",
+          "evidence_id": "evidence:change:0:100000"
+        },
+        {
+          "change_id": "change:1:100000",
+          "changed_at_ms": 99899,
+          "target_entity_id": "config:billing",
+          "public_summary": "Configuration deployment observed",
+          "evidence_id": "evidence:change:1:100000"
+        },
+        {
+          "change_id": "change:2:100000",
+          "changed_at_ms": 99898,
+          "target_entity_id": "config:inventory",
+          "public_summary": "Configuration deployment observed",
+          "evidence_id": "evidence:change:2:100000"
+        }
+      ]
+    },
+    "before": {
+      "investigation_id": "investigation:structural",
+      "snapshot_manifest_hash": "796ede5e8a6dd566b974e9fe8af63b4812a236368854fa19f28697896dfcf764",
+      "ranked_candidates": [
+        {
+          "entity_id": "config:billing",
+          "failing_coverage": 0,
+          "healthy_contradictions": 0,
+          "shortest_path": 999
+        },
+        {
+          "entity_id": "config:currency",
+          "failing_coverage": 0,
+          "healthy_contradictions": 0,
+          "shortest_path": 999
+        },
+        {
+          "entity_id": "config:inventory",
+          "failing_coverage": 0,
+          "healthy_contradictions": 0,
+          "shortest_path": 999
+        }
+      ],
+      "selected_origin_id": null,
+      "status": "insufficient_evidence",
+      "explanation_paths": [],
+      "evidence_ids": [],
+      "gap_reason": "No candidate has a complete supporting path",
+      "elapsed_ms": 94.00000001187436
+    },
+    "after": {
+      "investigation_id": "investigation:structural",
+      "snapshot_manifest_hash": "21ffc2ed9d3cc00578d4c6ef4c70493db1b282f254c83204e0ec0f8d735ebaa0",
+      "ranked_candidates": [
+        {
+          "entity_id": "config:currency",
+          "failing_coverage": 1,
+          "healthy_contradictions": 0,
+          "shortest_path": 3
+        },
+        {
+          "entity_id": "config:billing",
+          "failing_coverage": 1,
+          "healthy_contradictions": 1,
+          "shortest_path": 3
+        },
+        {
+          "entity_id": "config:inventory",
+          "failing_coverage": 0,
+          "healthy_contradictions": 0,
+          "shortest_path": 999
+        }
+      ],
+      "selected_origin_id": "config:currency",
+      "status": "supported",
+      "explanation_paths": [
+        {
+          "endpoint_id": "endpoint:checkout",
+          "candidate_id": "config:billing",
+          "entity_ids": [
+            "endpoint:checkout",
+            "service:checkout",
+            "service:billing",
+            "config:billing"
+          ],
+          "claim_ids": [
+            "claim:seed:530b5258ce17be225a5a",
+            "claim:seed:b60faccdb0367a1078c9",
+            "claim:learned:3bc33378004c6294f34e327e"
+          ],
+          "evidence_ids": [
+            "evidence:seed:530b5258ce17be225a5a",
+            "evidence:seed:b60faccdb0367a1078c9",
+            "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1"
+          ]
+        },
+        {
+          "endpoint_id": "endpoint:renewals",
+          "candidate_id": "config:billing",
+          "entity_ids": [
+            "endpoint:renewals",
+            "service:renewals",
+            "service:billing",
+            "config:billing"
+          ],
+          "claim_ids": [
+            "claim:seed:55d95c2b2f1e0458773c",
+            "claim:seed:6a3af451478075671a38",
+            "claim:learned:3bc33378004c6294f34e327e"
+          ],
+          "evidence_ids": [
+            "evidence:seed:55d95c2b2f1e0458773c",
+            "evidence:seed:6a3af451478075671a38",
+            "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1"
+          ]
+        },
+        {
+          "endpoint_id": "endpoint:checkout",
+          "candidate_id": "config:currency",
+          "entity_ids": [
+            "endpoint:checkout",
+            "service:checkout",
+            "service:pricing",
+            "config:currency"
+          ],
+          "claim_ids": [
+            "claim:seed:530b5258ce17be225a5a",
+            "claim:seed:e4a4d566580e058f085c",
+            "claim:learned:7ee9640dc80b47d9b60b0bd9"
+          ],
+          "evidence_ids": [
+            "evidence:seed:530b5258ce17be225a5a",
+            "evidence:seed:e4a4d566580e058f085c",
+            "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0"
+          ]
+        }
+      ],
+      "evidence_ids": [
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0",
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1",
+        "evidence:seed:530b5258ce17be225a5a",
+        "evidence:seed:55d95c2b2f1e0458773c",
+        "evidence:seed:6a3af451478075671a38",
+        "evidence:seed:b60faccdb0367a1078c9",
+        "evidence:seed:e4a4d566580e058f085c"
+      ],
+      "gap_reason": null,
+      "elapsed_ms": 92.99999999348074
+    },
+    "unresolved_services": [
+      "service:billing",
+      "service:checkout",
+      "service:pricing"
+    ],
+    "inspection": {
+      "source_id": "source:shared",
+      "owner_service_ids": [
+        "service:billing",
+        "service:pricing"
+      ],
+      "kind": "config_access",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+      "estimated_bytes": 593,
+      "inspected": false
+    },
+    "ledger": [
+      {
+        "source_id": "source:shared",
+        "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+        "status": "complete",
+        "bytes": 593,
+        "records": 5
+      }
+    ],
+    "budget": {
+      "max_sources": 1,
+      "max_bytes": 10000,
+      "max_records": 100,
+      "timeout_ms": 1000
+    },
+    "snapshot": {
+      "namespace": "pilot-200b88680a224e2392490cb6c5608df6",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "owned_ids": {
+        "endpoint:checkout": 61382098006337,
+        "endpoint:refunds": 213527476922781,
+        "endpoint:renewals": 38464497809529,
+        "service:checkout": 198679008919199,
+        "service:refunds": 133322885666259,
+        "service:renewals": 238619835196844,
+        "service:pricing": 18704597788246,
+        "service:billing": 71508108736668,
+        "config:currency": 207088796259041,
+        "config:billing": 159575927021792,
+        "config:inventory": 131404015685579,
+        "claim:seed:530b5258ce17be225a5a": 758344238009,
+        "evidence:seed:530b5258ce17be225a5a": 86257882056095,
+        "claim:seed:6bffa528be5954db4349": 249207055815874,
+        "evidence:seed:6bffa528be5954db4349": 124395556520806,
+        "claim:seed:55d95c2b2f1e0458773c": 30068986718532,
+        "evidence:seed:55d95c2b2f1e0458773c": 6905321203880,
+        "claim:seed:e4a4d566580e058f085c": 259570625270492,
+        "evidence:seed:e4a4d566580e058f085c": 150856169742302,
+        "claim:seed:b60faccdb0367a1078c9": 56313962583094,
+        "evidence:seed:b60faccdb0367a1078c9": 73176510891353,
+        "claim:seed:fc637dff4130a176c200": 54699649189268,
+        "evidence:seed:fc637dff4130a176c200": 107289351241950,
+        "claim:seed:a3a8bc44fe44b8f21f18": 40621379045922,
+        "evidence:seed:a3a8bc44fe44b8f21f18": 271570762584544,
+        "claim:seed:6a3af451478075671a38": 225719440787811,
+        "evidence:seed:6a3af451478075671a38": 177817904545769,
+        "claim:learned:7ee9640dc80b47d9b60b0bd9": 269943461912273,
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0": 196987556633410,
+        "claim:learned:3bc33378004c6294f34e327e": 144763603646680,
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1": 115658573799297
+      },
+      "claims": {
+        "claim:seed:530b5258ce17be225a5a": {
+          "from_id": "endpoint:checkout",
+          "to_id": "service:checkout",
+          "kind": "HANDLED_BY",
+          "evidence_id": "evidence:seed:530b5258ce17be225a5a",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:6bffa528be5954db4349": {
+          "from_id": "endpoint:refunds",
+          "to_id": "service:refunds",
+          "kind": "HANDLED_BY",
+          "evidence_id": "evidence:seed:6bffa528be5954db4349",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:55d95c2b2f1e0458773c": {
+          "from_id": "endpoint:renewals",
+          "to_id": "service:renewals",
+          "kind": "HANDLED_BY",
+          "evidence_id": "evidence:seed:55d95c2b2f1e0458773c",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:e4a4d566580e058f085c": {
+          "from_id": "service:checkout",
+          "to_id": "service:pricing",
+          "kind": "CALLS",
+          "evidence_id": "evidence:seed:e4a4d566580e058f085c",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:b60faccdb0367a1078c9": {
+          "from_id": "service:checkout",
+          "to_id": "service:billing",
+          "kind": "CALLS",
+          "evidence_id": "evidence:seed:b60faccdb0367a1078c9",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:fc637dff4130a176c200": {
+          "from_id": "service:refunds",
+          "to_id": "service:pricing",
+          "kind": "CALLS",
+          "evidence_id": "evidence:seed:fc637dff4130a176c200",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:a3a8bc44fe44b8f21f18": {
+          "from_id": "service:refunds",
+          "to_id": "service:billing",
+          "kind": "CALLS",
+          "evidence_id": "evidence:seed:a3a8bc44fe44b8f21f18",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:seed:6a3af451478075671a38": {
+          "from_id": "service:renewals",
+          "to_id": "service:billing",
+          "kind": "CALLS",
+          "evidence_id": "evidence:seed:6a3af451478075671a38",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_id": "source:topology",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 0
+        },
+        "claim:learned:7ee9640dc80b47d9b60b0bd9": {
+          "from_id": "service:pricing",
+          "to_id": "config:currency",
+          "kind": "READS_CONFIG",
+          "evidence_id": "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0",
+          "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+          "source_id": "source:shared",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 1
+        },
+        "claim:learned:3bc33378004c6294f34e327e": {
+          "from_id": "service:billing",
+          "to_id": "config:billing",
+          "kind": "READS_CONFIG",
+          "evidence_id": "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1",
+          "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+          "source_id": "source:shared",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "round": 1
+        }
+      },
+      "evidence": {
+        "evidence:seed:530b5258ce17be225a5a": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:6bffa528be5954db4349": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:55d95c2b2f1e0458773c": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:e4a4d566580e058f085c": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:b60faccdb0367a1078c9": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:fc637dff4130a176c200": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:a3a8bc44fe44b8f21f18": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:seed:6a3af451478075671a38": {
+          "source_id": "source:topology",
+          "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        },
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0": {
+          "source_id": "source:shared",
+          "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "record": {
+            "evidence_id": "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0",
+            "source_id": "source:shared",
+            "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+            "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+            "observed_at_ms": 100,
+            "record_index": 0,
+            "payload": {
+              "service_id": "service:pricing",
+              "config_key_id": "config:currency",
+              "operation": "read"
+            }
+          }
+        },
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1": {
+          "source_id": "source:shared",
+          "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+          "record": {
+            "evidence_id": "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1",
+            "source_id": "source:shared",
+            "sha256": "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210",
+            "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+            "observed_at_ms": 100,
+            "record_index": 1,
+            "payload": {
+              "service_id": "service:billing",
+              "config_key_id": "config:billing",
+              "operation": "read"
+            }
+          }
+        }
+      },
+      "sources": {
+        "6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210": {
+          "source_id": "source:shared",
+          "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+        }
+      },
+      "round": 1
+    },
+    "exhausted": false
+  },
+  "after": {
+    "investigation_id": "investigation:structural",
+    "snapshot_manifest_hash": "21ffc2ed9d3cc00578d4c6ef4c70493db1b282f254c83204e0ec0f8d735ebaa0",
+    "ranked_candidates": [
+      {
+        "entity_id": "config:currency",
+        "failing_coverage": 1,
+        "healthy_contradictions": 0,
+        "shortest_path": 3
+      },
+      {
+        "entity_id": "config:billing",
+        "failing_coverage": 1,
+        "healthy_contradictions": 1,
+        "shortest_path": 3
+      },
+      {
+        "entity_id": "config:inventory",
+        "failing_coverage": 0,
+        "healthy_contradictions": 0,
+        "shortest_path": 999
+      }
+    ],
+    "selected_origin_id": "config:currency",
+    "status": "supported",
+    "explanation_paths": [
+      {
+        "endpoint_id": "endpoint:refunds",
+        "candidate_id": "config:billing",
+        "entity_ids": [
+          "endpoint:refunds",
+          "service:refunds",
+          "service:billing",
+          "config:billing"
+        ],
+        "claim_ids": [
+          "claim:seed:6bffa528be5954db4349",
+          "claim:seed:a3a8bc44fe44b8f21f18",
+          "claim:learned:3bc33378004c6294f34e327e"
+        ],
+        "evidence_ids": [
+          "evidence:seed:6bffa528be5954db4349",
+          "evidence:seed:a3a8bc44fe44b8f21f18",
+          "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1"
+        ]
+      },
+      {
+        "endpoint_id": "endpoint:renewals",
+        "candidate_id": "config:billing",
+        "entity_ids": [
+          "endpoint:renewals",
+          "service:renewals",
+          "service:billing",
+          "config:billing"
+        ],
+        "claim_ids": [
+          "claim:seed:55d95c2b2f1e0458773c",
+          "claim:seed:6a3af451478075671a38",
+          "claim:learned:3bc33378004c6294f34e327e"
+        ],
+        "evidence_ids": [
+          "evidence:seed:55d95c2b2f1e0458773c",
+          "evidence:seed:6a3af451478075671a38",
+          "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1"
+        ]
+      },
+      {
+        "endpoint_id": "endpoint:refunds",
+        "candidate_id": "config:currency",
+        "entity_ids": [
+          "endpoint:refunds",
+          "service:refunds",
+          "service:pricing",
+          "config:currency"
+        ],
+        "claim_ids": [
+          "claim:seed:6bffa528be5954db4349",
+          "claim:seed:fc637dff4130a176c200",
+          "claim:learned:7ee9640dc80b47d9b60b0bd9"
+        ],
+        "evidence_ids": [
+          "evidence:seed:6bffa528be5954db4349",
+          "evidence:seed:fc637dff4130a176c200",
+          "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0"
+        ]
+      }
+    ],
+    "evidence_ids": [
+      "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0",
+      "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:1",
+      "evidence:seed:55d95c2b2f1e0458773c",
+      "evidence:seed:6a3af451478075671a38",
+      "evidence:seed:6bffa528be5954db4349",
+      "evidence:seed:a3a8bc44fe44b8f21f18",
+      "evidence:seed:fc637dff4130a176c200"
+    ],
+    "gap_reason": null,
+    "elapsed_ms": 94.00000001187436
+  },
+  "new_supporting_paths": [
+    {
+      "endpoint_id": "endpoint:refunds",
+      "candidate_id": "config:currency",
+      "entity_ids": [
+        "endpoint:refunds",
+        "service:refunds",
+        "service:pricing",
+        "config:currency"
+      ],
+      "claim_ids": [
+        "claim:seed:6bffa528be5954db4349",
+        "claim:seed:fc637dff4130a176c200",
+        "claim:learned:7ee9640dc80b47d9b60b0bd9"
+      ],
+      "evidence_ids": [
+        "evidence:seed:6bffa528be5954db4349",
+        "evidence:seed:fc637dff4130a176c200",
+        "evidence:6dd17f61da935afbc6ae6d9f70720d54e195975af2cf782fc6721afdfdf4f210:0"
+      ]
+    }
+  ],
+  "snapshot_hash": "21ffc2ed9d3cc00578d4c6ef4c70493db1b282f254c83204e0ec0f8d735ebaa0"
+}

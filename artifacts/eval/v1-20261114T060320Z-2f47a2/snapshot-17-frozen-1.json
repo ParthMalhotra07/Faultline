@@ -1,0 +1,159 @@
+{
+  "namespace": "v1-20261114T060320Z-2f47a2-17-frozen",
+  "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+  "owned_ids": {
+    "endpoint:checkout": 19001332506305,
+    "endpoint:refunds": 165240482343890,
+    "endpoint:renewals": 76024079191384,
+    "service:checkout": 224478582522889,
+    "service:refunds": 146432704313185,
+    "service:renewals": 14967151095478,
+    "service:pricing": 38255062500456,
+    "service:billing": 23796534444266,
+    "config:currency": 124124748805612,
+    "config:billing": 107892606544310,
+    "config:inventory": 72270566563434,
+    "claim:seed:530b5258ce17be225a5a": 183055091382966,
+    "evidence:seed:530b5258ce17be225a5a": 198641680036507,
+    "claim:seed:6bffa528be5954db4349": 39118877957605,
+    "evidence:seed:6bffa528be5954db4349": 53336454837945,
+    "claim:seed:55d95c2b2f1e0458773c": 102773308818078,
+    "evidence:seed:55d95c2b2f1e0458773c": 59050757496116,
+    "claim:seed:e4a4d566580e058f085c": 188047697572649,
+    "evidence:seed:e4a4d566580e058f085c": 95920127300133,
+    "claim:seed:b60faccdb0367a1078c9": 167601513169264,
+    "evidence:seed:b60faccdb0367a1078c9": 29972204894097,
+    "claim:seed:fc637dff4130a176c200": 180332017349405,
+    "evidence:seed:fc637dff4130a176c200": 71949586064757,
+    "claim:seed:a3a8bc44fe44b8f21f18": 95751260306226,
+    "evidence:seed:a3a8bc44fe44b8f21f18": 29394617955940,
+    "claim:seed:6a3af451478075671a38": 169549048304250,
+    "evidence:seed:6a3af451478075671a38": 62783512860308
+  },
+  "claims": {
+    "claim:seed:530b5258ce17be225a5a": {
+      "from_id": "endpoint:checkout",
+      "to_id": "service:checkout",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:530b5258ce17be225a5a",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:6bffa528be5954db4349": {
+      "from_id": "endpoint:refunds",
+      "to_id": "service:refunds",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:6bffa528be5954db4349",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:55d95c2b2f1e0458773c": {
+      "from_id": "endpoint:renewals",
+      "to_id": "service:renewals",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:55d95c2b2f1e0458773c",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:e4a4d566580e058f085c": {
+      "from_id": "service:checkout",
+      "to_id": "service:pricing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:e4a4d566580e058f085c",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:b60faccdb0367a1078c9": {
+      "from_id": "service:checkout",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:b60faccdb0367a1078c9",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:fc637dff4130a176c200": {
+      "from_id": "service:refunds",
+      "to_id": "service:pricing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:fc637dff4130a176c200",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:a3a8bc44fe44b8f21f18": {
+      "from_id": "service:refunds",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:a3a8bc44fe44b8f21f18",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:6a3af451478075671a38": {
+      "from_id": "service:renewals",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:6a3af451478075671a38",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    }
+  },
+  "evidence": {
+    "evidence:seed:530b5258ce17be225a5a": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:6bffa528be5954db4349": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:55d95c2b2f1e0458773c": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:e4a4d566580e058f085c": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:b60faccdb0367a1078c9": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:fc637dff4130a176c200": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:a3a8bc44fe44b8f21f18": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:6a3af451478075671a38": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    }
+  },
+  "sources": {},
+  "round": 0
+}

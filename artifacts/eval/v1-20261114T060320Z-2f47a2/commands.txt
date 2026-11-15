@@ -1,0 +1,1 @@
+HYDRADB_TOKEN_FILE=<local ignored auth file> .venv/Scripts/python.exe scripts/evaluate.py

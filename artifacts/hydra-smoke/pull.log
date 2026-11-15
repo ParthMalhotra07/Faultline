@@ -1,0 +1,22 @@
+0.4.0: Pulling from hydra-db/hydradb
+5a18084d10b8: Pulling fs layer
+7864b8ce7bc0: Pulling fs layer
+50a2143f06b3: Pulling fs layer
+26538842dfbf: Pulling fs layer
+759eb654e77f: Pulling fs layer
+44136fa355b3: Already exists
+bae959e623a5: Download complete
+65d553fceda1: Download complete
+5a18084d10b8: Download complete
+50a2143f06b3: Download complete
+26538842dfbf: Download complete
+26538842dfbf: Pull complete
+7864b8ce7bc0: Download complete
+759eb654e77f: Download complete
+759eb654e77f: Pull complete
+7864b8ce7bc0: Pull complete
+50a2143f06b3: Pull complete
+5a18084d10b8: Pull complete
+Digest: sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880
+Status: Downloaded newer image for ghcr.io/hydra-db/hydradb:0.4.0
+ghcr.io/hydra-db/hydradb:0.4.0

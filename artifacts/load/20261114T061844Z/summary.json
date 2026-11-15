@@ -1,0 +1,63 @@
+{
+  "label": "Generated isolated 100 chains; NOT real incident diversity",
+  "nodes": 300,
+  "edges": 200,
+  "scope": "load-441d50143df4495c8ecd0ab978896602",
+  "host": "Windows-11-10.0.26200-SP0",
+  "cpu": "Intel64 Family 6 Model 170 Stepping 4, GenuineIntel",
+  "logical_cpus": 22,
+  "docker_cpu_memory_limits": "4000000000 4294967296",
+  "database": "Official HydraDB 0.4.0 Docker on local Windows host",
+  "bounds": {
+    "hops": 2,
+    "query_limit": 101,
+    "page_rows": 1001,
+    "timeout_ms": 5000,
+    "requests_per_level": 500
+  },
+  "write_visible_read": true,
+  "levels": [
+    {
+      "clients": 1,
+      "requests": 500,
+      "successes": 500,
+      "errors": 0,
+      "warmup_requests": 10,
+      "warmup_errors": 0,
+      "elapsed_seconds": 4.10341999999946,
+      "successful_requests_per_second": 121.84957913156973,
+      "p50_ms": 3.894699999364093,
+      "p95_ms": 27.003099996363744,
+      "cache": "warm after 10 warmup requests; no cold-cache claim"
+    },
+    {
+      "clients": 5,
+      "requests": 500,
+      "successes": 500,
+      "errors": 0,
+      "warmup_requests": 10,
+      "warmup_errors": 0,
+      "elapsed_seconds": 0.7226528999744914,
+      "successful_requests_per_second": 691.8950993175966,
+      "p50_ms": 5.698349996237084,
+      "p95_ms": 21.10539999557659,
+      "cache": "warm after 10 warmup requests; no cold-cache claim"
+    },
+    {
+      "clients": 10,
+      "requests": 500,
+      "successes": 500,
+      "errors": 0,
+      "warmup_requests": 10,
+      "warmup_errors": 0,
+      "elapsed_seconds": 0.46336240001255646,
+      "successful_requests_per_second": 1079.0689965056524,
+      "p50_ms": 8.231400002841838,
+      "p95_ms": 14.883099996950477,
+      "cache": "warm after 10 warmup requests; no cold-cache claim"
+    }
+  ],
+  "completed_at": "2026-11-14T06:18:50.071275+00:00",
+  "started_at": "2026-11-14T06:18:44+00:00",
+  "start_time_resolution": "1 second, from run directory timestamp captured before graph setup"
+}

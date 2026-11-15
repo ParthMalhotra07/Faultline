@@ -1,0 +1,194 @@
+{
+  "namespace": "v1-20261114T060320Z-2f47a2-29-random",
+  "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+  "owned_ids": {
+    "endpoint:checkout": 57955282673954,
+    "endpoint:refunds": 146098495547260,
+    "endpoint:renewals": 198863735740104,
+    "service:checkout": 260962716254674,
+    "service:refunds": 171293966756756,
+    "service:renewals": 18421584350898,
+    "service:pricing": 257929844882071,
+    "service:billing": 146813464205888,
+    "config:currency": 189786475762377,
+    "config:billing": 47997820369534,
+    "config:inventory": 171890130591322,
+    "claim:seed:530b5258ce17be225a5a": 61959323042598,
+    "evidence:seed:530b5258ce17be225a5a": 7155048033782,
+    "claim:seed:6bffa528be5954db4349": 210120683810933,
+    "evidence:seed:6bffa528be5954db4349": 153887127367872,
+    "claim:seed:55d95c2b2f1e0458773c": 42434159874867,
+    "evidence:seed:55d95c2b2f1e0458773c": 190006190542235,
+    "claim:seed:e4a4d566580e058f085c": 42480502781169,
+    "evidence:seed:e4a4d566580e058f085c": 58087788548774,
+    "claim:seed:b60faccdb0367a1078c9": 34655797669625,
+    "evidence:seed:b60faccdb0367a1078c9": 156783493608607,
+    "claim:seed:fc637dff4130a176c200": 152813050528341,
+    "evidence:seed:fc637dff4130a176c200": 264067622268604,
+    "claim:seed:a3a8bc44fe44b8f21f18": 86590129257891,
+    "evidence:seed:a3a8bc44fe44b8f21f18": 49728036066512,
+    "claim:seed:6a3af451478075671a38": 136639016767571,
+    "evidence:seed:6a3af451478075671a38": 261912207570279,
+    "claim:learned:6873a76bcfd36fcccb90d089": 118646033545950,
+    "evidence:e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec:0": 53118878599723
+  },
+  "claims": {
+    "claim:seed:530b5258ce17be225a5a": {
+      "from_id": "endpoint:checkout",
+      "to_id": "service:checkout",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:530b5258ce17be225a5a",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:6bffa528be5954db4349": {
+      "from_id": "endpoint:refunds",
+      "to_id": "service:refunds",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:6bffa528be5954db4349",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:55d95c2b2f1e0458773c": {
+      "from_id": "endpoint:renewals",
+      "to_id": "service:renewals",
+      "kind": "HANDLED_BY",
+      "evidence_id": "evidence:seed:55d95c2b2f1e0458773c",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:e4a4d566580e058f085c": {
+      "from_id": "service:checkout",
+      "to_id": "service:pricing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:e4a4d566580e058f085c",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:b60faccdb0367a1078c9": {
+      "from_id": "service:checkout",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:b60faccdb0367a1078c9",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:fc637dff4130a176c200": {
+      "from_id": "service:refunds",
+      "to_id": "service:pricing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:fc637dff4130a176c200",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:a3a8bc44fe44b8f21f18": {
+      "from_id": "service:refunds",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:a3a8bc44fe44b8f21f18",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:seed:6a3af451478075671a38": {
+      "from_id": "service:renewals",
+      "to_id": "service:billing",
+      "kind": "CALLS",
+      "evidence_id": "evidence:seed:6a3af451478075671a38",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_id": "source:topology",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 0
+    },
+    "claim:learned:6873a76bcfd36fcccb90d089": {
+      "from_id": "service:checkout",
+      "to_id": "config:inventory",
+      "kind": "READS_CONFIG",
+      "evidence_id": "evidence:e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec:0",
+      "sha256": "e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec",
+      "source_id": "source:checkout",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "round": 1
+    }
+  },
+  "evidence": {
+    "evidence:seed:530b5258ce17be225a5a": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:6bffa528be5954db4349": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:55d95c2b2f1e0458773c": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:e4a4d566580e058f085c": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:b60faccdb0367a1078c9": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:fc637dff4130a176c200": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:a3a8bc44fe44b8f21f18": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:seed:6a3af451478075671a38": {
+      "source_id": "source:topology",
+      "sha256": "ddd87e2c7360a24e51b3021eab49b85abf94dad77793e5cda548729452aeb516",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    },
+    "evidence:e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec:0": {
+      "source_id": "source:checkout",
+      "sha256": "e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+      "record": {
+        "evidence_id": "evidence:e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec:0",
+        "source_id": "source:checkout",
+        "sha256": "e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec",
+        "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+        "observed_at_ms": 100,
+        "record_index": 0,
+        "payload": {
+          "service_id": "service:checkout",
+          "config_key_id": "config:inventory",
+          "operation": "read"
+        }
+      }
+    }
+  },
+  "sources": {
+    "e68739b968606423994285926d0ae1d73bd83e26478d256698eefc83cddb2dec": {
+      "source_id": "source:checkout",
+      "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
+    }
+  },
+  "round": 1
+}

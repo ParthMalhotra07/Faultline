@@ -1,0 +1,307 @@
+{
+  "protocol": "v1",
+  "fixture_label": "controlled synthetic executable commerce sandbox",
+  "seeds": [
+    17,
+    29,
+    43
+  ],
+  "cases_per_seed": 12,
+  "rows": [
+    {
+      "method": "frozen",
+      "round": 0,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 1,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 2,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 3,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 4,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 5,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "frozen",
+      "round": 6,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 0,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 1,
+      "correct": 16,
+      "total": 36,
+      "accuracy": 0.4444444444444444,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 20
+    },
+    {
+      "method": "random",
+      "round": 2,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 3,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 4,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 5,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "random",
+      "round": 6,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 0,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 1,
+      "correct": 24,
+      "total": 36,
+      "accuracy": 0.6666666666666666,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 12
+    },
+    {
+      "method": "adaptive",
+      "round": 2,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 3,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 4,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 5,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "adaptive",
+      "round": 6,
+      "correct": 36,
+      "total": 36,
+      "accuracy": 1.0,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 0,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 1,
+      "correct": 0,
+      "total": 36,
+      "accuracy": 0.0,
+      "abstentions": 36,
+      "errors": 0,
+      "wrong": 0
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 2,
+      "correct": 12,
+      "total": 36,
+      "accuracy": 0.3333333333333333,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 24
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 3,
+      "correct": 12,
+      "total": 36,
+      "accuracy": 0.3333333333333333,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 24
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 4,
+      "correct": 12,
+      "total": 36,
+      "accuracy": 0.3333333333333333,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 24
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 5,
+      "correct": 12,
+      "total": 36,
+      "accuracy": 0.3333333333333333,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 24
+    },
+    {
+      "method": "same-evidence-token-overlap",
+      "round": 6,
+      "correct": 12,
+      "total": 36,
+      "accuracy": 0.3333333333333333,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 24
+    },
+    {
+      "method": "ablation-no-pricing-currency",
+      "round": 6,
+      "correct": 24,
+      "total": 36,
+      "accuracy": 0.6666666666666666,
+      "abstentions": 0,
+      "errors": 0,
+      "wrong": 12
+    }
+  ],
+  "limitations": [
+    "Small controlled topology; two evidence sources; no statistical superiority claim.",
+    "Holdout differs in values/workloads/change ordering, not app topology; symptom vocabulary is intentionally generic.",
+    "Remaining time and organizer cutoff are unconfirmed."
+  ]
+}
