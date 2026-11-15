@@ -11,11 +11,12 @@ p.add_argument('--base',default='http://127.0.0.1:18765')
 p.add_argument('--origin',default='https://faultline.example')
 p.add_argument('--phase',choices=['first','after'],required=True)
 p.add_argument('--state',default='.runtime/host-smoke/manifest.json')
+p.add_argument('--railway-healthcheck',action='store_true',help='Also probe Railway healthcheck Host isolation')
 a=p.parse_args()
 host=urlsplit(a.origin).netloc
 
-def request(path, body=None, origin=a.origin):
-    headers={'Host':host,'Content-Type':'application/json'}
+def request(path, body=None, origin=a.origin, host_override=None):
+    headers={'Host':host_override or host,'Content-Type':'application/json'}
     if body is not None:
         headers['X-Faultline-Local']='sandbox'
         if origin: headers['Origin']=origin
@@ -32,6 +33,11 @@ assert request('/api/results')[1]['rows'] and len(request('/api/results')[1]['ro
 assert request('/api/replay')[1]['recorded'] is True
 assert request('/fixtures/private/heldout.json')[0]==404
 assert request('/local/trigger',{'scenario':'demo-currency'},origin='https://other.example')[0]==403
+if a.railway_healthcheck:
+    health_host='healthcheck.railway.app'
+    assert request('/api/health',host_override=health_host)[0]==200
+    assert request('/api/results',host_override=health_host)[0]==403
+    assert request('/local/trigger',{},host_override=health_host)[0]==403
 if a.phase=='first':
     assert request('/local/reset-experiment',{})[0]==200
     assert request('/local/trigger',{'scenario':'demo-currency'})[0]==200

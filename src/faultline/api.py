@@ -59,7 +59,7 @@ class App:
                     edges=list(edges.values()),manifest_hash=self.graph.manifest_hash(),source='live HydraDB traversal')
 
 
-def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1'):
+def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_railway_healthcheck=False):
     public_host=None
     if public_origin is not None:
         parsed=urlsplit(public_origin)
@@ -82,13 +82,15 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1'):
 
         def dispatch(self,method):
             raw_host=self.headers.get('Host','')
+            path=urlsplit(self.path).path
             try: host=urlsplit('http://'+raw_host).hostname
             except ValueError: host=None
             local_host=host in ('localhost','127.0.0.1')
             remote_host=bool(public_host and raw_host==public_host)
-            if not (local_host or remote_host):
+            railway_health=bool(allow_railway_healthcheck and raw_host=='healthcheck.railway.app'
+                                and method=='GET' and path=='/api/health')
+            if not (local_host or remote_host or railway_health):
                 return self.send(403,dict(error='Configured demo Host required'))
-            path=urlsplit(self.path).path
             if method=='POST':
                 if path not in ('/local/trigger','/local/restore','/local/reset-experiment','/api/diagnose','/api/learn'):
                     return self.send(404,dict(error='Route not found'))
@@ -110,7 +112,7 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1'):
             try:
                 with app.lock:
                     if method=='GET':
-                        if path=='/api/health': return self.send(200,dict(status='ok',database='HydraDB',scope='public sandbox demo' if remote_host else 'local sandbox'))
+                        if path=='/api/health': return self.send(200,dict(status='ok',database='HydraDB',scope='railway healthcheck' if railway_health else 'public sandbox demo' if remote_host else 'local sandbox'))
                         if path=='/api/observations': return self.send(200,app.public.model_dump())
                         if path=='/api/graph': return self.send(200,app.graph_view())
                         if path=='/api/sources': return self.send(200,[m.model_dump() | dict(inspected=m.sha256 in app.graph.manifest['sources']) for m in app.catalog.metadata()])

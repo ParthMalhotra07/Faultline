@@ -24,9 +24,30 @@ def test_explicit_public_origin_allows_only_that_host_and_same_origin_writes():
     try:
         assert request('faultline.example')==200
         assert request('other.example')==403
+        assert request('healthcheck.railway.app')==403
         assert request('faultline.example',origin='https://other.example',body={})==403
         assert request('faultline.example',origin='http://faultline.example',body={})==403
         assert request('faultline.example',origin='https://faultline.example',body={})!=403
+    finally:
+        server.shutdown();server.server_close()
+
+
+def test_railway_healthcheck_host_can_only_read_health():
+    app=SimpleNamespace(lock=threading.RLock())
+    server=make_server(app,port=0,public_origin='https://faultline.example',allow_railway_healthcheck=True)
+    thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+    base=f'http://127.0.0.1:{server.server_port}'
+    def request(host,path,post=False):
+        req=urllib.request.Request(base+path,headers={'Host':host},data=b'{}' if post else None)
+        try:
+            with urllib.request.urlopen(req) as response:return response.status
+        except urllib.error.HTTPError as exc:return exc.code
+    try:
+        assert request('healthcheck.railway.app','/api/health')==200
+        assert request('healthcheck.railway.app','/')==403
+        assert request('healthcheck.railway.app','/api/results')==403
+        assert request('healthcheck.railway.app','/local/trigger',post=True)==403
+        assert request('other.example','/api/health')==403
     finally:
         server.shutdown();server.server_close()
 
