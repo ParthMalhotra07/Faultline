@@ -30,10 +30,82 @@ it is not evidence that any cloud deployment has happened.
 - Keep one replica/one writer. Do not expose the engine's 8443/9090 ports as
   public ingress. Health and actual learning must be checked after deployment.
 
-On Railway, the [Dockerfile path setting](https://docs.railway.com/builds/dockerfiles)
-can select `Dockerfile.demo`; its [volume guide](https://docs.railway.com/volumes)
-describes mounting `/data`. Those docs explain a possible provider workflow,
-not an account or deployment already verified for this project.
+## Railway settings selected by the user
+
+The user selected Railway for the Docker deployment and will keep GitHub private
+until manually switching it to public before submission. Railway must be granted
+access to the private repo in its GitHub integration; no Railway project or live
+URL is recorded yet. Do not select Vercel for this service.
+
+In the Railway service dashboard:
+
+1. Connect this GitHub repo and set `RAILWAY_DOCKERFILE_PATH=Dockerfile.demo`.
+   Railway's default detector only looks for a root file named `Dockerfile`.
+2. Attach one persistent volume mounted at `/data`. Use one service replica in
+   one region; the graph engine and API share this volume and are single writer.
+3. Generate a Railway HTTPS domain before setting the exact origin. Set
+   `FAULTLINE_PUBLIC_ORIGIN=https://<the-generated-domain>` with no trailing
+   slash or path. The browser writes require an exact Origin match.
+4. Set `HYDRADB_TOKEN` as a newly generated 32+ character secret in Railway's
+   Variables tab. Never paste it into chat or commit it. Set `PORT=8765` and
+   `FAULTLINE_RAILWAY_HEALTHCHECK=1`. The image already has its start command.
+5. Configure the deployment healthcheck path `/api/health`. FAULTLINE accepts
+   Railway's `healthcheck.railway.app` Host only for that read-only GET route;
+   graph, results, and sandbox controls remain blocked for that Host. Railway's
+   default healthcheck timeout is 300 seconds, while the bundled engine waits up
+   to 90 seconds for its own readiness.
+6. Confirm the build log selected `Dockerfile.demo`, the volume path is `/data`,
+   and only the app's port 8765 is publicly routed. No pre-deploy command is
+   needed; Railway volumes are mounted at start, not during build or pre-deploy.
+
+Railway documentation: [custom Dockerfile path](https://docs.railway.com/builds/dockerfiles),
+[volumes](https://docs.railway.com/volumes),
+[healthchecks](https://docs.railway.com/deployments/healthchecks), and
+[public domains](https://docs.railway.com/networking/public-networking).
+Railway's older `railway.json` config-as-code format is deprecated, so these
+settings are recorded for the dashboard rather than added as a new config file.
+
+## Local image check and public URL commands
+
+The fresh-container local check runs the rebuilt image with a durable Docker
+volume, a loopback port, the Railway healthcheck flag, then restarts the same
+volume and verifies transfer. Its executed output is recorded in T25; it does
+not prove Railway deployed successfully. To reproduce it without writing a
+secret to Git, create an ignored `.runtime/railway-local.env` containing a
+locally generated `HYDRADB_TOKEN` and
+`FAULTLINE_PUBLIC_ORIGIN=https://faultline.example`. Then run:
+
+```powershell
+docker build -f Dockerfile.demo -t faultline-demo:railway-local .
+docker volume create faultline-railway-check
+docker run -d --name faultline-railway-check --mount type=volume,source=faultline-railway-check,target=/data --env-file .runtime/railway-local.env -e FAULTLINE_RAILWAY_HEALTHCHECK=1 -e PORT=8765 -p 127.0.0.1:18767:8765 faultline-demo:railway-local
+# Wait until the container reports "HydraDB ready" and /api/health responds.
+New-Item -ItemType Directory -Path .runtime/railway-check -Force | Out-Null
+.venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase first --state .runtime/railway-check/manifest.json --railway-healthcheck
+docker restart faultline-railway-check
+# Wait for /api/health again before the post-restart check.
+.venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase after --state .runtime/railway-check/manifest.json --railway-healthcheck
+docker stop faultline-railway-check
+docker rm faultline-railway-check
+```
+
+After the Railway deployment is active, use the actual HTTPS domain below.
+This script **resets the controlled demo graph** in its first phase, so run it
+before recording the Loom and avoid concurrent viewers. It checks results,
+replay, private-route rejection, wrong-Origin rejection, abstention, learning,
+real HydraDB graph paths, and post-restart transfer. Keep the state file local.
+
+```powershell
+$origin = 'https://<your-actual-railway-domain>'
+.venv/Scripts/python.exe scripts/verify_hosted.py --base $origin --origin $origin --phase first --state .runtime/railway-public-manifest.json
+# Restart the Railway service in its dashboard, retaining the same /data volume.
+.venv/Scripts/python.exe scripts/verify_hosted.py --base $origin --origin $origin --phase after --state .runtime/railway-public-manifest.json
+```
+
+The Railway healthcheck Host probe is for a directly reachable local container:
+add `--railway-healthcheck` to `verify_hosted.py` in that local check. The public
+Railway proxy has its own Host routing, so do not send that internal Host to the
+public URL as a substitute for Railway's actual deployment healthcheck.
 
 ## Verify the real public URL
 

@@ -49,6 +49,9 @@ swipe the graph and result chart to view their full width.
 
 The clean-environment check in `artifacts/T22-clean-demo.log` reproduces abstention, actual graph learning, restart persistence, runtime restoration and transfer in a fresh disposable namespace. The browser checks capture screenshots, a video, a trace and console events in `artifacts/ui/`; `latest-attempt.json` points to the last attempt, whose `report.json` explicitly says PASS or FAIL.
 
+The [development timeline](docs/DEVELOPMENT_TIMELINE.md) separates November 14
+local evidence from the Git commits actually created on November 15.
+
 For repeatable headless browser QA, without desktop input:
 
 ```powershell
@@ -86,4 +89,4 @@ Only two telemetry sources exist in this prototype, so knowledge saturates quick
 
 This is a single-writer local demo with function-level acceptance checks. It is not a production service, remediation agent or authenticated multi-user application. `.runtime/` stores local graph manifests and credentials and is excluded from source packaging. Private evaluator fixtures and raw predictions are never served through the public API or source catalog.
 
-The host requires a usable live app link, an open-source GitHub repo and a Loom walkthrough, according to the user. Submission date is November 15, 2026 IST; exact cutoff and hosting account access remain unconfirmed. The app is currently local-only. Source code has been pushed in focused commits to the user's **private** GitHub repo; it is not yet open-source/public. No Loom, social post or organizer submission has been verified. See `docs/SUBMISSION.md`, `STATE.json` and `HANDOFF.md` for evidence and remaining delivery steps.
+The host requires a usable live app link, an open-source GitHub repo and a Loom walkthrough, according to the user. Submission date is November 15, 2026 IST; exact cutoff remains unconfirmed. The user selected Railway for the bundled Docker deployment; its local image and persistent-volume workflow have been tested, but no public Railway URL is verified. Source code remains in the user's **private** GitHub repo until the user manually changes its visibility before submission. The user reports an X thread is live, without a supplied link or independent check. The user will record the narrated Loom after deployment. No organizer submission has been verified. See `docs/HOSTING.md`, `docs/SUBMISSION.md`, `STATE.json` and `HANDOFF.md` for evidence and remaining delivery steps.

@@ -136,3 +136,12 @@ FAULTLINE's identity, real API-backed investigation, HydraDB traversal, measured
 results, and replay labeling remain the product content. No Origyn backend,
 research workflow, fixture data, or model outputs are imported. This is a
 post-freeze presentation change and does not create a new evaluation version.
+
+ADR-019 — USER-CONFIRMED 2026-11-15: Railway is the chosen persistent Docker
+host, using `Dockerfile.demo`, one `/data` volume and port 8765. Do not use
+Vercel. The user will keep the GitHub repo private until manually changing its
+visibility immediately before submission. The user reports that the X thread is
+already published, but no URL or independent verification is recorded. The
+user will record the narrated Loom after the live URL works. These updates do
+not establish a public app, a public repo, or a Loom link. Railway's official
+healthcheck Host requires a narrowly scoped HTTP allowance; see T25.

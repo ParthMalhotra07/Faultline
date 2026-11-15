@@ -30,3 +30,11 @@ Do not claim worldwide originality. The proposed contribution is an inspectable,
 
 ## Research artifacts from this conversation
 Earlier planning briefs remain in C:/Users/am/Desktop/CC/output/. They are optional background, not runtime specifications. This Desktop project is self-contained; agents do not need the CC folder or those earlier files.
+
+## Railway deployment documentation checked November 15, 2026
+
+- Custom Dockerfile path: https://docs.railway.com/builds/dockerfiles
+- Persistent volume mount and startup behavior: https://docs.railway.com/volumes
+- Healthcheck Host, path and timeout: https://docs.railway.com/deployments/healthchecks
+- Public HTTPS domains: https://docs.railway.com/networking/public-networking
+- Deprecated config-as-code status: https://docs.railway.com/config-as-code/reference

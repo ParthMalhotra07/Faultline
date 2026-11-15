@@ -1,7 +1,9 @@
 # Social drafts and buyer discovery
 
-These are **drafts**. No post, tag, interview or customer validation has
-occurred. Replace `[LIVE APP]`, `[GITHUB]`, and `[LOOM]` only with verified public
+These are **drafts**. The user reports the X thread is already published, but
+its URL, contents and tags have not been independently checked. LinkedIn and
+other posts, interviews and customer validation remain unverified. Replace
+`[LIVE APP]`, `[GITHUB]`, and `[LOOM]` only with verified public
 links. Confirm the actual HydraDB account handle on each service before tagging.
 
 ## X / Twitter draft

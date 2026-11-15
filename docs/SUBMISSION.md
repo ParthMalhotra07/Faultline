@@ -51,18 +51,21 @@ would ingest approved exported telemetry and service metadata in shadow mode,
 present evidence-backed hypotheses, and let a human decide what to do. No
 customer interview, willingness-to-pay result, revenue, or time-saved figure
 has been measured. Use docs/SOCIAL_POSTS.md for truthful draft posts and buyer
-questions; publish only after the links exist and an account owner authorizes it.
+questions. The user reports that the X thread is already live, but no link or
+independent content/tag check has been recorded. LinkedIn and other publication
+remain unverified; do not claim those posts or buyer validation.
 
 ## Remaining public delivery
 
-1. Deploy the tested bundled image to an approved host with a durable graph
-   volume. Configure `FAULTLINE_PUBLIC_ORIGIN` to the exact HTTPS app origin and
-   test the actual public workflow. Automatic approval review rejected starting
-   a temporary public tunnel, so no tunnel or public URL exists.
-2. Review the pushed private GitHub repository, then change its visibility to
-   public for the host's open-source requirement. Do not publish runtime
+1. Deploy the tested bundled image to Railway with one `/data` volume, port
+   8765 and the settings in `docs/HOSTING.md`. Configure
+   `FAULTLINE_PUBLIC_ORIGIN` to the exact HTTPS app origin and test the actual
+   public workflow. No Railway URL has been verified yet.
+2. Keep the pushed GitHub repository private until the user manually changes
+   its visibility to public immediately before the cutoff. Do not publish runtime
    credentials, local browser profiles, or large test recordings.
-3. Record a narrated Loom using docs/DEMO.md. Verify the Loom share link loads
+3. The user will record a narrated Loom using docs/LOOM_SCRIPT.md after the
+   live URL is active. Verify the Loom share link loads
    for a viewer and includes the live workflow, real counts, buyer pitch and
    limitations. The silent fallback can guide this recording.
 4. Verify all three links in a signed-out browser, add exact URLs and the real

@@ -373,3 +373,13 @@ Build: Inspect the user's Origyn frontend at github.com/ParthMalhotra07/origyn. 
 Acceptance: Real trigger → abstain → bounded learn → restore → transfer remains usable; actual returned graph nodes/edges and measured counts render; replay stays labeled; desktop and mobile layouts are readable; no unexpected console/page errors. Capture and inspect rendered screenshots. Record source reference commit and actual test output. Rebuild the demo image if frontend assets are packaged there.
 
 Completion evidence: exact commands, exits, browser report/screenshots, changed files and remaining limitations in STATE.json and HANDOFF.md. Do not treat T23's public-host blockers as solved by a visual change.
+
+### T25 — Prepare Railway Docker deployment
+
+Phase: P6. Depends on: T24. Required by the user's November 15 Railway decision.
+
+Build: Keep `Dockerfile.demo` and the bundled self-run HydraDB engine. Permit Railway's documented healthcheck Host only for a read-only health route, preserve Host and same-origin restrictions elsewhere, and document exact Railway dashboard settings and post-deploy validation commands. Keep the GitHub repository private until the user changes visibility.
+
+Acceptance: A failing test demonstrates the healthcheck issue, then a passing test proves its narrow fix. Rebuild the bundled image and exercise the real graph workflow through a fresh local container with a durable `/data` volume, including restart persistence and a Railway-style health request. Do not claim a Railway deployment without its URL and actual remote checks.
+
+Completion evidence: exact commands, exits, local container output, changed files, and remaining public-delivery limitations in STATE.json and HANDOFF.md.
