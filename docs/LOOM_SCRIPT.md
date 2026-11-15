@@ -5,13 +5,14 @@ Record the live app at https://faultline-j7kn.onrender.com. The silent
 timing, but it is not a Loom or narrated pitch. Keep failures, replay labels and
 counts visible. If live hosting is unavailable, say so plainly.
 
-**0:00–0:20 — Landing and healthy sandbox.** Show the animated landing page,
-then click **Open workspace** and enter with the prefilled public test values.
-Complete or skip the first-visit tour, then reset the graph. “FAULTLINE is an incident search prototype
-for small platform teams. Their service map can miss shared configuration
-dependencies. This executable commerce sandbox has checkout, refunds and
-renewals, and its dependency graph lives in the open-source HydraDB engine I
-run myself.”
+**0:00–0:20 — The problem and the three steps.** Show the landing page's
+**How FAULTLINE solves it** section. “Checkout fails. The team's map shows
+services but misses that pricing reads a shared currency setting. FAULTLINE
+shows the failure, checks the missing connection against evidence, then
+remembers the supported link for the next incident.” Open the workspace with
+the prefilled public test values, complete or skip the tour, then reset the
+graph. “This is a controlled commerce sandbox, and I run the open-source
+HydraDB engine myself.”
 
 **0:20–0:45 — Real fault.** “I’ll trigger a local currency configuration fault.
 The acceptance checks now fail in checkout. Nothing touches production.”

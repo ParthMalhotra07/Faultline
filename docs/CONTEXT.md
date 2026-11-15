@@ -1,7 +1,7 @@
 # Product context and scope
 
 ## Goal and judging
-Track 1 requires a graph search system that improves what it ingests/how it queries and a measured accuracy curve over iterations. The required database is the self-run open-source engine at github.com/hydra-db/hydradb. Engineering and go-to-market have equal judging weight, according to the host clarification relayed by the builder. The host requests a usable live app link, an open-source GitHub repo, and a Loom walkthrough. Exact cutoff and hosting account access remain unconfirmed; the connected GitHub repo is still private.
+The [November HydraDB event](https://luma.com/bqwllms4) describes Track 1 as a graph that improves itself and states that it must earn its place over a vector store. The page sets the 48-hour build for November 14–16, 2026, ending at 9:00 AM IST on November 16. The host's additional clarification, relayed by the builder, asks for meaningful technical implementation and go-to-market, plus a usable live app link, an open-source GitHub repo, and a Loom walkthrough. The required database is the self-run open-source engine at github.com/hydra-db/hydradb. The connected GitHub repo is still private; organizer submission remains unverified.
 
 FAULTLINE diagnoses incidents in a small executable commerce app, discovers missing dependencies through targeted evidence inspection, and remembers verified relationships in HydraDB for future investigations.
 

@@ -1,8 +1,9 @@
 # Submission checklist — FAULTLINE
 
 The host requires three links: a **usable live app**, an **open-source GitHub
-repository**, and a **Loom walkthrough**. The user confirmed November 15, 2026
-IST as the submission date; the exact cutoff is still unknown. The live app
+repository**, and a **Loom walkthrough**. The [November event page](https://luma.com/bqwllms4)
+sets the end of the 48-hour build at **November 16, 2026, 9:00 AM IST**. Confirm
+the official submission form's cutoff in Discord if it differs. The live app
 link is verified at `https://faultline-j7kn.onrender.com`; the public GitHub
 and Loom links remain undelivered. Source was pushed to the user's private
 repo at `https://github.com/ParthMalhotra07/Faultline`; make it public only
@@ -14,7 +15,9 @@ with the prefilled public test values, then complete or skip the first-visit
 tour before resetting and triggering the demonstration fault. These values
 open an in-memory public demo session; they are not private accounts or
 HydraDB credentials. The hosted T30 browser run passed ten checks after the
-new revision deployed; see `artifacts/T30-browser-report.json`.
+new revision deployed; see `artifacts/T30-browser-report.json`. The
+[judge's quick guide](JUDGE_GUIDE.md) explains the problem, the exact demo
+steps, the real graph traversal, and the measured comparison in one place.
 
 ## Ready local evidence
 

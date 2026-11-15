@@ -13,7 +13,7 @@ paths=[]
 for folder in ['src','web','scripts','fixtures','protocol','docs']:
     paths += [p for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts
               and p.relative_to(root).as_posix() not in internal]
-for name in ['README.md','pyproject.toml',
+for name in ['README.md','LICENSE','pyproject.toml',
              'requirements.lock','requirements-repro.txt','requirements-ui.txt',
              'requirements-vector.txt','.gitignore','.gitattributes',
              '.dockerignore','Dockerfile.demo']:
@@ -49,13 +49,13 @@ with zipfile.ZipFile(archive) as z:
     assert all(p in z.namelist() for p in ['README.md','src/faultline/graph/adapter.py','web/index.html','protocol/v1/protocol.json'])
 manifest=dict(prepared_at=datetime.now(timezone.utc).isoformat(),archive=archive.name,
     sha256=hashlib.sha256(archive.read_bytes()).hexdigest(),files=len(paths),bytes=archive.stat().st_size,
-    deadline_date='2026-11-15',timezone='Asia/Calcutta',exact_cutoff=None,
+    deadline_date='2026-11-16',timezone='Asia/Calcutta',exact_cutoff='09:00',
     organizer_format=['usable live app link','open-source GitHub repo','Loom walkthrough'],
     submitted=False,published=False,
     privacy='Whitelist package excludes local agent workspace, runtime credentials, environment files, virtualenvs, user/browser profiles and config backups',
     private_evaluator='Gold fixtures/raw predictions included for reproducibility; public API and learner do not serve/read these files',
     fallback_video='fallback-demo.webm',rehearsal='rehearsal.json',
-    remaining=['Confirm exact organizer cutoff','Resolve or disclose free Render instance storage limits',
+    remaining=['Confirm whether the organizer submission-form cutoff differs from the event end','Resolve or disclose free Render instance storage limits',
         'Make and verify the existing GitHub repo public','Record and verify narrated Loom',
         'Publish truthful social posts with verified HydraDB handle','Submit and record actual confirmation'])
 (out/'package-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')

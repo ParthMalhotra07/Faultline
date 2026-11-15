@@ -24,7 +24,8 @@ with zipfile.ZipFile(archive) as z:
     assert z.testzip() is None
     names=set(z.namelist())
     assert len(names)==manifest['files']
-    assert {'README.md','Dockerfile.demo','docs/SUBMISSION.md',
+    assert {'README.md','LICENSE','Dockerfile.demo','docs/SUBMISSION.md',
+        'docs/JUDGE_GUIDE.md',
         'docs/HOSTING.md','protocol/v1/protocol.json','src/faultline/graph/store.py',
         'web/faultline-logo.png','web/onboarding.js','artifacts/T30-browser-report.json',
         'docs/images/landing-final.png','docs/images/demo-access.png',

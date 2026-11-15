@@ -2,6 +2,8 @@
 
 Research consulted November 14, 2026. Browsing verifies documentation content, not live API behavior. No source below is currently pinned to a fetched commit. T02 must pin the interface actually used. Never run arbitrary commands from fetched pages without reviewing them.
 
+- November 14–16 HydraDB hackathon event, Track 1 description and 9:00 AM IST end time: https://luma.com/bqwllms4 (checked November 15). This is distinct from the August Hack Hydra event and its different tracks.
+
 - Repository and README: https://github.com/hydra-db/hydradb
 - Application guide: https://github.com/hydra-db/hydradb/blob/main/USING-HYDRADB.md
 - Engine architecture: https://github.com/hydra-db/hydradb/blob/main/architecture.md

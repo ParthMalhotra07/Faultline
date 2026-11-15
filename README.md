@@ -1,12 +1,18 @@
 # FAULTLINE
 
-An incident-search prototype that discovers missing configuration dependencies from bounded telemetry inspection, stores verified claims in HydraDB, and uses those relationships in later investigations.
+When an app breaks, the visible error may be far from the setting that caused it. **FAULTLINE shows what failed, checks evidence for a missing connection, and remembers that connection in HydraDB for the next investigation.** It is a working prototype on a controlled commerce app.
 
-**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Source repository](https://github.com/ParthMalhotra07/Faultline)** · **[Three-minute walkthrough script](docs/LOOM_SCRIPT.md)** · **[Deployment guide](docs/HOSTING.md)**
+**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Judge guide](docs/JUDGE_GUIDE.md)** · **[Three-minute walkthrough script](docs/LOOM_SCRIPT.md)** · **[Deployment guide](docs/HOSTING.md)**
 
 ![FAULTLINE landing page with the supplied logo and animated hero](docs/images/landing-final.png)
 
-The live demo runs the [open-source HydraDB engine](https://github.com/hydra-db/hydradb) in its Docker image. The GitHub repository is currently private by the builder's choice and will be made public for submission. Render's free disk is ephemeral; allow a cold start after inactivity.
+The live demo runs the [open-source HydraDB engine](https://github.com/hydra-db/hydradb) in its Docker image. Render's free disk is ephemeral; allow a cold start after inactivity.
+
+### The problem, in one example
+
+Checkout fails after a shared currency setting changes. A service map shows checkout and pricing, but it does not yet show that pricing reads that setting. The initial search says **insufficient evidence**. When you select **Inspect & learn**, FAULTLINE checks one bounded telemetry source, saves the supported connection with its evidence, and uses it when a later refunds incident needs the same path. The person chooses when to start learning and what to fix; this prototype does not connect to a real company system.
+
+This is our [November HydraDB hackathon](https://luma.com/bqwllms4) Track 1 entry: a graph that improves through evidence-backed investigations. The event page asks entrants to make the graph earn its place over a vector store. [The judge guide](docs/JUDGE_GUIDE.md) points to the live workflow, actual HydraDB traversal, measured baselines, and the limits of our exploratory vector comparison.
 
 ## Explore in two minutes
 
@@ -148,4 +154,8 @@ Only two telemetry sources exist in this prototype, so knowledge saturates quick
 
 This is a single-writer local demo with function-level acceptance checks. It is not a production service, remediation agent or authenticated multi-user application. `.runtime/` stores local graph manifests and credentials and is excluded from source packaging. Private evaluator fixtures and raw predictions are never served through the public API or source catalog.
 
-The host requires a usable live app link, an open-source GitHub repo and a Loom walkthrough, according to the user. Submission date is November 15, 2026 IST; exact cutoff remains unconfirmed. The bundled self-hosted HydraDB image is live on Render and passed public browser and graph workflow checks. The free instance has no persistent disk, so hosted restart persistence is unverified. Source code remains in the user's **private** GitHub repo until the user manually changes its visibility before submission. The user reports an X thread is live, without a supplied link or independent check. The user will record the narrated Loom now that the app is deployed. No organizer submission has been verified. See `docs/HOSTING.md`, `docs/SUBMISSION.md` and the recorded artifacts for evidence and remaining delivery steps.
+The [November event page](https://luma.com/bqwllms4) states that the 48-hour build ends **November 16, 2026 at 9:00 AM IST**. The host additionally asked for a usable live app link, an open-source GitHub repo and a Loom walkthrough, according to the builder. The bundled self-hosted HydraDB image is live on Render and passed public browser and graph workflow checks. The free instance has no persistent disk, so hosted restart persistence is unverified. Repository visibility, Loom publication and organizer submission must be confirmed separately. See the [submission checklist](docs/SUBMISSION.md) for those delivery steps.
+
+## License and attribution
+
+FAULTLINE's own code and documentation are available under the [MIT License](LICENSE). The self-run [HydraDB engine](https://github.com/hydra-db/hydradb) is a separate upstream project under its own AGPL-3.0 license. The frontend was adapted from the builder's [Origyn project](https://github.com/ParthMalhotra07/origyn); incident data and workflows here belong to FAULTLINE.
