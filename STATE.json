@@ -5,8 +5,8 @@
   "timezone": "Asia/Calcutta",
   "delivery_kind": "implementation_in_progress",
   "implementation_started": true,
-  "current_task_id": "T23",
-  "next_action": "User connects the private repo to Railway, sets Dockerfile.demo, one /data volume, PORT=8765, HYDRADB_TOKEN, FAULTLINE_PUBLIC_ORIGIN and FAULTLINE_RAILWAY_HEALTHCHECK=1, then provides the public HTTPS URL for the checks in docs/HOSTING.md. Keep GitHub private until the user toggles it; Loom follows the live URL.",
+  "current_task_id": "T26",
+  "next_action": "Deploy the verified Dockerfile.demo image on Railway with one persistent /data volume, configure HYDRADB_TOKEN and FAULTLINE_PUBLIC_ORIGIN in Railway, then verify the public HTTPS link and graph persistence; the user will make the repo public and record Loom before submission.",
   "current_phase": "P6",
   "scope": "Solo Track 1; gap-driven evidence ingestion on a controlled executable app",
   "verified_facts": [
@@ -1741,6 +1741,162 @@
         "artifacts/T25-container-config.log": "939b991a6fdda933bab597626139729a521beda1731b0e652d206611f9883419",
         "artifacts/T25-git-history.log": "bd226974af16277cb970a5823be66d502837d873d15f626487dc5aa441ea030e"
       }
+    },
+    {
+      "id": "T26",
+      "phase": "P6",
+      "title": "Restore the Origyn-style landing experience",
+      "depends_on": [
+        "T24",
+        "T25"
+      ],
+      "status": "DONE",
+      "required": true,
+      "expected_outputs": [
+        "web/landing.html",
+        "web/landing.css",
+        "web/landing.js",
+        "artifacts/ui/latest-landing.json"
+      ],
+      "changed_files": [
+        "HANDOFF.md",
+        "README.md",
+        "STATE.json",
+        "artifacts/ui/latest-attempt.json",
+        "artifacts/ui/latest-landing.json",
+        "docs/BUILD_PLAN.md",
+        "docs/DECISIONS.md",
+        "docs/DEMO.md",
+        "docs/HOSTING.md",
+        "docs/LOOM_SCRIPT.md",
+        "scripts/package_submission.py",
+        "scripts/rehearse_demo.py",
+        "scripts/verify_landing.py",
+        "scripts/verify_submission.py",
+        "scripts/verify_ui.py",
+        "src/faultline/api.py",
+        "tests/integration/test_public_api.py",
+        "web/landing.css",
+        "web/landing.html",
+        "web/landing.js"
+      ],
+      "checks": [
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T26-route-red.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-route-green.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_landing.py (FAULTLINE_BASE_URL=http://127.0.0.1:8765; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-landing-browser-local.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_ui.py --results (FAULTLINE_BASE_URL=http://127.0.0.1:18768; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-workspace-browser.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-full-tests.log"
+        },
+        {
+          "command": "docker build -f Dockerfile.demo -t faultline-demo:landing-local .",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-image-build.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18769 --origin https://faultline.example --phase first --state .runtime/landing-image/manifest.json --railway-healthcheck",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-image-hosted-first.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18769 --origin https://faultline.example --phase after --state .runtime/landing-image/manifest.json --railway-healthcheck",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-image-hosted-after.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/rehearse_demo.py (FAULTLINE_BASE_URL=http://127.0.0.1:18768; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-rehearsal.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-package-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T26-package-verify.log"
+        }
+      ],
+      "evidence_paths": [
+        "artifacts/T26-full-tests.log",
+        "artifacts/T26-image-build.log",
+        "artifacts/T26-image-hosted-after.log",
+        "artifacts/T26-image-hosted-first.log",
+        "artifacts/T26-landing-browser-local.log",
+        "artifacts/T26-package-verify.log",
+        "artifacts/T26-rehearsal.log",
+        "artifacts/T26-route-green.log",
+        "artifacts/T26-route-red.log",
+        "artifacts/T26-workspace-browser.log"
+      ],
+      "limitations": [
+        "Only local and Docker-image deployment verified; Railway HTTPS link remains unverified.",
+        "Origyn layout and motion adapted to the buildless FAULTLINE frontend; this is not a byte-for-byte Next.js port."
+      ],
+      "blocker": null,
+      "next_action": "Deploy the verified Dockerfile.demo image on Railway with one persistent /data volume, configure HYDRADB_TOKEN and FAULTLINE_PUBLIC_ORIGIN in Railway, then verify the public HTTPS link and graph persistence; the user will make the repo public and record Loom before submission.",
+      "artifact_sha256": {
+        "web/landing.html": "29d62b1e5f15b1fb978a38527abd5356869b9d24054f9985cac65a10d3c20be2",
+        "web/landing.css": "280447b7aaa94591309fa277cee2baf4c7ae2483ba967b0c74c22023de55aa0f",
+        "web/landing.js": "ca3518a80def6cae77006bc1fc46630b998b3917b8adcaf45562681474415a7d",
+        "src/faultline/api.py": "e735e609a1a69251e2b65fd69a0d69bde3da17bc98cf3163221dd73daf1a58d5",
+        "scripts/verify_landing.py": "5379cd7610d60bb83e5558425cb636ab1a479aa145a42bf3689942f9bf458cb3",
+        "scripts/verify_ui.py": "0a62383d7a3958afdbe59325629bace7803ab3e956741e0df3936a90c16bca11",
+        "scripts/rehearse_demo.py": "66eca3d031d06daf5015da9ca89822c2e3faf54e36cc0a99cb744180a9600290",
+        "scripts/package_submission.py": "821ceeee8153afdd57a193f235c9b2d04f0b28f19a7533d4c5f68d0ca3da6383",
+        "scripts/verify_submission.py": "3d8268c46bb0e972d3dacd48140555453dd10d9a44c595d15dd4deff8317ed11",
+        "tests/integration/test_public_api.py": "c2143916c2d78bf1c0aae5f61edb6dc89e6756231da849e228c26630397883cc",
+        "README.md": "090b596fe276ea75a052d9dfa278d3cdbbde0d46e3976f1f0984172e43872ade",
+        "docs/BUILD_PLAN.md": "63110889dfff63ead9564295b21529ac06463874b76b38c9bd46d5ff0d79cac3",
+        "docs/DECISIONS.md": "09cc6d988195e79de1cd88d7c35fd419a8212d75f55cb65807829157e053bdcd",
+        "docs/DEMO.md": "8bcf4683f73ec340d07ace0ce16ce14c25032241861996b3d3f7176803f97071",
+        "docs/HOSTING.md": "f32546d8597119f16920d17b7a15d5f73348a21983b802d64af63e90e246c39d",
+        "docs/LOOM_SCRIPT.md": "8223c428304d008b0e932f42c93c4df759d606f74bae2a7f1cd0773d5a346b62",
+        "artifacts/ui/latest-landing.json": "5aeb885ba4e4b45d94e5ac2dd0e4e5c2d33f7a29846e6ef7b9cbd4b0744e9553",
+        "artifacts/ui/latest-attempt.json": "42ee42254cfcacd0aacaa5c01a5dc7ca58480db2087128445d73ec8c98ae5223"
+      }
     }
   ],
   "check_record_template": {
@@ -1752,7 +1908,7 @@
     "summary": "Never replace real output with invented success"
   },
   "experiment": null,
-  "last_verified_implementation_task": "T25",
+  "last_verified_implementation_task": "T26",
   "session_log": [
     {
       "at": "2026-11-14T05:40:40.503Z",
@@ -2283,6 +2439,90 @@
       "status": "BLOCKED",
       "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
       "output": "artifacts/T25-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T06:26:45.048039+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T06:42:17.123187+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct",
+      "output": "artifacts/T26-route-red.log"
+    },
+    {
+      "at": "2026-11-15T06:42:17.704617+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct",
+      "output": "artifacts/T26-route-green.log"
+    },
+    {
+      "at": "2026-11-15T06:42:18.272755+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_landing.py (FAULTLINE_BASE_URL=http://127.0.0.1:8765; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+      "output": "artifacts/T26-landing-browser-local.log"
+    },
+    {
+      "at": "2026-11-15T06:42:18.937463+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_ui.py --results (FAULTLINE_BASE_URL=http://127.0.0.1:18768; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+      "output": "artifacts/T26-workspace-browser.log"
+    },
+    {
+      "at": "2026-11-15T06:42:19.559115+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q",
+      "output": "artifacts/T26-full-tests.log"
+    },
+    {
+      "at": "2026-11-15T06:42:20.186199+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": "docker build -f Dockerfile.demo -t faultline-demo:landing-local .",
+      "output": "artifacts/T26-image-build.log"
+    },
+    {
+      "at": "2026-11-15T06:42:20.843016+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18769 --origin https://faultline.example --phase first --state .runtime/landing-image/manifest.json --railway-healthcheck",
+      "output": "artifacts/T26-image-hosted-first.log"
+    },
+    {
+      "at": "2026-11-15T06:42:21.442873+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18769 --origin https://faultline.example --phase after --state .runtime/landing-image/manifest.json --railway-healthcheck",
+      "output": "artifacts/T26-image-hosted-after.log"
+    },
+    {
+      "at": "2026-11-15T06:42:22.012726+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/rehearse_demo.py (FAULTLINE_BASE_URL=http://127.0.0.1:18768; FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/)",
+      "output": "artifacts/T26-rehearsal.log"
+    },
+    {
+      "at": "2026-11-15T06:42:40.783029+00:00",
+      "task": "T26",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T26-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T06:42:41.392874+00:00",
+      "task": "T26",
+      "status": "DONE",
+      "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T26-package-verify.log"
     }
   ],
   "delivery_deadline": {

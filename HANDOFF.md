@@ -1,12 +1,12 @@
 # Current handoff
 
-Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22, T24, T25. Current task: T23 (BLOCKED).
+Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22, T24, T25, T26. Current task: T26 (DONE).
 Consult STATE.json for exact checks, artifact hashes, changed files, and limitations.
 Failed checks remain preserved in artifacts and the task ledger.
 
 ## Next executable step
 
-User connects the private repo to Railway, sets Dockerfile.demo, one /data volume, PORT=8765, HYDRADB_TOKEN, FAULTLINE_PUBLIC_ORIGIN and FAULTLINE_RAILWAY_HEALTHCHECK=1, then provides the public HTTPS URL for the checks in docs/HOSTING.md. Keep GitHub private until the user toggles it; Loom follows the live URL.
+Deploy the verified Dockerfile.demo image on Railway with one persistent /data volume, configure HYDRADB_TOKEN and FAULTLINE_PUBLIC_ORIGIN in Railway, then verify the public HTTPS link and graph persistence; the user will make the repo public and record Loom before submission.
 
 ## Blockers
 

@@ -1,0 +1,1 @@
+PASS: image /, /workspace, landing.css, landing.js returned 200 with expected content

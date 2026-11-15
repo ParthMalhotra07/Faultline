@@ -1,0 +1,46 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________ test_landing_and_live_workspace_routes_are_distinct _____________
+
+    def test_landing_and_live_workspace_routes_are_distinct():
+        app=SimpleNamespace(lock=threading.RLock())
+        server=make_server(app,port=0)
+        thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+        base=f'http://127.0.0.1:{server.server_port}'
+        try:
+            with urllib.request.urlopen(base+'/') as response:
+                landing=response.read().decode()
+>           with urllib.request.urlopen(base+'/workspace') as response:
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_public_api.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:215: in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:521: in open
+    response = meth(req, response)
+               ^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:630: in http_response
+    response = self.parent.error(
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:559: in error
+    return self._call_chain(*args)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:492: in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <urllib.request.HTTPDefaultErrorHandler object at 0x000002B774F3F7A0>
+req = <urllib.request.Request object at 0x000002B774456DE0>
+fp = <http.client.HTTPResponse object at 0x000002B772D58310>, code = 404
+msg = 'Not Found', hdrs = <http.client.HTTPMessage object at 0x000002B774F8D670>
+
+    def http_error_default(self, req, fp, code, msg, hdrs):
+>       raise HTTPError(req.full_url, code, msg, hdrs, fp)
+E       urllib.error.HTTPError: HTTP Error 404: Not Found
+
+..\..\AppData\Local\Programs\Python\Python312\Lib\urllib\request.py:639: HTTPError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct
+1 failed in 0.86s
