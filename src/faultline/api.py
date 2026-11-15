@@ -132,12 +132,16 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                                 edges=list(edges.values()),manifest_hash=trace['after']['snapshot_manifest_hash'],source='recorded HydraDB explanation paths')
                             return self.send(200,dict(recorded=True,before=trace['before'],after=trace['after'],graph=recorded_graph,
                                 public_input=trace['public_input'],inspection=trace['inspection'],ledger=trace['ledger']))
-                        if path in ('/','/app.js','/style.css'):
-                            name={'/':'index.html','/app.js':'app.js','/style.css':'style.css'}[path]
+                        static_files={'/':'landing.html','/workspace':'index.html','/workspace/':'index.html',
+                                      '/landing.css':'landing.css','/landing.js':'landing.js',
+                                      '/app.js':'app.js','/style.css':'style.css'}
+                        if path in static_files:
+                            name=static_files[path]
                             file=ROOT/'web'/name
                             if file.exists():
                                 raw=file.read_bytes(); self.send_response(200)
-                                self.send_header('Content-Type',{'index.html':'text/html; charset=utf-8','app.js':'text/javascript','style.css':'text/css'}[name])
+                                self.send_header('Content-Type','text/html; charset=utf-8' if name.endswith('.html') else
+                                                 'text/javascript; charset=utf-8' if name.endswith('.js') else 'text/css; charset=utf-8')
                                 self.send_header('Content-Length',str(len(raw))); self.end_headers(); self.wfile.write(raw); return
                     if method=='POST':
                         if path=='/local/trigger': return self.send(200,app.trigger(data.get('scenario')))

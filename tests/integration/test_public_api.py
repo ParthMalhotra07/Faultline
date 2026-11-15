@@ -52,6 +52,24 @@ def test_railway_healthcheck_host_can_only_read_health():
         server.shutdown();server.server_close()
 
 
+def test_landing_and_live_workspace_routes_are_distinct():
+    app=SimpleNamespace(lock=threading.RLock())
+    server=make_server(app,port=0)
+    thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+    base=f'http://127.0.0.1:{server.server_port}'
+    try:
+        with urllib.request.urlopen(base+'/') as response:
+            landing=response.read().decode()
+        with urllib.request.urlopen(base+'/workspace') as response:
+            workspace=response.read().decode()
+        assert 'id="particle-wave"' in landing
+        assert 'href="/workspace"' in landing
+        assert 'id="trigger"' in workspace
+        assert 'id="trigger"' not in landing
+    finally:
+        server.shutdown();server.server_close()
+
+
 def test_real_http_workflow_and_private_boundary(tmp_path):
     app=App('api-'+uuid.uuid4().hex,tmp_path)
     server=make_server(app,port=0,public_origin='https://faultline.example')
