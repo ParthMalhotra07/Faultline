@@ -6,28 +6,28 @@
   const steps = [
     {
       target: '#scenario',
-      title: 'Choose a controlled incident',
-      description: 'Pick a sandbox fault. Each scenario changes executable app behavior, not a decorative dashboard value.',
+      title: 'Pick a demo problem',
+      description: 'Start with checkout. Its failure may come from a shared currency setting that the first map does not show.',
     },
     {
       target: '.control-actions',
-      title: 'Investigate, then inspect',
-      description: 'Trigger a fault, ask HydraDB for a diagnosis, and inspect one bounded source when the graph lacks evidence.',
+      title: 'Break it, then investigate',
+      description: 'Trigger fault changes the demo app. Investigate checks the current map. Inspect & learn checks evidence when a connection is missing.',
     },
     {
       target: '#health',
-      title: 'Watch the app checks',
-      description: 'Checkout, refunds, and renewals run real acceptance checks. Restore the app to see them recover.',
+      title: 'See what stopped working',
+      description: 'Checkout, refunds, and renewals run real checks in this demo. Restore app makes them healthy again.',
     },
     {
       target: '#graph-section',
-      title: 'Follow the evidence path',
-      description: 'The live graph shows endpoint, service, claim, and evidence relationships returned through HydraDB traversal.',
+      title: 'See the connection it learned',
+      description: 'The live HydraDB graph shows which feature, service, and shared setting connect. Saved claims keep their evidence IDs.',
     },
     {
       target: '#results-section',
-      title: 'Read the measured result',
-      description: 'Compare the frozen, random, and gap-driven methods. Every point keeps abstentions and errors in its denominator.',
+      title: 'Check whether it helped',
+      description: 'The chart counts correct answers across controlled cases and compares this approach with unchanged and random baselines.',
     },
   ];
 

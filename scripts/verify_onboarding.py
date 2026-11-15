@@ -65,6 +65,8 @@ with sync_playwright() as playwright:
         assert sign_in.value.status == 200
         expect(page.locator('#demo-gate')).to_be_hidden()
         expect(page.locator('#tour')).to_be_visible()
+        expect(page.locator('.solution-story > div')).to_have_count(3)
+        expect(page.locator('.solution-story')).to_contain_text('CHECK THE LINK')
         expect(page.locator('#tour-progress')).to_contain_text('1 OF 5')
         assert page.request.get(BASE + '/api/demo/session').json()['signed_in'] is True
         capture(page, '03-first-visit-tour', full_page=False)

@@ -27,6 +27,19 @@
   letter-spacing: .18em;
 }
 .brand-wordmark span { color: #9573f5; }
+
+/* Three plain-language steps, placed immediately after the live preview. */
+.workflow-strip { text-align: left; }
+.workflow-strip > p { color: #aaa7bd; }
+.workflow-stages { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.workflow-step { display: grid; grid-template-columns: 38px 1fr; column-gap: 10px; align-content: start; border-top: 1px solid #ffffff35; padding: 22px 8px 0 0; }
+.workflow-step span { grid-row: 1 / 3; font: 12px ui-monospace, Consolas, monospace; color: #a99bd7; }
+.workflow-step b { font-size: 20px; font-weight: 550; letter-spacing: -.035em; color: #ededf0; }
+.workflow-step p { grid-column: 2; margin-top: 11px; font-size: 14px; line-height: 1.55; }
+@media (max-width: 700px) {
+  .workflow-stages { grid-template-columns: 1fr; gap: 30px; }
+  .workflow-step { padding-top: 17px; }
+}
 @media (max-width: 700px) {
   .brand-logo { flex-basis: 37px; width: 37px; height: 37px; background-size: 99px 77px; background-position: -24px -9px; }
   .brand-wordmark { font-size: 12px; letter-spacing: .13em; }

@@ -25,6 +25,13 @@
 }
 .brand-wordmark { font-size: 13px; font-weight: 650; letter-spacing: .16em; }
 .brand-wordmark span { color: #9573f5; }
+
+/* A first-visit explanation beside the real investigation controls. */
+.solution-story { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; margin-bottom: 24px; }
+.solution-story > div { min-width: 0; padding: 18px 20px; border: 1px solid #ffffff1b; border-radius: 9px; background: #ffffff06; }
+.solution-story span { color: #b7a5df; font: 11px ui-monospace, Consolas, monospace; letter-spacing: .08em; }
+.solution-story p { margin-top: 11px; color: #c5c5cd; font-size: 13px; line-height: 1.5; }
+@media (max-width: 800px) { .solution-story { grid-template-columns: 1fr; } .solution-story > div { padding: 14px 17px; } }
 .identity { gap: 8px; }
 .demo-tools { display: flex; gap: 8px; margin-top: 18px; }
 .demo-tools button {

@@ -32,6 +32,8 @@ with sync_playwright() as pw:
         expect(page.locator('#hero-title')).to_contain_text('Watch the graph learn why')
         expect(page.locator('#particle-wave')).to_be_visible()
         expect(page.locator('.hero-window')).to_be_visible()
+        expect(page.locator('.workflow-step')).to_have_count(3)
+        expect(page.locator('.workflow-step').nth(1)).to_contain_text('Check the missing link')
         report['checks'].append('Origyn-style landing hero, animated particle canvas and product window render at root')
         expect(page.locator('html')).to_have_attribute('data-preview-loaded','true')
         graph=page.request.get(BASE+'/api/graph').json()
@@ -60,6 +62,7 @@ with sync_playwright() as pw:
         assert first!=second,'Particle wave did not animate'
         page.locator('#planning').scroll_into_view_if_needed()
         expect(page.locator('#planning .section-head')).to_have_class(re.compile('reveal-visible'))
+        expect(page.locator('#overview .statement')).to_contain_text('Checkout fails')
         report['checks'].append('Particle wave changes over time and section content reveals on scroll')
         for element in page.locator('.reveal').all():
             element.scroll_into_view_if_needed()
