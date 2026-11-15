@@ -51,6 +51,17 @@ workspace checks, and the hosted API completed real trigger, abstain, learn and
 HydraDB traversal. See `artifacts/T23-render-public-*.log` and the latest UI
 reports. These checks establish a usable live demo, not durable graph storage.
 
+The T30 update added the supplied logo, public demo entry and first-visit tour.
+After push, the public Render URL returned HTTP 200 for `/api/health`,
+`/faultline-logo.png`, `/onboarding.js` and `/workspace`. Isolated Chromium
+then passed ten hosted checks, including sign-in, tour, mobile layout,
+sign-out, and actual trigger/abstain/learn HydraDB traversal with no console,
+page or failed-request errors. See `artifacts/T30-render-browser-verified.log`
+and the PASS report selected by `artifacts/T30-browser-report.json`. A first
+hosted test attempt completed the workflow but aborted one in-flight GET while
+navigating home; the verifier now waits for network idle before navigation.
+That failed attempt is retained locally.
+
 In Render's web-service settings, select **Docker** and `Dockerfile.demo` as
 the Dockerfile path. Leave the Docker command unset. For the new image, set
 `PORT=10000` explicitly or leave `PORT` unset; the entrypoint also corrects an

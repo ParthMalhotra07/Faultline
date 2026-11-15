@@ -13,7 +13,8 @@ The judge flow starts at the landing page. Select **Open workspace**, enter
 with the prefilled public test values, then complete or skip the first-visit
 tour before resetting and triggering the demonstration fault. These values
 open an in-memory public demo session; they are not private accounts or
-HydraDB credentials. Recheck the hosted flow after the newest commit deploys.
+HydraDB credentials. The hosted T30 browser run passed ten checks after the
+new revision deployed; see `artifacts/T30-browser-report.json`.
 
 ## Ready local evidence
 

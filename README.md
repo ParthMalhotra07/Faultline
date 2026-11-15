@@ -21,7 +21,7 @@ The test sign-in creates an eight-hour server-side demo cookie. It is a shared p
 |:--:|:--:|:--:|
 | ![Public demo access with prefilled testing values](docs/images/demo-access.png) | ![Five-step tour highlighting the incident controls](docs/images/guided-tour.png) | ![Workspace showing real HydraDB paths](docs/images/workspace-final.png) |
 
-The [mobile workspace screenshot](docs/images/mobile-workspace.png) shows the same controls at a 390-pixel viewport. The images come from an isolated Chromium run against a local server backed by the real HydraDB container; [the browser report](artifacts/T30-browser-report.json) records checks and source paths.
+The [mobile workspace screenshot](docs/images/mobile-workspace.png) shows the same controls at a 390-pixel viewport. These README images came from an isolated Chromium run against a local server backed by the real HydraDB container. [The latest browser report](artifacts/T30-browser-report.json) points to a separate passing run against the public Render URL.
 
 ## How it works
 

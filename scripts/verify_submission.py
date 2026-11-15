@@ -56,6 +56,13 @@ with zipfile.ZipFile(archive) as z:
     assert not any(Path(name).name in {'auth-token','.env'} or Path(name).name.startswith('.env.') for name in names)
     latest=json.loads(z.read('artifacts/eval/latest.json'))
     assert f"{latest['directory']}/aggregate.json" in names
+    onboarding=json.loads(z.read('artifacts/T30-browser-report.json'))
+    assert onboarding['status']=='PASS'
+    onboard_report=json.loads(z.read(f"{onboarding['directory']}/report.json"))
+    assert onboard_report['status']=='PASS' and len(onboard_report['checks'])>=10
+    assert not onboard_report['console_errors'] and not onboard_report['page_errors']
+    assert not onboard_report['failed_requests']
+    assert set(onboard_report['screenshots'])<=names
 
 ui=json.loads((root/'artifacts/ui/latest-attempt.json').read_text())
 report=json.loads((root/ui['directory']/'report.json').read_text())

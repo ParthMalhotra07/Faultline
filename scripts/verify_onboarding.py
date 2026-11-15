@@ -88,6 +88,7 @@ with sync_playwright() as playwright:
         expect(page.locator('#tour')).to_be_hidden()
         report['checks'].append('Manual replay traverses all five steps and Finish closes the tour')
 
+        page.wait_for_load_state('networkidle')
         page.reload(wait_until='networkidle')
         expect(page.locator('#demo-gate')).to_be_hidden()
         expect(page.locator('#tour')).to_be_hidden()
@@ -129,6 +130,7 @@ with sync_playwright() as playwright:
         expect(page.locator('#demo-gate')).to_be_hidden()
         expect(page.locator('#tour')).to_be_hidden()
         expect(page.locator('#results-section')).to_be_visible()
+        page.wait_for_load_state('networkidle')
         page.locator('.identity').click()
         expect(page).to_have_url(BASE + '/')
         expect(page.locator('#hero-title')).to_be_visible()
