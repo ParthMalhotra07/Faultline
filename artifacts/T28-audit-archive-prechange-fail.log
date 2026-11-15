@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\verify_submission.py", line 33, in <module>
+    assert not any('handoff-audit' in name for name in names), 'Internal audit output entered the source archive'
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Internal audit output entered the source archive

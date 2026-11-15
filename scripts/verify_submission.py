@@ -30,6 +30,7 @@ with zipfile.ZipFile(archive) as z:
         'docs/BUILD_PLAN.md','docs/WORK_LOG.md',
         'scripts/audit_handoff.py','scripts/record_task.py'}
     assert not (internal & names), 'Internal workspace files entered the source archive'
+    assert not any('handoff-audit' in name for name in names), 'Internal audit output entered the source archive'
     vector_latest=json.loads(z.read('artifacts/eval/vector-exploratory/latest.json'))
     assert {'requirements-vector.txt','protocol/vector-exploratory-v2.json',
         'src/faultline/evaluation/vector_baseline.py',

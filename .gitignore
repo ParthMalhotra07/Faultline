@@ -25,3 +25,4 @@ artifacts/T23-docker-build.log
 /docs/WORK_LOG.md
 /scripts/audit_handoff.py
 /scripts/record_task.py
+/artifacts/*handoff-audit*
