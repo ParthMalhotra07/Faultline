@@ -1,0 +1,27 @@
+{
+  "started_at": "2026-11-15T15:53:17.504371+00:00",
+  "base": "https://faultline-j7kn.onrender.com",
+  "browser": "Isolated headless Playwright Chromium",
+  "checks": [
+    "Origyn-style landing hero, animated particle canvas and product window render at root",
+    "Live preview, source list and measured chart match the actual public API",
+    "Particle wave changes over time and section content reveals on scroll",
+    "Every landing section reveals when scrolled into view",
+    "Mobile landing and workspace CTA render without page overflow",
+    "Landing CTA opens public demo access, tour and real HydraDB-backed workspace",
+    "Reduced-motion preference keeps content visible and animation static",
+    "No browser console errors, uncaught page errors or failed requests"
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "screenshots": [
+    "artifacts/ui/20261115T155317Z/00-hero-desktop.png",
+    "artifacts/ui/20261115T155317Z/01-landing-desktop.png",
+    "artifacts/ui/20261115T155317Z/02-landing-mobile.png",
+    "artifacts/ui/20261115T155317Z/03-reduced-motion.png"
+  ],
+  "browser_version": "159.0.8154.6",
+  "status": "PASS",
+  "completed_at": "2026-11-15T15:53:44.791082+00:00"
+}

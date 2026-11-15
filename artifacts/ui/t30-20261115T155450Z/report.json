@@ -1,0 +1,40 @@
+{
+  "base": "https://faultline-j7kn.onrender.com",
+  "started_at": "2026-11-15T15:54:50.736886+00:00",
+  "status": "PASS",
+  "checks": [
+    "Supplied logo loads in landing navigation and favicon route",
+    "Workspace presents working public demo access with labeled prefilled values",
+    "Server-backed demo session starts a five-step first-visit tour",
+    "Tour Next, Back, and Skip work and save completion in this browser",
+    "Manual replay traverses all five steps and Finish closes the tour",
+    "Demo cookie resumes the workspace; completed tour stays dismissed",
+    "Demo controls still trigger, abstain, learn and traverse real HydraDB claims",
+    "Mobile workspace and replayed tour remain usable without page overflow",
+    "Sign-out revokes the demo session; re-entry works and workspace logo returns home",
+    "No browser console, page, or unexpected failed-request errors"
+  ],
+  "screenshots": [
+    "artifacts/ui/t30-20261115T155450Z/01-landing.png",
+    "artifacts/ui/t30-20261115T155450Z/02-demo-access.png",
+    "artifacts/ui/t30-20261115T155450Z/03-first-visit-tour.png",
+    "artifacts/ui/t30-20261115T155450Z/04-live-workspace.png",
+    "artifacts/ui/t30-20261115T155450Z/05-mobile-tour.png",
+    "artifacts/ui/t30-20261115T155450Z/06-mobile-workspace.png"
+  ],
+  "console_errors": [],
+  "page_errors": [],
+  "failed_requests": [],
+  "navigation_aborts": [
+    {
+      "url": "https://faultline-j7kn.onrender.com/api/graph",
+      "error": "net::ERR_ABORTED"
+    },
+    {
+      "url": "https://faultline-j7kn.onrender.com/api/evidence",
+      "error": "net::ERR_ABORTED"
+    }
+  ],
+  "browser_version": "159.0.8154.6",
+  "completed_at": "2026-11-15T15:55:10.846425+00:00"
+}

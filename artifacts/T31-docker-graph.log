@@ -1,0 +1,1 @@
+PASS: bundled image serves results and replay; remote same-origin controls trigger, abstain, learn and traverse actual HydraDB claims.

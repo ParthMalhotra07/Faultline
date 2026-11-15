@@ -1,0 +1,114 @@
+#0 building with "desktop-linux" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile.demo
+#1 transferring dockerfile: 1.18kB done
+#1 DONE 0.0s
+
+#2 [internal] load metadata for ghcr.io/hydra-db/hydradb@sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880
+#2 DONE 1.1s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 544B 0.0s done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 DONE 0.0s
+
+#5 [ 1/14] FROM ghcr.io/hydra-db/hydradb@sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880
+#5 resolve ghcr.io/hydra-db/hydradb@sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880 0.1s done
+#5 DONE 0.2s
+
+#4 [internal] load build context
+#4 transferring context: 168.33kB 0.1s done
+#4 DONE 0.1s
+
+#6 [ 2/14] RUN apt-get update && apt-get install -y --no-install-recommends python3 python3-venv python3-pip curl && rm -rf /var/lib/apt/lists/*
+#6 CACHED
+
+#7 [ 3/14] WORKDIR /app
+#7 CACHED
+
+#8 [ 4/14] COPY pyproject.toml README.md ./
+#8 DONE 0.1s
+
+#9 [ 5/14] COPY src ./src
+#9 DONE 0.1s
+
+#10 [ 6/14] COPY scripts ./scripts
+#10 DONE 0.1s
+
+#11 [ 7/14] COPY web ./web
+#11 DONE 0.0s
+
+#12 [ 8/14] COPY fixtures ./fixtures
+#12 DONE 0.1s
+
+#13 [ 9/14] COPY artifacts/eval/latest.json ./artifacts/eval/latest.json
+#13 DONE 0.1s
+
+#14 [10/14] COPY artifacts/eval/v1-20261114T064609Z-31b50c/aggregate.json ./artifacts/eval/v1-20261114T064609Z-31b50c/aggregate.json
+#14 DONE 0.0s
+
+#15 [11/14] COPY artifacts/pilot-transfer/result.json ./artifacts/pilot-transfer/result.json
+#15 DONE 0.1s
+
+#16 [12/14] RUN python3 -m venv /opt/faultline-venv && /opt/faultline-venv/bin/pip install --no-cache-dir setuptools==80.9.0 pydantic==2.12.5 && /opt/faultline-venv/bin/pip install --no-build-isolation --no-deps -e .
+#16 5.274 Collecting setuptools==80.9.0
+#16 5.965   Downloading setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+#16 6.203 Collecting pydantic==2.12.5
+#16 6.237   Downloading pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+#16 6.423      ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 90.6/90.6 kB 527.6 kB/s eta 0:00:00
+#16 6.501 Collecting annotated-types>=0.6.0 (from pydantic==2.12.5)
+#16 6.627   Downloading annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+#16 8.366 Collecting pydantic-core==2.41.5 (from pydantic==2.12.5)
+#16 8.392   Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (7.3 kB)
+#16 8.445 Collecting typing-extensions>=4.14.1 (from pydantic==2.12.5)
+#16 8.472   Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+#16 8.518 Collecting typing-inspection>=0.4.2 (from pydantic==2.12.5)
+#16 8.544   Downloading typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+#16 8.636 Downloading setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+#16 8.808    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 7.1 MB/s eta 0:00:00
+#16 8.840 Downloading pydantic-2.12.5-py3-none-any.whl (463 kB)
+#16 8.907    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 463.6/463.6 kB 7.0 MB/s eta 0:00:00
+#16 8.933 Downloading pydantic_core-2.41.5-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.1 MB)
+#16 9.285    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.1/2.1 MB 5.9 MB/s eta 0:00:00
+#16 9.313 Downloading annotated_types-0.8.0-py3-none-any.whl (13 kB)
+#16 9.340 Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+#16 9.348    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 45.6/45.6 kB 19.1 MB/s eta 0:00:00
+#16 9.375 Downloading typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+#16 9.506 Installing collected packages: typing-extensions, setuptools, annotated-types, typing-inspection, pydantic-core, pydantic
+#16 11.05 Successfully installed annotated-types-0.8.0 pydantic-2.12.5 pydantic-core-2.41.5 setuptools-80.9.0 typing-extensions-4.16.0 typing-inspection-0.4.5
+#16 11.84 Obtaining file:///app
+#16 11.85   Checking if build backend supports build_editable: started
+#16 12.09   Checking if build backend supports build_editable: finished with status 'done'
+#16 12.10   Preparing editable metadata (pyproject.toml): started
+#16 12.32   Preparing editable metadata (pyproject.toml): finished with status 'done'
+#16 12.33 Building wheels for collected packages: faultline
+#16 12.34   Building editable for faultline (pyproject.toml): started
+#16 12.59   Building editable for faultline (pyproject.toml): finished with status 'done'
+#16 12.59   Created wheel for faultline: filename=faultline-0.1.0-0.editable-py3-none-any.whl size=1237 sha256=6f2470db18335fa5a779bee1f3a7ae9ab71f79d175c4f7f105468949f3274c1e
+#16 12.59   Stored in directory: /tmp/pip-ephem-wheel-cache-akpcwinx/wheels/54/1b/b7/aa63e25c8f14f4f2ae7b04e6097bdecb770e455c5c1ee0a600
+#16 12.59 Successfully built faultline
+#16 12.59 Installing collected packages: faultline
+#16 12.60 Successfully installed faultline-0.1.0
+#16 DONE 12.7s
+
+#17 [13/14] COPY scripts/run_hosted.sh /usr/local/bin/run-faultline-hosted
+#17 DONE 0.1s
+
+#18 [14/14] RUN chmod +x /usr/local/bin/run-faultline-hosted
+#18 DONE 0.3s
+
+#19 exporting to image
+#19 exporting layers
+#19 exporting layers 1.8s done
+#19 exporting manifest sha256:c20c292b4ade93062e6adef1a2cafd73d5b5446e227efa5c219a82c26cd268ec 0.0s done
+#19 exporting config sha256:dacd24a6a874a3aa3ed6b49595aeafd23e19f3799bf25cc70f45035cb01aafb3 0.0s done
+#19 exporting attestation manifest sha256:c20954c3e3d41f0e49d1ede178cbb36854047fc1c86e246aa76e3e456c6986b0 0.0s done
+#19 exporting manifest list sha256:700f24f4a27c544cf7846bad697b58fa4302ef66c9800f4a2936693b17dca305 0.0s done
+#19 naming to docker.io/library/faultline:t31 done
+#19 unpacking to docker.io/library/faultline:t31
+#19 unpacking to docker.io/library/faultline:t31 0.7s done
+#19 DONE 2.7s
+
+View build details: docker-desktop://dashboard/build/desktop-linux/desktop-linux/fatmzphwehpk0wk914p93jur6

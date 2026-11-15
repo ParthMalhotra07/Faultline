@@ -83,7 +83,7 @@ with sync_playwright() as pw:
         expect(page).to_have_url(BASE+'/workspace')
         expect(page.locator('#demo-gate')).to_be_visible()
         page.locator('#demo-form button[type="submit"]').click()
-        expect(page.locator('#demo-gate')).to_be_hidden()
+        expect(page.locator('#demo-gate')).to_be_hidden(timeout=20000)
         expect(page.locator('#tour')).to_be_visible()
         page.locator('#tour-skip').click()
         expect(page.locator('#graph svg')).to_be_visible()

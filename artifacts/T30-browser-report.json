@@ -1,5 +1,5 @@
 {
-  "directory": "artifacts/ui/t30-20261115T152353Z",
+  "directory": "artifacts/ui/t30-20261115T155450Z",
   "status": "PASS",
   "checks": [
     "Supplied logo loads in landing navigation and favicon route",
@@ -14,11 +14,11 @@
     "No browser console, page, or unexpected failed-request errors"
   ],
   "screenshots": [
-    "artifacts/ui/t30-20261115T152353Z/01-landing.png",
-    "artifacts/ui/t30-20261115T152353Z/02-demo-access.png",
-    "artifacts/ui/t30-20261115T152353Z/03-first-visit-tour.png",
-    "artifacts/ui/t30-20261115T152353Z/04-live-workspace.png",
-    "artifacts/ui/t30-20261115T152353Z/05-mobile-tour.png",
-    "artifacts/ui/t30-20261115T152353Z/06-mobile-workspace.png"
+    "artifacts/ui/t30-20261115T155450Z/01-landing.png",
+    "artifacts/ui/t30-20261115T155450Z/02-demo-access.png",
+    "artifacts/ui/t30-20261115T155450Z/03-first-visit-tour.png",
+    "artifacts/ui/t30-20261115T155450Z/04-live-workspace.png",
+    "artifacts/ui/t30-20261115T155450Z/05-mobile-tour.png",
+    "artifacts/ui/t30-20261115T155450Z/06-mobile-workspace.png"
   ]
 }

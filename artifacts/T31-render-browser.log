@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\verify_onboarding.py", line 143, in <module>
+    assert not report['failed_requests'], report['failed_requests']
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: [{'url': 'https://faultline-j7kn.onrender.com/api/observations', 'error': 'net::ERR_ABORTED'}, {'url': 'https://faultline-j7kn.onrender.com/api/graph', 'error': 'net::ERR_ABORTED'}, {'url': 'https://faultline-j7kn.onrender.com/api/sources', 'error': 'net::ERR_ABORTED'}, {'url': 'https://faultline-j7kn.onrender.com/api/evidence', 'error': 'net::ERR_ABORTED'}]

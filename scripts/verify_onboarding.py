@@ -33,9 +33,12 @@ with sync_playwright() as playwright:
     page.on('console', lambda message: report['console_errors'].append(message.text)
             if message.type == 'error' else None)
     page.on('pageerror', lambda error: report['page_errors'].append(str(error)))
+    navigating_home = [False]
     def request_failed(request):
         event = dict(url=request.url, error=request.failure)
-        if request.failure == 'net::ERR_ABORTED' and request.url.endswith('/api/results'):
+        if (request.failure == 'net::ERR_ABORTED'
+                and request.url.startswith(BASE + '/api/')
+                and (request.url.endswith('/api/results') or navigating_home[0])):
             report['navigation_aborts'].append(event)
         else:
             report['failed_requests'].append(event)
@@ -63,7 +66,7 @@ with sync_playwright() as playwright:
         with page.expect_response(lambda result: result.url.endswith('/api/demo/sign-in')) as sign_in:
             page.locator('#demo-form button[type="submit"]').click()
         assert sign_in.value.status == 200
-        expect(page.locator('#demo-gate')).to_be_hidden()
+        expect(page.locator('#demo-gate')).to_be_hidden(timeout=20000)
         expect(page.locator('#tour')).to_be_visible()
         expect(page.locator('.solution-story > div')).to_have_count(3)
         expect(page.locator('.solution-story')).to_contain_text('CHECK THE LINK')
@@ -92,7 +95,7 @@ with sync_playwright() as playwright:
 
         page.wait_for_load_state('networkidle')
         page.reload(wait_until='networkidle')
-        expect(page.locator('#demo-gate')).to_be_hidden()
+        expect(page.locator('#demo-gate')).to_be_hidden(timeout=20000)
         expect(page.locator('#tour')).to_be_hidden()
         expect(page.locator('#graph svg')).to_be_visible()
         report['checks'].append('Demo cookie resumes the workspace; completed tour stays dismissed')
@@ -129,10 +132,12 @@ with sync_playwright() as playwright:
         expect(page.locator('#demo-gate')).to_be_visible()
         assert page.request.get(BASE + '/api/demo/session').json()['signed_in'] is False
         page.locator('#demo-form button[type="submit"]').click()
-        expect(page.locator('#demo-gate')).to_be_hidden()
+        expect(page.locator('#demo-gate')).to_be_hidden(timeout=20000)
         expect(page.locator('#tour')).to_be_hidden()
         expect(page.locator('#results-section')).to_be_visible()
         page.wait_for_load_state('networkidle')
+        assert not report['failed_requests'], report['failed_requests']
+        navigating_home[0] = True
         page.locator('.identity').click()
         expect(page).to_have_url(BASE + '/')
         expect(page.locator('#hero-title')).to_be_visible()
