@@ -2,7 +2,7 @@
 
 When an app breaks, the visible error may be far from the setting that caused it. **FAULTLINE shows what failed, checks evidence for a missing connection, and remembers that connection in HydraDB for the next investigation.** It is a working prototype on a controlled commerce app.
 
-**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[See the demo steps](docs/JUDGE_GUIDE.md)** · **[Run locally](#run-locally-on-windows)** · **[Deployment guide](docs/HOSTING.md)**
+**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Loom walkthrough (add uploaded video URL)](https://www.loom.com/share/REPLACE_WITH_VIDEO_ID)** · **[See the demo steps](docs/JUDGE_GUIDE.md)** · **[Run locally](#run-locally-on-windows)** · **[Deployment guide](docs/HOSTING.md)**
 
 ## Contents
 
