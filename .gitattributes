@@ -1,3 +1,9 @@
-/protocol/vector-exploratory-v*.json text eol=lf
+/protocol/vector-exploratory-v*.json text eol=crlf
 /scripts/evaluate_vector_exploratory.py text eol=lf
 /src/faultline/evaluation/vector_baseline.py text eol=lf
+/.gitattributes text eol=lf
+/requirements-vector.txt text eol=lf
+/scripts/verify_vector_exploratory.py text eol=lf
+/docs/REFERENCES.md text eol=lf
+/docs/SUBMISSION.md text eol=lf
+/docs/LOOM_SCRIPT.md text eol=lf
