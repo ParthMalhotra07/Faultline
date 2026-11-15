@@ -1,0 +1,38 @@
+{
+  "done": 23,
+  "blocked": [
+    "T23"
+  ],
+  "active": [],
+  "optional_skipped": [
+    "T21"
+  ],
+  "current_task_verified_files": 22,
+  "artifact_changes": [
+    {
+      "file": "README.md",
+      "last_verified_owner": "T23",
+      "reason": "Active-task artifact changed after its recorded check"
+    },
+    {
+      "file": "docs/DECISIONS.md",
+      "last_verified_owner": "T23",
+      "reason": "Active-task artifact changed after its recorded check"
+    },
+    {
+      "file": "docs/DEMO.md",
+      "last_verified_owner": "T23",
+      "reason": "Active-task artifact changed after its recorded check"
+    },
+    {
+      "file": ".gitignore",
+      "last_verified_owner": "T23",
+      "reason": "Active-task artifact changed after its recorded check"
+    }
+  ]
+}
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\audit_handoff.py", line 42, in <module>
+    assert not changes,'Artifact hash discrepancies require review before final handoff'
+           ^^^^^^^^^^^
+AssertionError: Artifact hash discrepancies require review before final handoff

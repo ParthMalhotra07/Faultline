@@ -1,0 +1,25 @@
+{
+  "started_at": "2026-11-15T05:26:50.102062+00:00",
+  "browser": "Isolated headless Playwright Chromium",
+  "user_profile": false,
+  "channel": "chromium",
+  "checks": [],
+  "console_errors": [
+    "Failed to load resource: net::ERR_EMPTY_RESPONSE"
+  ],
+  "page_errors": [],
+  "failed_requests": [
+    {
+      "url": "http://127.0.0.1:8765/local/reset-experiment",
+      "error": "net::ERR_EMPTY_RESPONSE"
+    }
+  ],
+  "http_errors": [],
+  "screenshots": [
+    "artifacts/ui/20261115T052650Z/failure.png"
+  ],
+  "browser_version": "159.0.8154.6",
+  "status": "FAIL",
+  "failure": "Page.expect_response: Timeout 15000ms exceeded while waiting for event \"response\"",
+  "completed_at": "2026-11-15T05:27:12.574038+00:00"
+}

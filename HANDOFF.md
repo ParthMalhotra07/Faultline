@@ -1,12 +1,12 @@
 # Current handoff
 
-Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22. Current task: T23 (BLOCKED).
+Verified tasks: T00, T01, T02, T03, T04, T05, T06, T07, T08, T09, T10, T11, T12, T13, T14, T15, T16, T17, T18, T19, T20, T22, T24. Current task: T23 (BLOCKED).
 Consult STATE.json for exact checks, artifact hashes, changed files, and limitations.
 Failed checks remain preserved in artifacts and the task ledger.
 
 ## Next executable step
 
-Configure an approved persistent Docker host using Dockerfile.demo and verify its public URL; review and make the GitHub repo public; record/upload the narrated Loom and truthful social posts, then submit before the confirmed cutoff.
+Configure an approved persistent Docker host and verify its public URL; make the GitHub repo public; record and upload the narrated Loom; publish truthful social posts and submit before the confirmed cutoff.
 
 ## Blockers
 

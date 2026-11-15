@@ -1,0 +1,308 @@
+FFFFF.....FFFF..F..............................                          [100%]
+================================== FAILURES ===================================
+__________ test_frozen_and_random_budget_parity_and_reproducibility ___________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_frozen_and_random_budget_0')
+
+    def test_frozen_and_random_budget_parity_and_reproducibility(tmp_path):
+        s = Sandbox(); s.observe(100)
+        catalog = Catalog.from_telemetry(s.config.telemetry(), s.source_version)
+>       stores = [GraphStore('budget-'+uuid.uuid4().hex, s.source_version, tmp_path) for _ in range(3)]
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_budget_parity.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+_______________ test_development_structural_rerun_is_identical ________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_development_structural_re0')
+
+    def test_development_structural_rerun_is_identical(tmp_path):
+        s=Sandbox(); s.observe(100)
+        catalog=Catalog.from_telemetry(s.config.telemetry(),s.source_version)
+>       g=GraphStore('determinism-'+uuid.uuid4().hex,s.source_version,tmp_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_deterministic_rerun.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+________________ test_actual_graph_ranking_abstention_and_ties ________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_actual_graph_ranking_abst0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029C064CFB90>
+
+    def test_actual_graph_ranking_abstention_and_ties(tmp_path, monkeypatch):
+        s = Sandbox(); s.observe(100)
+        catalog = Catalog.from_telemetry(s.config.telemetry(), s.source_version)
+>       store = GraphStore('rank-' + uuid.uuid4().hex, s.source_version, tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_diagnosis.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+__________ test_partial_source_stale_restart_and_read_only_diagnosis __________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_partial_source_stale_rest0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029C064CF9E0>
+
+    def test_partial_source_stale_restart_and_read_only_diagnosis(tmp_path, monkeypatch):
+        s=Sandbox(); s.observe(100)
+        catalog=Catalog.from_telemetry(s.config.telemetry(),s.source_version)
+        records=Inspector(catalog,DEFAULT_BUDGET).inspect('source:shared')
+>       g=GraphStore('fail-'+uuid.uuid4().hex,s.source_version,tmp_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_failure_modes.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+__________________ test_round_trace_is_an_immutable_snapshot __________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_round_trace_is_an_immutab0')
+
+    def test_round_trace_is_an_immutable_snapshot(tmp_path):
+        s=Sandbox(); s.observe(100)
+        catalog=Catalog.from_telemetry(s.config.telemetry(),s.source_version)
+>       g=GraphStore('trace-'+uuid.uuid4().hex,s.source_version,tmp_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_failure_modes.py:52: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+__________________ test_live_seed_and_provenance_idempotence __________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_live_seed_and_provenance_0')
+
+    def test_live_seed_and_provenance_idempotence(tmp_path):
+>       store = GraphStore('test-' + uuid.uuid4().hex, source_version(), tmp_path)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_graph_store.py:7: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+______________ test_evidence_validation_recovery_and_idempotence ______________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_evidence_validation_recov0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000029C06509A30>
+
+    def test_evidence_validation_recovery_and_idempotence(tmp_path, monkeypatch):
+        s = Sandbox(); s.observe(100)
+        c = Catalog.from_telemetry(s.config.telemetry(), s.source_version)
+        records = Inspector(c, InspectionBudget(max_sources=1,max_bytes=10000,max_records=100,timeout_ms=1000)).inspect('source:shared')
+>       g = GraphStore('ingest-' + uuid.uuid4().hex, s.source_version, tmp_path)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_ingestion.py:15: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+_________________ test_live_learning_restart_and_reset_scopes _________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_live_learning_restart_and0')
+
+    def test_live_learning_restart_and_reset_scopes(tmp_path):
+        s = Sandbox(); s.observe(100)
+        catalog = Catalog.from_telemetry(s.config.telemetry(), s.source_version)
+>       g = GraphStore('round-' + uuid.uuid4().hex, s.source_version, tmp_path)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_learning_round.py:13: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+_____________ test_runtime_captured_learner_input_is_public_only ______________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_runtime_captured_learner_0')
+
+    def test_runtime_captured_learner_input_is_public_only(tmp_path):
+        s=Sandbox(); s.observe(100)
+        catalog=Catalog.from_telemetry(s.config.telemetry(),s.source_version)
+>       g=GraphStore('leak-'+uuid.uuid4().hex,s.source_version,tmp_path)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_no_leakage.py:16: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+________________ test_real_http_workflow_and_private_boundary _________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-14/test_real_http_workflow_and_pr0')
+
+    def test_real_http_workflow_and_private_boundary(tmp_path):
+>       app=App('api-'+uuid.uuid4().hex,tmp_path)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\integration\test_public_api.py:35: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+src\faultline\api.py:24: in __init__
+    self.graph=GraphStore(namespace,self.sandbox.source_version,directory)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\faultline\graph\store.py:51: in __init__
+    self.adapter = adapter or HydraAdapter.from_environment()
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+cls = <class 'faultline.graph.adapter.HydraAdapter'>
+
+    @classmethod
+    def from_environment(cls):
+        token = os.environ.get('HYDRADB_TOKEN')
+        if not token and os.environ.get('HYDRADB_TOKEN_FILE'):
+            token = Path(os.environ['HYDRADB_TOKEN_FILE']).read_text().strip()
+        if not token:
+>           raise GraphError('Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally')
+E           faultline.graph.adapter.GraphError: Configure HYDRADB_TOKEN or HYDRADB_TOKEN_FILE locally
+
+src\faultline\graph\adapter.py:61: GraphError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_budget_parity.py::test_frozen_and_random_budget_parity_and_reproducibility
+FAILED tests/integration/test_deterministic_rerun.py::test_development_structural_rerun_is_identical
+FAILED tests/integration/test_diagnosis.py::test_actual_graph_ranking_abstention_and_ties
+FAILED tests/integration/test_failure_modes.py::test_partial_source_stale_restart_and_read_only_diagnosis
+FAILED tests/integration/test_failure_modes.py::test_round_trace_is_an_immutable_snapshot
+FAILED tests/integration/test_graph_store.py::test_live_seed_and_provenance_idempotence
+FAILED tests/integration/test_ingestion.py::test_evidence_validation_recovery_and_idempotence
+FAILED tests/integration/test_learning_round.py::test_live_learning_restart_and_reset_scopes
+FAILED tests/integration/test_no_leakage.py::test_runtime_captured_learner_input_is_public_only
+FAILED tests/integration/test_public_api.py::test_real_http_workflow_and_private_boundary
+10 failed, 37 passed in 0.98s

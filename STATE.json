@@ -3,10 +3,10 @@
   "project": "FAULTLINE",
   "created_date": "2026-11-14",
   "timezone": "Asia/Calcutta",
-  "delivery_kind": "local_prototype_verified_public_delivery_blocked",
+  "delivery_kind": "implementation_in_progress",
   "implementation_started": true,
   "current_task_id": "T23",
-  "next_action": "Configure an approved persistent Docker host using Dockerfile.demo and verify its public URL; review and make the GitHub repo public; record/upload the narrated Loom and truthful social posts, then submit before the confirmed cutoff.",
+  "next_action": "Configure an approved persistent Docker host and verify its public URL; make the GitHub repo public; record and upload the narrated Loom; publish truthful social posts and submit before the confirmed cutoff.",
   "current_phase": "P6",
   "scope": "Solo Track 1; gap-driven evidence ingestion on a controlled executable app",
   "verified_facts": [
@@ -1403,6 +1403,13 @@
           "exit_code": 0,
           "status": "PASS",
           "output_path": "artifacts/T23-final-submission-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-package-verify.log"
         }
       ],
       "evidence_paths": [
@@ -1418,6 +1425,7 @@
         "artifacts/T23-rehearsal.log",
         "artifacts/T23-submission-local-verify.log",
         "artifacts/T23-tunnel-policy-rejection.txt",
+        "artifacts/T24-package-verify.log",
         "artifacts/submission/package-manifest.json",
         "artifacts/submission/rehearsal.json"
       ],
@@ -1427,7 +1435,7 @@
         "No narrated Loom share link, published social posts, validated buyer responses or exact cutoff are available."
       ],
       "blocker": "No verified live HTTPS URL: a durable hosting account is needed; automatic approval review rejected the temporary tunnel.; The GitHub repository is pushed but still private; host requires public visibility.; No narrated Loom share link, published social posts, validated buyer responses or exact cutoff are available.",
-      "next_action": "Configure an approved persistent Docker host using Dockerfile.demo and verify its public URL; review and make the GitHub repo public; record/upload the narrated Loom and truthful social posts, then submit before the confirmed cutoff.",
+      "next_action": "Configure an approved persistent Docker host and verify its public URL; make the GitHub repo public; record and upload the narrated Loom; publish truthful social posts and submit before the confirmed cutoff.",
       "artifact_sha256": {
         "README.md": "7c11439173eef2966cb26390bb57eac3b450f1724e7b73c1d47240c01320910f",
         "START_HERE.md": "2eaa584635dfad9efe7afd68396f381a70de6d51a969022b2e4c9e6a743dbe21",
@@ -1452,6 +1460,146 @@
         ".dockerignore": "5c78c8625e075c4de08f9bdac41aa589da96aae4a44f2a74456c2c92104c8b08",
         ".gitignore": "fc79013331f49032b926f412e9e1cdd2748d015e4552b25de33ee184d4a7dc1e"
       }
+    },
+    {
+      "id": "T24",
+      "phase": "P6",
+      "title": "Adapt Origyn frontend design for FAULTLINE",
+      "depends_on": [
+        "T19",
+        "T22"
+      ],
+      "status": "DONE",
+      "required": true,
+      "expected_outputs": [
+        "web/index.html",
+        "web/style.css",
+        "web/app.js",
+        "artifacts/ui/latest-attempt.json"
+      ],
+      "changed_files": [
+        ".gitignore",
+        "HANDOFF.md",
+        "README.md",
+        "STATE.json",
+        "artifacts/T24-demo-image-build.log",
+        "artifacts/T24-python-tests-configured.log",
+        "artifacts/T24-rehearsal.log",
+        "artifacts/ui/20261115T053153Z/01-healthy-desktop.png",
+        "artifacts/ui/20261115T053153Z/03-learned-graph.png",
+        "artifacts/ui/20261115T053153Z/07-mobile.png",
+        "artifacts/ui/20261115T053153Z/report.json",
+        "artifacts/ui/latest-attempt.json",
+        "docs/BUILD_PLAN.md",
+        "docs/DECISIONS.md",
+        "docs/DEMO.md",
+        "scripts/audit_handoff.py",
+        "web/app.js",
+        "web/index.html",
+        "web/style.css"
+      ],
+      "checks": [
+        {
+          "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results (initial UI attempt)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T24-browser-check.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q (token file not set)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T24-python-tests.log"
+        },
+        {
+          "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results (mobile overflow attempt)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T24-browser-check-retry.log"
+        },
+        {
+          "command": "HYDRADB_TOKEN_FILE=.runtime/hydra/auth-token .venv/Scripts/python.exe -m pytest -q",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-python-tests-configured.log"
+        },
+        {
+          "command": "docker build -f Dockerfile.demo -t faultline-demo:local .",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-demo-image-build.log"
+        },
+        {
+          "command": "docker run --rm --entrypoint sh faultline-demo:local -c grep updated UI assets",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-demo-image-assets.log"
+        },
+        {
+          "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/rehearse_demo.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-rehearsal.log"
+        },
+        {
+          "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-browser-check-final.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m py_compile scripts/audit_handoff.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T24-audit-compile.log"
+        }
+      ],
+      "evidence_paths": [
+        "artifacts/T24-audit-compile.log",
+        "artifacts/T24-browser-check-final.log",
+        "artifacts/T24-browser-check-retry.log",
+        "artifacts/T24-browser-check.log",
+        "artifacts/T24-demo-image-assets.log",
+        "artifacts/T24-demo-image-build.log",
+        "artifacts/T24-python-tests-configured.log",
+        "artifacts/T24-python-tests.log",
+        "artifacts/T24-rehearsal.log"
+      ],
+      "limitations": [
+        "Mobile graph and chart require horizontal swipe, which is labeled in the UI.",
+        "The refreshed fallback is silent and is not a narrated Loom.",
+        "T23 still requires a public live app, a public repo, a Loom link and real go-to-market publication."
+      ],
+      "blocker": null,
+      "next_action": "Run handoff audit, repackage and verify the local bundle, then commit and push T24 documentation and evidence. T23 remains blocked on external public delivery.",
+      "artifact_sha256": {
+        "web/index.html": "077a0207f509e65c564ccc8ed4d8189c6e5dcd2e113073983acdfe898776fd9c",
+        "web/style.css": "843f462e54948084129f51e7960891011a17e1583cb00dbef133f9fd6b6d3091",
+        "web/app.js": "2ca368b7a0dba4e367c99a4e7c24fa1e8c537c55e2f9f2aeaedc87a56faec9e3",
+        "README.md": "2a38a09eef47176ab66aa16e5e58e14ae61cb81aa7088939afc0fca78c6bfe09",
+        "docs/BUILD_PLAN.md": "6895ae1720c5d0504be9a65c047c2467a5fa399e52d0014573441083a4a80c7a",
+        "docs/DECISIONS.md": "153b5207048bd90d8c9e97213875d8360a6dac9044902016085b76bdf36eca1c",
+        "docs/DEMO.md": "46c133ba471b97e51a2dd413d709310d87ea5fe680d55c689e9ca86336fdd796",
+        ".gitignore": "9a7e92e481fab5643381f351280f46006026ba84d00df55e61221f8277262e3a",
+        "artifacts/ui/latest-attempt.json": "0d73a4a25196dfdcec2c2a286216b7a7ca63716ae78563943b7a35e8060e8114",
+        "artifacts/ui/20261115T053153Z/report.json": "94dd25ed2d759eb0ae6f274350e868480a2bb9dcbcbb3cb60baadc6e5e28511e",
+        "artifacts/ui/20261115T053153Z/01-healthy-desktop.png": "2dd23a70cb9d9cae18e648440748f5c6439ef370a6ed4dd2f93f5a7e68778b0c",
+        "artifacts/ui/20261115T053153Z/03-learned-graph.png": "191596c8443c2f7cf5e1fbede9628c2379b7f72560e27e295c3b652eb48f0e0d",
+        "artifacts/ui/20261115T053153Z/07-mobile.png": "5df58070f6ec3df543b5e86a654a7d96fac08f2ceca580f2e9a7b615051a3b4b",
+        "artifacts/T24-python-tests-configured.log": "7aadd0a4a1af9f4da72ec93d9916ea630ac4785e62521375813c1a307ff1251d",
+        "artifacts/T24-demo-image-build.log": "ee077a6b6b4fb14105d9e92cd6daf218e082ff5f40f83ee2a92859b32c7fcdbf",
+        "artifacts/T24-rehearsal.log": "b804e9176ec3afe3d4fccf9e32396eaf113055b63b68672ba3f3382228effcfc",
+        "scripts/audit_handoff.py": "e3c4caf9900dd208293e399f8d4029446a1310736b71ba48b108e89eae2d0bae"
+      }
     }
   ],
   "check_record_template": {
@@ -1463,7 +1611,7 @@
     "summary": "Never replace real output with invented success"
   },
   "experiment": null,
-  "last_verified_implementation_task": "T22",
+  "last_verified_implementation_task": "T24",
   "session_log": [
     {
       "at": "2026-11-14T05:40:40.503Z",
@@ -1847,6 +1995,83 @@
       "status": "BLOCKED",
       "command": "python scripts/verify_submission.py",
       "output": "artifacts/T23-submission-local-verify.log"
+    },
+    {
+      "at": "2026-11-15T05:21:38.353736+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T05:35:27.706314+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results (initial UI attempt)",
+      "output": "artifacts/T24-browser-check.log"
+    },
+    {
+      "at": "2026-11-15T05:35:27.833105+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q (token file not set)",
+      "output": "artifacts/T24-python-tests.log"
+    },
+    {
+      "at": "2026-11-15T05:35:32.894023+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results (mobile overflow attempt)",
+      "output": "artifacts/T24-browser-check-retry.log"
+    },
+    {
+      "at": "2026-11-15T05:36:17.612486+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "HYDRADB_TOKEN_FILE=.runtime/hydra/auth-token .venv/Scripts/python.exe -m pytest -q",
+      "output": "artifacts/T24-python-tests-configured.log"
+    },
+    {
+      "at": "2026-11-15T05:36:17.758837+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "docker build -f Dockerfile.demo -t faultline-demo:local .",
+      "output": "artifacts/T24-demo-image-build.log"
+    },
+    {
+      "at": "2026-11-15T05:36:17.862737+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "docker run --rm --entrypoint sh faultline-demo:local -c grep updated UI assets",
+      "output": "artifacts/T24-demo-image-assets.log"
+    },
+    {
+      "at": "2026-11-15T05:36:18.060186+00:00",
+      "task": "T24",
+      "status": "IN_PROGRESS",
+      "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/rehearse_demo.py",
+      "output": "artifacts/T24-rehearsal.log"
+    },
+    {
+      "at": "2026-11-15T05:36:45.281380+00:00",
+      "task": "T24",
+      "status": "DONE",
+      "command": "FAULTLINE_PLAYWRIGHT_WS=ws://127.0.0.1:13000/ .venv/Scripts/python.exe scripts/verify_ui.py --results",
+      "output": "artifacts/T24-browser-check-final.log"
+    },
+    {
+      "at": "2026-11-15T05:37:21.851501+00:00",
+      "task": "T24",
+      "status": "DONE",
+      "command": ".venv/Scripts/python.exe -m py_compile scripts/audit_handoff.py",
+      "output": "artifacts/T24-audit-compile.log"
+    },
+    {
+      "at": "2026-11-15T05:37:46.896624+00:00",
+      "task": "T23",
+      "status": "BLOCKED",
+      "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T24-package-verify.log"
     }
   ],
   "delivery_deadline": {
