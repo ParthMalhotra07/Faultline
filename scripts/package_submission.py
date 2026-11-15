@@ -21,6 +21,9 @@ for name in ['README.md','LICENSE','pyproject.toml',
 paths += [p for p in (root/'tests').rglob('*.py')]
 latest=json.loads((root/'artifacts/eval/latest.json').read_text())
 paths += [p for p in (root/latest['directory']).iterdir() if p.is_file()]
+# Keep the original completed run alongside the selected exact-protocol rerun.
+# README links to its raw evidence and explains the metadata-only correction.
+paths += [p for p in (root/'artifacts/eval/v1-20261114T060320Z-2f47a2').iterdir() if p.is_file()]
 paths += [p for p in (root/'artifacts/eval/vector-exploratory').rglob('*') if p.is_file()]
 load=json.loads((root/'artifacts/load/latest.json').read_text())
 paths += [p for p in (root/load['directory']).iterdir() if p.is_file()]
