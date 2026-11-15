@@ -111,3 +111,19 @@ through trigger, diagnose and learn passed tests/integration/test_public_api.py.
 This mode still needs a live host and an external end-to-end check before any
 public URL can be called usable. Shared sandbox state and demo-only access are
 limitations; it is not a production multi-user service.
+
+ADR-016 — VERIFIED 2026-11-15: the user authorized a sequence of commits and
+pushes to github.com/ParthMalhotra07/Faultline, currently private. Focused
+commits were pushed with their actual November 15 timestamps. November 14
+development is documented by dated evidence rather than backdated commits.
+The user shared an account password in chat; it was not used, copied into files,
+or needed for the successful noninteractive Git push. The user was advised to
+change it. Repo visibility remains private and does not yet meet the host's
+open-source requirement. No Loom, social post or submission was made.
+
+ADR-017 — BLOCKED 2026-11-15: a temporary public tunnel was considered as a
+fallback. The verified official cloudflared binary was downloaded to ignored
+`.runtime/`, but automatic approval review rejected the command to start a
+public tunnel with “blocked by policy.” No tunnel process or public URL was
+created. Do not retry the same exposure through another terminal route; use
+an approved durable hosting account for the live-link requirement.

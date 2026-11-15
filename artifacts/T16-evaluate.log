@@ -1,0 +1,114 @@
+17 frozen round 0: 12 read-only cases completed
+17 frozen round 1: 12 read-only cases completed
+17 frozen round 2: 12 read-only cases completed
+17 frozen round 3: 12 read-only cases completed
+17 frozen round 4: 12 read-only cases completed
+17 frozen round 5: 12 read-only cases completed
+17 frozen round 6: 12 read-only cases completed
+17 frozen complete
+17 random round 0: 12 read-only cases completed
+17 random round 1: 12 read-only cases completed
+17 random round 2: 12 read-only cases completed
+17 random round 3: 12 read-only cases completed
+17 random round 4: 12 read-only cases completed
+17 random round 5: 12 read-only cases completed
+17 random round 6: 12 read-only cases completed
+17 random complete
+17 adaptive round 0: 12 read-only cases completed
+17 adaptive round 1: 12 read-only cases completed
+17 adaptive round 2: 12 read-only cases completed
+17 adaptive round 3: 12 read-only cases completed
+17 adaptive round 4: 12 read-only cases completed
+17 adaptive round 5: 12 read-only cases completed
+17 adaptive round 6: 12 read-only cases completed
+17 adaptive complete
+29 frozen round 0: 12 read-only cases completed
+29 frozen round 1: 12 read-only cases completed
+29 frozen round 2: 12 read-only cases completed
+29 frozen round 3: 12 read-only cases completed
+29 frozen round 4: 12 read-only cases completed
+29 frozen round 5: 12 read-only cases completed
+29 frozen round 6: 12 read-only cases completed
+29 frozen complete
+29 random round 0: 12 read-only cases completed
+29 random round 1: 12 read-only cases completed
+29 random round 2: 12 read-only cases completed
+29 random round 3: 12 read-only cases completed
+29 random round 4: 12 read-only cases completed
+29 random round 5: 12 read-only cases completed
+29 random round 6: 12 read-only cases completed
+29 random complete
+29 adaptive round 0: 12 read-only cases completed
+29 adaptive round 1: 12 read-only cases completed
+29 adaptive round 2: 12 read-only cases completed
+29 adaptive round 3: 12 read-only cases completed
+29 adaptive round 4: 12 read-only cases completed
+29 adaptive round 5: 12 read-only cases completed
+29 adaptive round 6: 12 read-only cases completed
+29 adaptive complete
+43 frozen round 0: 12 read-only cases completed
+43 frozen round 1: 12 read-only cases completed
+43 frozen round 2: 12 read-only cases completed
+43 frozen round 3: 12 read-only cases completed
+43 frozen round 4: 12 read-only cases completed
+43 frozen round 5: 12 read-only cases completed
+43 frozen round 6: 12 read-only cases completed
+43 frozen complete
+43 random round 0: 12 read-only cases completed
+43 random round 1: 12 read-only cases completed
+43 random round 2: 12 read-only cases completed
+43 random round 3: 12 read-only cases completed
+43 random round 4: 12 read-only cases completed
+43 random round 5: 12 read-only cases completed
+43 random round 6: 12 read-only cases completed
+43 random complete
+43 adaptive round 0: 12 read-only cases completed
+43 adaptive round 1: 12 read-only cases completed
+43 adaptive round 2: 12 read-only cases completed
+43 adaptive round 3: 12 read-only cases completed
+43 adaptive round 4: 12 read-only cases completed
+43 adaptive round 5: 12 read-only cases completed
+43 adaptive round 6: 12 read-only cases completed
+43 adaptive complete
+COMPLETE C:\Users\am\Desktop\Faultline\artifacts\eval\v1-20261114T060320Z-2f47a2: 1044 private predictions; no held-out learner writes
+Traceback (most recent call last):
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\am\\AppData\\Local\\Temp\\faultline-eval-zjnvkzah'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 909, in onexc
+    _os.unlink(path)
+PermissionError: [WinError 5] Access is denied: 'C:\\Users\\am\\AppData\\Local\\Temp\\faultline-eval-zjnvkzah'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\evaluate.py", line 7, in <module>
+    with tempfile.TemporaryDirectory(prefix='faultline-eval-') as workspace:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 950, in __exit__
+    self.cleanup()
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 954, in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 924, in onexc
+    cls._rmtree(path, ignore_errors=ignore_errors,
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\tempfile.py", line 934, in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 781, in rmtree
+    return _rmtree_unsafe(path, onexc)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 639, in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\shutil.py", line 637, in _rmtree_unsafe
+    os.rmdir(path)
+PermissionError: [WinError 32] The process cannot access the file because it is being used by another process: 'C:\\Users\\am\\AppData\\Local\\Temp\\faultline-eval-zjnvkzah'

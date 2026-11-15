@@ -1,0 +1,16 @@
+
+=================================== ERRORS ====================================
+________________ ERROR collecting tests/unit/test_contracts.py ________________
+ImportError while importing test module 'C:\Users\am\Desktop\Faultline\tests\unit\test_contracts.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_contracts.py:3: in <module>
+    from faultline.contracts import Observation, PublicIncident, EvidenceRecord, DependencyClaim, Diagnosis
+E   ModuleNotFoundError: No module named 'faultline'
+=========================== short test summary info ===========================
+ERROR tests/unit/test_contracts.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.22s

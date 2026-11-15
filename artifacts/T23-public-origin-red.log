@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+__ test_explicit_public_origin_allows_only_that_host_and_same_origin_writes ___
+
+    def test_explicit_public_origin_allows_only_that_host_and_same_origin_writes():
+        app=SimpleNamespace(lock=threading.RLock())
+>       server=make_server(app,port=0,public_origin='https://faultline.example')
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: make_server() got an unexpected keyword argument 'public_origin'
+
+tests\integration\test_public_api.py:12: TypeError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_public_api.py::test_explicit_public_origin_allows_only_that_host_and_same_origin_writes
+1 failed in 0.31s

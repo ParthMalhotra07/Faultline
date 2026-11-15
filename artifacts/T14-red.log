@@ -1,0 +1,28 @@
+.F                                                                       [100%]
+================================== FAILURES ===================================
+__________________ test_round_trace_is_an_immutable_snapshot __________________
+
+tmp_path = WindowsPath('C:/Users/am/AppData/Local/Temp/pytest-of-am/pytest-5/test_round_trace_is_an_immutab0')
+
+    def test_round_trace_is_an_immutable_snapshot(tmp_path):
+        s=Sandbox(); s.observe(100)
+        catalog=Catalog.from_telemetry(s.config.telemetry(),s.source_version)
+        g=GraphStore('trace-'+uuid.uuid4().hex,s.source_version,tmp_path)
+        try:
+            g.seed()
+            with Controller(s).incident(load_scenarios('development')[0]) as public:
+                trace=learn_round(g,public,catalog)
+                saved=copy.deepcopy(trace['snapshot'])
+                g.manifest['round']+=1
+>               assert trace['snapshot']==saved
+E               AssertionError: assert {'claims': {'...28, ...}, ...} == {'claims': {'...28, ...}, ...}
+E                 
+E                 Omitting 6 identical items, use -vv to show
+E                 Differing items:
+E                 {'round': 2} != {'round': 1}
+E                 Use -v to get more diff
+
+tests\integration\test_failure_modes.py:59: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_failure_modes.py::test_round_trace_is_an_immutable_snapshot
+1 failed, 1 passed in 13.67s

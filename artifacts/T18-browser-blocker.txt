@@ -1,0 +1,7 @@
+T18 browser verification attempt:
+- cua.createBrowserTab('iab','http://127.0.0.1:8765',{visible:true}): browser access host unavailable.
+- cua.getState(): native Edge windows returned; browsers unavailable.
+- cua.getApp({windowId:2820792}): Computer Use was not approved to use Microsoft Edge.
+- No browser screenshot or UI interaction succeeded. Browser acceptance remains NOT_RUN.
+- GET http://127.0.0.1:8765/ returned HTTP 200 with 4017 bytes.
+- node --check web/app.js exited 0.

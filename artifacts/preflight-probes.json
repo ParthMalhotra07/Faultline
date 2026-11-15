@@ -1,0 +1,130 @@
+{
+  "checked_at": "2026-11-14T05:40:40.503Z",
+  "workspace": "C:/Users/am/Desktop/Faultline",
+  "os": {
+    "platform": "win32",
+    "release": "10.0.26200",
+    "arch": "x64"
+  },
+  "inventory_before_changes": [
+    ".cursor/rules/faultline.mdc",
+    "AGENTS.md",
+    "CLAUDE.md",
+    "docs/ARCHITECTURE.md",
+    "docs/BUILD_PLAN.md",
+    "docs/CONTEXT.md",
+    "docs/DECISIONS.md",
+    "docs/DEMO.md",
+    "docs/EVALUATION.md",
+    "docs/REFERENCES.md",
+    "HANDOFF.md",
+    "HANDOFF_VALIDATION.json",
+    "START_HERE.md",
+    "STATE.json"
+  ],
+  "git_boundary": [
+    {
+      "directory": "C:/Users/am/Desktop/Faultline",
+      "git_marker": "ENOENT"
+    },
+    {
+      "directory": "C:/Users/am/Desktop",
+      "git_marker": "ENOENT"
+    },
+    {
+      "directory": "C:/Users/am",
+      "git_marker": "ENOENT"
+    },
+    {
+      "directory": "C:/Users",
+      "git_marker": "ENOENT"
+    },
+    {
+      "directory": "C:/",
+      "git_marker": "ENOENT"
+    }
+  ],
+  "process_probes": [
+    {
+      "file": "python",
+      "args": [
+        "--version"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    },
+    {
+      "file": "node",
+      "args": [
+        "--version"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    },
+    {
+      "file": "git",
+      "args": [
+        "-C",
+        "C:/Users/am/Desktop/Faultline",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    },
+    {
+      "file": "git",
+      "args": [
+        "-C",
+        "C:/Users/am/Desktop/Faultline",
+        "status",
+        "--short"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    },
+    {
+      "file": "wsl.exe",
+      "args": [
+        "--list",
+        "--quiet"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    },
+    {
+      "file": "docker",
+      "args": [
+        "--version"
+      ],
+      "exit_code": null,
+      "spawn_error": "EPERM",
+      "message": "spawn EPERM"
+    }
+  ],
+  "terminal_failure": {
+    "command": "Get-Location; Get-Content -Raw AGENTS.md; Get-Content -Raw START_HERE.md; Get-Content -Raw HANDOFF.md; Get-Content -Raw STATE.json",
+    "exit_code": null,
+    "error": "CreateProcessAsUserW failed: 5 (Access is denied.)",
+    "fallback": "Explicit Windows PowerShell selection also resolved to the unavailable pwsh launcher."
+  },
+  "credential_presence": {
+    "status": "NOT_CHECKED",
+    "reason": "Node REPL does not expose process; subprocesses cannot start. No environment files or secret stores read."
+  },
+  "network": {
+    "browser_source": "https://github.com/hydra-db/hydradb",
+    "browser_read": "succeeded",
+    "application_network": "NOT_RUN",
+    "live_hydradb": "NOT_RUN"
+  },
+  "event": {
+    "confirmed_cutoff": null,
+    "remaining_time": null
+  }
+}

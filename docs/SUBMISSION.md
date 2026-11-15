@@ -3,7 +3,9 @@
 The host requires three links: a **usable live app**, an **open-source GitHub
 repository**, and a **Loom walkthrough**. The user confirmed November 15, 2026
 IST as the submission date; the exact cutoff is still unknown. None of the three
-public links is recorded as delivered. Do not put a localhost or silent fallback
+public links is recorded as delivered. Source was pushed to the user's private
+repo at `https://github.com/ParthMalhotra07/Faultline`; make it public only
+after the owner reviews the disclosure. Do not put a localhost or silent fallback
 video URL into a submission form as if it were a live app or Loom.
 
 ## Ready local evidence
@@ -53,14 +55,13 @@ questions; publish only after the links exist and an account owner authorizes it
 
 ## Remaining public delivery
 
-1. Deploy the Python app **and** the self-run HydraDB engine to a host with a
-   durable graph volume, or provide a verified temporary tunnel while the
-   machine stays online. Configure `FAULTLINE_PUBLIC_ORIGIN` to the exact HTTPS
-   app origin and test the actual public workflow. A temporary tunnel has no
-   uptime guarantee and is unsuitable as a durable judge link.
-2. Create and inspect a public GitHub repository from the reviewed source
-   package. The workspace currently has no Git repository or GitHub CLI. Do not
-   commit runtime credentials, local browser profiles, or large test recordings.
+1. Deploy the tested bundled image to an approved host with a durable graph
+   volume. Configure `FAULTLINE_PUBLIC_ORIGIN` to the exact HTTPS app origin and
+   test the actual public workflow. Automatic approval review rejected starting
+   a temporary public tunnel, so no tunnel or public URL exists.
+2. Review the pushed private GitHub repository, then change its visibility to
+   public for the host's open-source requirement. Do not publish runtime
+   credentials, local browser profiles, or large test recordings.
 3. Record a narrated Loom using docs/DEMO.md. Verify the Loom share link loads
    for a viewer and includes the live workflow, real counts, buyer pitch and
    limitations. The silent fallback can guide this recording.

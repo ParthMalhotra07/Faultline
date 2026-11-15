@@ -1,0 +1,30 @@
+{
+  "started_at": "2026-11-14T06:38:44.461633+00:00",
+  "browser": "Isolated headless Playwright Chromium",
+  "user_profile": false,
+  "checks": [
+    "Experiment reset: three healthy flows and no learned config claims",
+    "Real checkout fault: initial graph diagnosis visibly abstains",
+    "Learning: supported currency hypothesis; rendered nodes/edges match real backend graph",
+    "Restore preserves learning; different refunds incident is supported without inspection",
+    "Relevant-source exhaustion is explicitly visible, without another inspection",
+    "390px mobile layout has no horizontal overflow and visible controls"
+  ],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "failed_requests": [],
+  "screenshots": [
+    "artifacts/ui/20261114T063844Z/01-healthy-desktop.png",
+    "artifacts/ui/20261114T063844Z/02-insufficient-evidence.png",
+    "artifacts/ui/20261114T063844Z/03-learned-graph.png",
+    "artifacts/ui/20261114T063844Z/04-transfer.png",
+    "artifacts/ui/20261114T063844Z/07-mobile.png",
+    "artifacts/ui/20261114T063844Z/failure.png"
+  ],
+  "browser_version": "157.0.8103.51",
+  "status": "FAIL",
+  "failure": "['Failed to load resource: the server responded with a status of 404 (Not Found)']",
+  "completed_at": "2026-11-14T06:39:00.461768+00:00"
+}

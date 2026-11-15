@@ -1,0 +1,16 @@
+
+=================================== ERRORS ====================================
+________________ ERROR collecting tests/unit/test_selector.py _________________
+ImportError while importing test module 'C:\Users\am\Desktop\Faultline\tests\unit\test_selector.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+..\..\AppData\Local\Programs\Python\Python312\Lib\importlib\__init__.py:90: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_selector.py:2: in <module>
+    from faultline.learning.selector import select_source
+E   ModuleNotFoundError: No module named 'faultline.learning'
+=========================== short test summary info ===========================
+ERROR tests/unit/test_selector.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+1 error in 0.29s

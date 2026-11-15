@@ -1,0 +1,26 @@
+17 frozen round 0: 12 read-only cases completed
+17 frozen round 1: 12 read-only cases completed
+17 frozen round 2: 12 read-only cases completed
+17 frozen round 3: 12 read-only cases completed
+17 frozen round 4: 12 read-only cases completed
+17 frozen round 5: 12 read-only cases completed
+17 frozen round 6: 12 read-only cases completed
+17 frozen complete
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\evaluate.py", line 3, in <module>
+    evaluate()
+  File "C:\Users\am\Desktop\Faultline\src\faultline\evaluation\report.py", line 78, in evaluate
+    g.seed()
+  File "C:\Users\am\Desktop\Faultline\src\faultline\graph\store.py", line 78, in seed
+    self.commit_claim(claim, a, kind, b, evidence, seed_hash, 'source:topology', 0)
+  File "C:\Users\am\Desktop\Faultline\src\faultline\graph\store.py", line 89, in commit_claim
+    cid, aid, bid, eid = [self.vid(x) for x in (key, a, b, evidence)]
+                          ^^^^^^^^^^^
+  File "C:\Users\am\Desktop\Faultline\src\faultline\graph\store.py", line 68, in vid
+    self._save()  # Persist ownership before attempting any write, including interrupted writes.
+    ^^^^^^^^^^^^
+  File "C:\Users\am\Desktop\Faultline\src\faultline\graph\store.py", line 60, in _save
+    temp.replace(self.path)
+  File "C:\Users\am\AppData\Local\Programs\Python\Python312\Lib\pathlib.py", line 1376, in replace
+    os.replace(self, target)
+PermissionError: [WinError 5] Access is denied: '.runtime\\experiments\\v1-20261114T060128Z-8c019d-17-random.tmp' -> '.runtime\\experiments\\v1-20261114T060128Z-8c019d-17-random.json'

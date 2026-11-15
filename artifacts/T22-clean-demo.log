@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "python": "3.12.10",
+  "initial": "insufficient_evidence",
+  "learned": "config:currency",
+  "transfer": "config:currency",
+  "committed_claims": 10,
+  "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+  "reset_restored_health": true,
+  "restart_retained_learning": true,
+  "heldout_run": false
+}

@@ -1,0 +1,26 @@
+Traceback (most recent call last):
+  File "C:\Users\am\Desktop\Faultline\scripts\verify_ui.py", line 75, in <module>
+    click('learn','/api/learn','No unseen relevant evidence sources remain.')
+  File "C:\Users\am\Desktop\Faultline\scripts\verify_ui.py", line 38, in click
+    expect(page.locator('#notice')).to_contain_text(message)
+  File "C:\Users\am\Desktop\Faultline\.venv\Lib\site-packages\playwright\sync_api\_generated.py", line 14994, in to_contain_text
+    self._sync(
+  File "C:\Users\am\Desktop\Faultline\.venv\Lib\site-packages\playwright\_impl\_sync_base.py", line 124, in _sync
+    return task.result()
+           ^^^^^^^^^^^^^
+  File "C:\Users\am\Desktop\Faultline\.venv\Lib\site-packages\playwright\_impl\assertions.py", line 306, in to_contain_text
+    await self._expect_impl(
+  File "C:\Users\am\Desktop\Faultline\.venv\Lib\site-packages\playwright\_impl\assertions.py", line 122, in _expect_impl
+    _record_soft_or_raise(
+  File "C:\Users\am\Desktop\Faultline\.venv\Lib\site-packages\playwright\_impl\_assertions.py", line 50, in _record_soft_or_raise
+    raise error
+AssertionError: Locator expected to contain text 'No unseen relevant evidence sources remain.'
+Actual value: Complete. App state, graph paths and evidence refreshed from the backend. 
+Call log:
+  - Expect "to_contain_text" locator("#notice") with timeout 5000ms
+  - waiting for locator("#notice")
+    14 � locator resolved to <div class="" id="notice" role="status" aria-live="polite">Complete. App state, graph paths and evidence ref�</div>
+       - unexpected value "Complete. App state, graph paths and evidence refreshed from the backend."
+
+Aria snapshot:
+- status: Complete. App state, graph paths and evidence refreshed from the backend.

@@ -1,0 +1,57 @@
+Collecting annotated-types==0.8.0 (from -r requirements-repro.txt (line 1))
+  Using cached annotated_types-0.8.0-py3-none-any.whl.metadata (15 kB)
+Collecting colorama==0.4.6 (from -r requirements-repro.txt (line 2))
+  Using cached colorama-0.4.6-py2.py3-none-any.whl.metadata (17 kB)
+Collecting iniconfig==2.3.1 (from -r requirements-repro.txt (line 3))
+  Using cached iniconfig-2.3.1-py3-none-any.whl.metadata (2.8 kB)
+Collecting packaging==26.3 (from -r requirements-repro.txt (line 4))
+  Using cached packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pluggy==1.7.0 (from -r requirements-repro.txt (line 5))
+  Using cached pluggy-1.7.0-py3-none-any.whl.metadata (5.0 kB)
+Collecting pydantic==2.12.5 (from -r requirements-repro.txt (line 6))
+  Using cached pydantic-2.12.5-py3-none-any.whl.metadata (90 kB)
+Collecting pydantic_core==2.41.5 (from -r requirements-repro.txt (line 7))
+  Using cached pydantic_core-2.41.5-cp312-cp312-win_amd64.whl.metadata (7.4 kB)
+Collecting Pygments==2.21.0 (from -r requirements-repro.txt (line 8))
+  Using cached pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting pytest==9.0.3 (from -r requirements-repro.txt (line 9))
+  Using cached pytest-9.0.3-py3-none-any.whl.metadata (7.6 kB)
+Collecting setuptools==80.9.0 (from -r requirements-repro.txt (line 10))
+  Using cached setuptools-80.9.0-py3-none-any.whl.metadata (6.6 kB)
+Collecting typing-inspection==0.4.5 (from -r requirements-repro.txt (line 11))
+  Using cached typing_inspection-0.4.5-py3-none-any.whl.metadata (2.6 kB)
+Collecting typing_extensions==4.16.0 (from -r requirements-repro.txt (line 12))
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Using cached annotated_types-0.8.0-py3-none-any.whl (13 kB)
+Using cached colorama-0.4.6-py2.py3-none-any.whl (25 kB)
+Using cached iniconfig-2.3.1-py3-none-any.whl (7.6 kB)
+Using cached packaging-26.3-py3-none-any.whl (129 kB)
+Using cached pluggy-1.7.0-py3-none-any.whl (27 kB)
+Using cached pydantic-2.12.5-py3-none-any.whl (463 kB)
+Using cached pydantic_core-2.41.5-cp312-cp312-win_amd64.whl (2.0 MB)
+Using cached pygments-2.21.0-py3-none-any.whl (1.3 MB)
+Using cached pytest-9.0.3-py3-none-any.whl (375 kB)
+Using cached setuptools-80.9.0-py3-none-any.whl (1.2 MB)
+Using cached typing_inspection-0.4.5-py3-none-any.whl (14 kB)
+Using cached typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Installing collected packages: typing_extensions, setuptools, Pygments, pluggy, packaging, iniconfig, colorama, annotated-types, typing-inspection, pytest, pydantic_core, pydantic
+Successfully installed Pygments-2.21.0 annotated-types-0.8.0 colorama-0.4.6 iniconfig-2.3.1 packaging-26.3 pluggy-1.7.0 pydantic-2.12.5 pydantic_core-2.41.5 pytest-9.0.3 setuptools-80.9.0 typing-inspection-0.4.5 typing_extensions-4.16.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: C:\Users\am\Desktop\Faultline\.runtime\clean-venv\Scripts\python.exe -m pip install --upgrade pip
+Obtaining file:///C:/Users/am/Desktop/Faultline
+  Checking if build backend supports build_editable: started
+  Checking if build backend supports build_editable: finished with status 'done'
+  Preparing editable metadata (pyproject.toml): started
+  Preparing editable metadata (pyproject.toml): finished with status 'done'
+Building wheels for collected packages: faultline
+  Building editable for faultline (pyproject.toml): started
+  Building editable for faultline (pyproject.toml): finished with status 'done'
+  Created wheel for faultline: filename=faultline-0.1.0-0.editable-py3-none-any.whl size=1271 sha256=f5f07ecfd3e540b84f98680eaf34fa35a6c316dc5ec3607294bbccae9a6458c0
+  Stored in directory: C:\Users\am\AppData\Local\Temp\pip-ephem-wheel-cache-x3alqv5p\wheels\74\0e\10\e4bcf9a9cda9e0481f184731dd17f16636237c3f1a219529fe
+Successfully built faultline
+Installing collected packages: faultline
+Successfully installed faultline-0.1.0
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: C:\Users\am\Desktop\Faultline\.runtime\clean-venv\Scripts\python.exe -m pip install --upgrade pip

@@ -1,0 +1,12 @@
+Collecting playwright==1.65.2 (from -r requirements-ui.txt (line 1))
+  Downloading playwright-1.65.2-py3-none-win_amd64.whl.metadata (3.3 kB)
+Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.65.2->-r requirements-ui.txt (line 1))
+  Downloading greenlet-3.5.6-cp312-cp312-win_amd64.whl.metadata (3.9 kB)
+Downloading playwright-1.65.2-py3-none-win_amd64.whl (42.7 MB)
+   ---------------------------------------- 42.7/42.7 MB 5.0 MB/s eta 0:00:00
+Downloading greenlet-3.5.6-cp312-cp312-win_amd64.whl (324 kB)
+Installing collected packages: greenlet, playwright
+Successfully installed greenlet-3.5.6 playwright-1.65.2
+
+[notice] A new release of pip is available: 25.0.1 -> 26.3
+[notice] To update, run: C:\Users\am\Desktop\Faultline\.venv\Scripts\python.exe -m pip install --upgrade pip

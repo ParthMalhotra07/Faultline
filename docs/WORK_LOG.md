@@ -24,6 +24,7 @@ had already begun; commit timestamps reflect the actual commit time.
   against the real sandbox workflow.
 - Built a single-container demo image with the pinned open-source HydraDB
   engine and verified learning, graph persistence and transfer after restart.
-- Prepared host-specific submission materials and chronological Git commits.
+- Prepared host-specific submission materials and pushed chronological,
+  topic-focused commits to the user-specified private GitHub repository.
 
 Consult `STATE.json` and `HANDOFF.md` for commands, exit results and limitations.

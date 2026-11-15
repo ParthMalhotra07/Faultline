@@ -71,7 +71,10 @@ have been measured. Do not invent any.
 
 User confirmed submission November 15, 2026 IST and relayed the host's three
 required public deliverables: usable live link, open-source GitHub repo, and
-Loom walkthrough. Exact cutoff and account access remain unknown. No public
-link, publication, commit, push or upload has been verified. See
+Loom walkthrough. Exact cutoff and hosting account access remain unknown.
+Focused commits were pushed to the user's private GitHub repo, which does not
+yet satisfy the public-repo requirement. No live public link, Loom, social post
+or organizer submission has been verified. See
 `docs/SUBMISSION.md` for the concrete checklist and `docs/SOCIAL_POSTS.md` for
-truthful draft posts; prepared files are not a completed submission.
+truthful draft posts. `docs/LOOM_SCRIPT.md` has a complete timed narration.
+Prepared files are not a completed submission.

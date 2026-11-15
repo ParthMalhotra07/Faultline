@@ -1,0 +1,29 @@
+{
+  "started_at": "2026-11-14T06:39:33.408277+00:00",
+  "browser": "Isolated headless Playwright Chromium",
+  "user_profile": false,
+  "channel": "chrome",
+  "checks": [
+    "Experiment reset: three healthy flows and no learned config claims",
+    "Real checkout fault: initial graph diagnosis visibly abstains",
+    "Learning: supported currency hypothesis; rendered nodes/edges match real backend graph",
+    "Restore preserves learning; different refunds incident is supported without inspection"
+  ],
+  "console_errors": [
+    "Failed to load resource: the server responded with a status of 404 (Not Found)"
+  ],
+  "page_errors": [],
+  "failed_requests": [],
+  "http_errors": [],
+  "screenshots": [
+    "artifacts/ui/20261114T063933Z/01-healthy-desktop.png",
+    "artifacts/ui/20261114T063933Z/02-insufficient-evidence.png",
+    "artifacts/ui/20261114T063933Z/03-learned-graph.png",
+    "artifacts/ui/20261114T063933Z/04-transfer.png",
+    "artifacts/ui/20261114T063933Z/failure.png"
+  ],
+  "browser_version": "157.0.8103.51",
+  "status": "FAIL",
+  "failure": "Locator expected to contain text 'No unseen relevant evidence sources remain.'\nActual value: Complete. App state, graph paths and evidence refreshed from the backend. \nCall log:\n  - Expect \"to_contain_text\" locator(\"#notice\") with timeout 5000ms\n  - waiting for locator(\"#notice\")\n    14 \u00d7 locator resolved to <div class=\"\" id=\"notice\" role=\"status\" aria-live=\"polite\">Complete. App state, graph paths and evidence ref\u2026</div>\n       - unexpected value \"Complete. App state, graph paths and evidence refreshed from the backend.\"\n\nAria snapshot:\n- status: Complete. App state, graph paths and evidence refreshed from the backend.",
+  "completed_at": "2026-11-14T06:39:52.060868+00:00"
+}

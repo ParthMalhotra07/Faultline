@@ -1,0 +1,106 @@
+{
+  "checked_at": "2026-11-14T05:42:20.997770+00:00",
+  "workspace": "C:\\Users\\am\\Desktop\\Faultline",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "python": "3.12.10",
+  "probes": [
+    {
+      "command": [
+        "python",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.12.10",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "node",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "v24.16.0",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "git version 2.54.0.windows.1",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "rev-parse",
+        "--show-toplevel"
+      ],
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git"
+    },
+    {
+      "command": [
+        "git",
+        "status",
+        "--short"
+      ],
+      "exit_code": 128,
+      "stdout": "",
+      "stderr": "fatal: not a git repository (or any of the parent directories): .git"
+    },
+    {
+      "command": [
+        "wsl.exe",
+        "--list",
+        "--quiet"
+      ],
+      "exit_code": 0,
+      "stdout": "Ubuntu\r\ndocker-desktop",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Docker version 29.7.2, build a7dcaa6",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "docker",
+        "info",
+        "--format",
+        "{{.ServerVersion}}"
+      ],
+      "exit_code": 1,
+      "stdout": "",
+      "stderr": "failed to connect to the docker API at npipe:////./pipe/dockerDesktopLinuxEngine; check if the path is correct and if the daemon is running: open //./pipe/dockerDesktopLinuxEngine: The system cannot find the file specified."
+    },
+    {
+      "command": [
+        "wsl.exe",
+        "-d",
+        "Ubuntu",
+        "--",
+        "bash",
+        "-lc",
+        "python3 --version; command -v cargo; command -v cc; sudo -n true"
+      ],
+      "exit_code": 1,
+      "stdout": "Python 3.14.4\n/usr/bin/cc",
+      "stderr": "sudo: interactive authentication is required"
+    }
+  ],
+  "network": {
+    "status": 200,
+    "hydradb_commit": "916637477f3f34766b4905b270bd4292109d77e6"
+  },
+  "credential_presence": {},
+  "confirmed_cutoff": null,
+  "remaining_time": null
+}
