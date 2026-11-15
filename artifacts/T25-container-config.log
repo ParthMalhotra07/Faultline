@@ -1,3 +1,0 @@
-mount=/data:volume  ports={"8765/tcp":[{"HostIp":"127.0.0.1","HostPort":"18767"}]}
-faultline-railway-smoke memory=53.03MiB / 15.34GiB cpu=0.20%
-image=sha256:14bac9e951c4f97108fb09e646621556c1a4c2647d503e57db95649be589fa28 size=210976981

@@ -1,9 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\am\Desktop\Faultline\scripts\evaluate.py", line 3, in <module>
-    evaluate()
-  File "C:\Users\am\Desktop\Faultline\src\faultline\evaluation\report.py", line 52, in evaluate
-    protocol=verify_protocol()
-             ^^^^^^^^^^^^^^^^^
-  File "C:\Users\am\Desktop\Faultline\src\faultline\evaluation\report.py", line 25, in verify_protocol
-    raise RuntimeError('Frozen protocol hash mismatch')
-RuntimeError: Frozen protocol hash mismatch

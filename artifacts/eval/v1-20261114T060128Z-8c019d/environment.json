@@ -1,7 +1,0 @@
-{
-  "runtime": "official HydraDB 0.4.0 Docker, local Windows bind store",
-  "image": "sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880",
-  "query_rows": 1000,
-  "timeout_ms": 5000,
-  "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb"
-}

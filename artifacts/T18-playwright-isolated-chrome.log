@@ -1,5 +1,0 @@
-Traceback (most recent call last):
-  File "C:\Users\am\Desktop\Faultline\scripts\verify_ui.py", line 92, in <module>
-    assert not report['console_errors'], report['console_errors']
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-AssertionError: ['Failed to load resource: the server responded with a status of 404 (Not Found)']

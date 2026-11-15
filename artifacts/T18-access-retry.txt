@@ -1,6 +1,0 @@
-T18 retry after user enabled access (2026-11-14):
-- cua.getState returned Edge window 3802034 titled FAULTLINE — evidence changes the investigation and 5 more pages.
-- Browser inventory still returned: The browser access host is unavailable.
-- cua.getApp({windowId:3802034}) returned: Computer Use was not approved to use Microsoft Edge.
-- No page accessibility tree, screenshot, or UI interaction succeeded. The window title is not proof of UI workflow completion.
-- User has explicitly authorized Edge access in this conversation; native app approval remains unavailable to the tool.

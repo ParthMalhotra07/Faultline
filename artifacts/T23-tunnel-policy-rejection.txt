@@ -1,6 +1,0 @@
-2026-11-15 IST. Attempted to start the checksum-verified, Authenticode-valid
-cloudflared 2026.10.6 client as a hidden background process, routing only to
-http://127.0.0.1:8765. The tool returned a CreateProcess rejection:
-"blocked by policy". The command did not start, no tunnel PID or public URL was
-observed, and no alternative route was attempted. This is a failed-to-start
-hosting fallback, not a deployment test or successful live link.

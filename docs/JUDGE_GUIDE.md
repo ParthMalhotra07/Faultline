@@ -96,6 +96,5 @@ show evidence-backed suggestions, and let engineers decide what to fix. This
 is a buyer hypothesis, not a measured sales result.
 
 The [README](../README.md) has setup commands, exact versions, reproduction
-notes, screenshots and hosting details. [T30 browser evidence](../artifacts/T30-browser-report.json)
-points to ten passing checks against the public Render URL, including the
-real graph workflow, navigation, mobile layout and console checks.
+notes, screenshots and hosting details. The [verification summary](../artifacts/verification/)
+links the ten passing Render workspace checks and other selected outputs.

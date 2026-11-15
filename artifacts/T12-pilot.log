@@ -1,2 +1,0 @@
-PASS: development B changed from insufficient evidence to config:currency after A learned pricing READS_CONFIG currency.
-Returned path: endpoint:refunds -> service:refunds -> service:pricing -> config:currency, with claim/evidence IDs in result.json.

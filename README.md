@@ -2,7 +2,7 @@
 
 When an app breaks, the visible error may be far from the setting that caused it. **FAULTLINE shows what failed, checks evidence for a missing connection, and remembers that connection in HydraDB for the next investigation.** It is a working prototype on a controlled commerce app.
 
-**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Judge guide](docs/JUDGE_GUIDE.md)** · **[Three-minute walkthrough script](docs/LOOM_SCRIPT.md)** · **[Deployment guide](docs/HOSTING.md)**
+**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[See the demo steps](docs/JUDGE_GUIDE.md)** · **[Run locally](#run-locally-on-windows)** · **[Deployment guide](docs/HOSTING.md)**
 
 ## Contents
 
@@ -11,7 +11,7 @@ When an app breaks, the visible error may be far from the setting that caused it
 - [Run locally](#run-locally-on-windows)
 - [Learning loop](#demonstrate-the-learning-loop)
 - [Verification and results](#verification-and-evidence)
-- [Limitations and delivery](#boundaries-and-remaining-work)
+- [Scope and limitations](#scope-and-limitations)
 
 **At a glance:** FAULTLINE is a deterministic, single-writer incident-search
 prototype for a controlled commerce app. A human triggers the demo fault and
@@ -45,16 +45,14 @@ interviews, willingness-to-pay result, or production time savings are claimed.
 
 The test sign-in creates an eight-hour server-side demo cookie. It is a shared public entry flow, **not a private account or a security boundary**. Sandbox API routes remain public under the configured host and origin rules. Sessions end on sign-out or service restart; the tour completion flag stays only in that browser's local storage.
 
-| Public demo access | Guided tour | Live investigation |
-|:--:|:--:|:--:|
-| ![Public demo access with prefilled testing values](docs/images/demo-access.png) | ![Five-step tour highlighting the incident controls](docs/images/guided-tour.png) | ![Workspace showing real HydraDB paths](docs/images/workspace-final.png) |
+![FAULTLINE workspace showing live observations, diagnosis and the HydraDB graph](docs/images/workspace-final.png)
 
-The [mobile workspace screenshot](docs/images/mobile-workspace.png) shows the same controls at a 390-pixel viewport. These README images came from an isolated Chromium run against a local server backed by the real HydraDB container. [The latest browser report](artifacts/T30-browser-report.json) points to a separate passing run against the public Render URL.
+More views: [demo entry](docs/images/demo-access.png) · [guided tour](docs/images/guided-tour.png) · [mobile workspace](docs/images/mobile-workspace.png).
 
 ## Architecture at four levels
 
-These diagrams describe the implemented demo. [Architecture contracts](docs/ARCHITECTURE.md)
-record the original design decisions; the source paths below show what runs.
+These diagrams describe the implemented demo. Each component links to the
+source that runs it.
 
 ### Level 0 — Product and trust boundary
 
@@ -156,13 +154,9 @@ topology. Config-read claims enter only after source-backed inspection.
 
 ```mermaid
 flowchart LR
-    EP[Entity: endpoint:checkout] <--|FROM_ENTITY| C1[Claim: HANDLED_BY]
-    C1 -->|TO_ENTITY| S1[Entity: service:checkout]
-    S1 <--|FROM_ENTITY| C2[Claim: CALLS]
-    C2 -->|TO_ENTITY| S2[Entity: service:pricing]
-    S2 <--|FROM_ENTITY| C3[Claim: READS_CONFIG]
-    C3 -->|TO_ENTITY| Key[Entity: config:currency]
-    C3 -->|SUPPORTED_BY| E[Evidence: source hash + version]
+    Claim[Claim: READS_CONFIG] -->|FROM_ENTITY| Service[Entity: service:pricing]
+    Claim -->|TO_ENTITY| Config[Entity: config:currency]
+    Claim -->|SUPPORTED_BY| Evidence[Evidence: source hash and version]
 ```
 
 The fixed traversal templates cover one to three **domain** edges (each domain
@@ -172,8 +166,7 @@ incomplete pages, oversize responses and transport errors become explicit
 errors, never an empty successful path. Only committed claims with the current
 source version can support diagnosis. The application manifest records active
 claims and source hashes; deterministic IDs make retries idempotent. See the
-[verified graph queries](src/faultline/graph/queries/verified.json) and
-[implementation decisions](docs/DECISIONS.md).
+[verified graph queries](src/faultline/graph/queries/verified.json).
 
 The source inspector reads an allowlisted catalog and is constrained by one
 source, 10,000 bytes, 100 records and a 1,000 ms inspection budget in the
@@ -211,7 +204,7 @@ $env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 
 Open http://127.0.0.1:8765 for the animated landing page, then select **Open workspace** for the live investigation at http://127.0.0.1:8765/workspace. Use the prefilled public demo values to enter, then complete or skip the tour. The default database and API bind only to loopback. The launcher generates a random local HydraDB authentication file inside ignored `.runtime/`; never print or copy its value. The prefilled UI values are intentionally public and unrelated to the HydraDB secret. The public Render demo is at https://faultline-j7kn.onrender.com; its current free instance has ephemeral storage. See [docs/HOSTING.md](docs/HOSTING.md) for exact deployment checks and limitations.
 
-HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880`, commit `916637477f3f34766b4905b270bd4292109d77e6`. It uses the engine HTTP API, not hosted memory search. See [the vendor application guide](https://github.com/hydra-db/hydradb/blob/916637477f3f34766b4905b270bd4292109d77e6/USING-HYDRADB.md) and captured smoke evidence in `artifacts/hydra-smoke/`.
+HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880`, commit `916637477f3f34766b4905b270bd4292109d77e6`. It uses the engine HTTP API, not hosted memory search. See [the vendor application guide](https://github.com/hydra-db/hydradb/blob/916637477f3f34766b4905b270bd4292109d77e6/USING-HYDRADB.md) and the [graph integration test](tests/integration/test_graph_store.py).
 
 ### Configuration and operating boundaries
 
@@ -257,21 +250,11 @@ $env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 .venv/Scripts/python.exe scripts/verify_evaluation.py
 ```
 
-The latest recorded full suite completed **50 tests**; see
-[`T31-full-tests.log`](artifacts/T31-full-tests.log). Integration tests use the
-real local HydraDB engine. [`T31-docker-graph.log`](artifacts/T31-docker-graph.log)
-records a fresh bundled-image trigger, abstain, learn and graph traversal.
-The clean-environment check in `artifacts/T22-clean-demo.log` reproduces
-abstention, learning, restart persistence, runtime restoration and transfer in
-a disposable local namespace. Browser checks record screenshots, traces and
-console events; the [hosted browser report](artifacts/T30-browser-report.json)
-selects ten passing workspace checks, and the
-[landing report](artifacts/ui/latest-landing.json) selects eight. A PASS
-report and its run URL are evidence for that run only, not a continuous uptime
-or production-performance guarantee.
-
-The [development timeline](docs/DEVELOPMENT_TIMELINE.md) separates November 14
-local evidence from the Git commits actually created on November 15.
+The recorded full suite passed **50 tests**, including integration checks
+against the self-run HydraDB engine. A fresh bundled-image check completed
+trigger, abstain, learn and graph traversal. Isolated Chromium passed eight
+landing and ten workspace checks against the public Render URL. The selected
+check outputs are in [verification evidence](artifacts/verification/).
 
 For repeatable headless browser QA, without desktop input:
 
@@ -284,7 +267,9 @@ $env:FAULTLINE_PLAYWRIGHT_WS = 'ws://127.0.0.1:13000/'
 docker stop faultline-ui-browser
 ```
 
-This uses the pinned official Playwright 1.65.2 Linux image, isolated contexts and a loopback-only local service. It does not connect to a signed-in Chrome profile. Native desktop automation was unreliable here; Windows bundled Chromium failed to launch. Both failures are preserved rather than counted as UI passes.
+This uses the pinned official Playwright 1.65.2 Linux image and isolated
+browser contexts. The checks exercise the rendered controls and report
+console, page and unexpected request errors.
 
 ## Frozen experiment and measured limits
 
@@ -307,16 +292,23 @@ claims in an isolated final graph changes 36/36 correct to **24/36**. That
 ablation shows this relationship matters on these fixtures. Token overlap is
 a lexical baseline, not a semantic/vector method.
 
-The original completed run is
-[`artifacts/eval/v1-20261114T060320Z-2f47a2/`](artifacts/eval/v1-20261114T060320Z-2f47a2/):
-1,044 prediction records, 29 aggregate points and 63 unchanged evaluation
-snapshot hashes. The [selected exact-protocol rerun](artifacts/eval/latest.json)
-reproduces the structural predictions and aggregate counts. These are small
-synthetic-fixture results on one topology, not evidence of general superiority.
+The [selected run](artifacts/eval/latest.json) includes 1,044 prediction records,
+29 aggregate points and 63 unchanged read-only evaluation snapshots. Its
+structural predictions and aggregate counts matched an exact-protocol rerun.
+The [raw predictions](artifacts/eval/v1-20261114T064609Z-31b50c/predictions.jsonl)
+and [evaluation verifier](scripts/verify_evaluation.py) make the counts
+inspectable. These are controlled cases on one topology, not a general
+accuracy claim.
 
-The first completed scoring process exited with an error during temporary-directory cleanup after saving its complete results. Those artifacts independently pass `verify_evaluation.py`. Earlier failed startup/scoring attempts are retained. Original text-baseline rows inherited graph timing/citation metadata; corrected rows mark text timing unmeasured and remove those citations, while preserving the originals. No selected answer or scoring count changed. An exact-protocol rerun completed with identical 29 aggregate points and 1,044 structural prediction rows; `artifacts/eval/latest.json` selects it.
-
-An additional **retrospective exploratory** comparison indexes the acquired config-access records in a local Qdrant vector collection with FastEmbed BGE-small. It uses the public incident only to query and rank recent public change targets; private expected answers reach only the outer scorer. Across the same 36 predictions per round, vector retrieval scored 0/36 before acquisition and 12/36 at every later point; adaptive HydraDB scored 0/36, 24/36, then 36/36 from round 2. The 252 raw vector predictions and 21 snapshot hashes are independently recounted by `scripts/verify_vector_exploratory.py`. This tests one fixed vector text representation on the already used synthetic cases. The graph also has eight seeded topology claims; the vector index contains only acquired record text, so this is **not** a full information-equivalent vector architecture or a fresh held-out win. The first exploratory attempt failed on a snapshot-round assertion before aggregation and is retained with its error; v2 corrected that runner check without changing retrieval or scoring rules. See `protocol/vector-exploratory-v2.json` and `artifacts/eval/vector-exploratory/latest.json`.
+An additional **retrospective exploratory** comparison indexes acquired
+config-access records in local Qdrant with FastEmbed BGE-small. This fixed
+vector representation reached 12/36 after acquisition; adaptive HydraDB
+reached 24/36 after one incident and 36/36 after two. The graph also had eight
+seeded topology claims that the vector corpus lacked, so this is not an
+information-equivalent comparison or a general claim against vector stores.
+See the [separate protocol](protocol/vector-exploratory-v2.json),
+[raw results](artifacts/eval/vector-exploratory/latest.json) and
+[verifier](scripts/verify_vector_exploratory.py).
 
 To reproduce the optional exploratory comparator after installing the base project:
 
@@ -335,17 +327,22 @@ To run the unchanged frozen experiment again:
 .venv/Scripts/python.exe scripts/verify_evaluation.py
 ```
 
-The runner verifies input hashes before and after execution and reconstructs isolated HydraDB snapshots. Do not tune ranking, selection, budgets or fixtures on these held-out results. Changes to experimental rules need a new experiment version and fresh holdout or an exploratory label.
+The runner verifies input hashes and reconstructs isolated HydraDB snapshots.
+The [evaluation protocol](docs/EVALUATION.md) explains the split and leakage
+controls.
 
 Load evidence in `artifacts/load/` is separate: 500 requests at each of 1/5/10 clients, on a generated 300-node/200-edge graph, with zero errors in the recorded run. It measures bounded warm two-hop retrieval on this local Docker deployment, not production incident diversity or scale. Raw timings and hardware/resource limits are saved there.
 
-## Boundaries and remaining work
+## Scope and limitations
 
 Only two telemetry sources exist in this prototype, so knowledge saturates quickly. Faults vary values, workloads and change order on one fixed topology with generic symptom vocabulary. Reified claims are committed only with evidence, source hashes and versions; graph reachability supports hypotheses and does not prove causation. Ambiguity, abstention and infrastructure errors are preserved.
 
 This is a single-writer local demo with function-level acceptance checks. It is not a production service, remediation agent or authenticated multi-user application. `.runtime/` stores local graph manifests and credentials and is excluded from source packaging. Private evaluator fixtures and raw predictions are never served through the public API or source catalog.
 
-The [November event page](https://luma.com/bqwllms4) states that the 48-hour build ends **November 16, 2026 at 9:00 AM IST**. The host additionally asked for a usable live app link, an open-source GitHub repo and a Loom walkthrough, according to the builder. The bundled self-hosted HydraDB image is live on Render and passed public browser and graph workflow checks. The free instance has no persistent disk, so hosted restart persistence is unverified. Repository visibility, Loom publication and organizer submission must be confirmed separately. See the [submission checklist](docs/SUBMISSION.md) for those delivery steps.
+The public demo is hosted on Render's free plan. Its disk is ephemeral, so graph
+state may reset after inactivity or redeployment. A production version would
+need durable storage, controlled data connectors, access control and
+independent validation on real incidents.
 
 ## License and attribution
 

@@ -13,6 +13,15 @@ artifacts/ui/**/video/
 artifacts/ui/*/*.png
 artifacts/T23-docker-build.log
 
+# Local troubleshooting history and generated browser runs. Keep curated
+# verification outputs under artifacts/verification/ instead.
+/artifacts/T*
+/artifacts/ui/
+/artifacts/hydra-smoke/
+/artifacts/demo/
+/artifacts/rounds/
+/artifacts/eval/v1-20261114T060128Z-8c019d/
+
 # Local agent workspace and task handoff; retain on this PC.
 /.cursor/
 /AGENTS.md
@@ -23,6 +32,15 @@ artifacts/T23-docker-build.log
 /STATE.json
 /docs/BUILD_PLAN.md
 /docs/WORK_LOG.md
+/docs/ARCHITECTURE.md
+/docs/CONTEXT.md
+/docs/DECISIONS.md
+/docs/DEMO.md
+/docs/DEVELOPMENT_TIMELINE.md
+/docs/LOOM_SCRIPT.md
+/docs/REFERENCES.md
+/docs/SOCIAL_POSTS.md
+/docs/SUBMISSION.md
 /scripts/audit_handoff.py
 /scripts/record_task.py
 /artifacts/*handoff-audit*

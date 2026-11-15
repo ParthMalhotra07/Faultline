@@ -1,2 +1,0 @@
-Captured failure excerpt from the first scripts/verify_submission.py run. Its log file was overwritten by the successful rerun; this excerpt is preserved from the terminal tool output.
-AssertionError: Broken README source link: artifacts/eval/v1-20261114T060320Z-2f47a2/

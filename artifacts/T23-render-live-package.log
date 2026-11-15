@@ -1,8 +1,0 @@
-{
-  "status": "PASS",
-  "archive": "artifacts\\submission\\FAULTLINE-source-and-evidence.zip",
-  "files": 381,
-  "bytes": 5897472,
-  "sha256": "3217b9732f1b9bd254d6de8ca41503ee268f131d4d0febfa492e7504f9fb629b",
-  "submitted": false
-}

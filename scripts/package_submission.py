@@ -7,12 +7,13 @@ import zipfile
 
 root=Path(__file__).resolve().parents[1]
 out=root/'artifacts/submission';out.mkdir(parents=True,exist_ok=True)
-internal={'docs/BUILD_PLAN.md','docs/WORK_LOG.md',
-          'scripts/audit_handoff.py','scripts/record_task.py'}
+internal={'scripts/audit_handoff.py','scripts/record_task.py'}
 paths=[]
-for folder in ['src','web','scripts','fixtures','protocol','docs']:
+for folder in ['src','web','scripts','fixtures','protocol']:
     paths += [p for p in (root/folder).rglob('*') if p.is_file() and '__pycache__' not in p.parts
               and p.relative_to(root).as_posix() not in internal]
+paths += [root/'docs'/name for name in ('EVALUATION.md','HOSTING.md','JUDGE_GUIDE.md')]
+paths += [p for p in (root/'docs/images').iterdir() if p.is_file()]
 for name in ['README.md','LICENSE','pyproject.toml',
              'requirements.lock','requirements-repro.txt','requirements-ui.txt',
              'requirements-vector.txt','.gitignore','.gitattributes',
@@ -24,21 +25,14 @@ paths += [p for p in (root/latest['directory']).iterdir() if p.is_file()]
 # Keep the original completed run alongside the selected exact-protocol rerun.
 # README links to its raw evidence and explains the metadata-only correction.
 paths += [p for p in (root/'artifacts/eval/v1-20261114T060320Z-2f47a2').iterdir() if p.is_file()]
-paths += [p for p in (root/'artifacts/eval/vector-exploratory').rglob('*') if p.is_file()]
+vector_latest=json.loads((root/'artifacts/eval/vector-exploratory/latest.json').read_text())
+paths += [root/'artifacts/eval/vector-exploratory/latest.json']
+paths += [p for p in (root/vector_latest['directory']).iterdir() if p.is_file()]
 load=json.loads((root/'artifacts/load/latest.json').read_text())
 paths += [p for p in (root/load['directory']).iterdir() if p.is_file()]
-ui=json.loads((root/'artifacts/ui/latest-attempt.json').read_text())
-paths += [p for p in (root/ui['directory']).iterdir() if p.is_file() and p.suffix in ('.json','.png')]
-landing=json.loads((root/'artifacts/ui/latest-landing.json').read_text())
-paths += [p for p in (root/landing['directory']).iterdir() if p.is_file() and p.suffix in ('.json','.png')]
 paths += [p for p in (root/'artifacts/pilot-transfer').glob('*.json')]
-paths += [root/'artifacts/protocol-freeze.json',root/'artifacts/eval/latest.json',root/'artifacts/load/latest.json',root/'artifacts/ui/latest-attempt.json',root/'artifacts/ui/latest-landing.json']
-paths += [root/'artifacts/T30-browser-report.json']
-onboarding=json.loads((root/'artifacts/T30-browser-report.json').read_text())
-paths += [p for p in (root/onboarding['directory']).iterdir()
-          if p.is_file() and p.suffix in ('.json','.png')]
-paths += [p for p in (root/'artifacts').glob('T*.log') if 'handoff-audit' not in p.name]
-paths += [p for p in (root/'artifacts/hydra-smoke').iterdir() if p.is_file()]
+paths += [root/'artifacts/protocol-freeze.json',root/'artifacts/eval/latest.json',root/'artifacts/load/latest.json']
+paths += [p for p in (root/'artifacts/verification').iterdir() if p.is_file()]
 paths=sorted(set(paths))
 archive=out/'FAULTLINE-source-and-evidence.zip'
 with zipfile.ZipFile(archive,'w',compression=zipfile.ZIP_DEFLATED) as z:

@@ -1,6 +1,0 @@
-{"seed": 17, "method": "frozen", "round": 1, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}
-{"seed": 17, "method": "frozen", "round": 2, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}
-{"seed": 17, "method": "frozen", "round": 3, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}
-{"seed": 17, "method": "frozen", "round": 4, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}
-{"seed": 17, "method": "frozen", "round": 5, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}
-{"seed": 17, "method": "frozen", "round": 6, "budget": {"max_sources": 1, "max_bytes": 10000, "max_records": 100, "timeout_ms": 1000}, "ledger": [], "inspection": null}

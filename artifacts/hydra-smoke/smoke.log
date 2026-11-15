@@ -1,7 +1,0 @@
-PASS: repeat seed, two-hop traversal, update visibility, label-anchored existence, error decoding
-Traceback (most recent call last):
-  File "C:\Users\am\Desktop\Faultline\scripts\graph_smoke.py", line 29, in <module>
-    g.execute('smoke_delete', {'id': i})
-  File "C:\Users\am\Desktop\Faultline\src\faultline\graph\adapter.py", line 80, in execute
-    raise GraphError(f'HydraDB HTTP {e.code}') from None
-faultline.graph.adapter.GraphError: HydraDB HTTP 500

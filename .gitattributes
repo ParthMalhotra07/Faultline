@@ -4,6 +4,8 @@
 /src/faultline/evaluation/vector_baseline.py text eol=lf
 /.gitattributes text eol=lf
 /requirements-vector.txt text eol=lf
+*.py text eol=lf
+/pyproject.toml text eol=lf
 /scripts/verify_vector_exploratory.py text eol=lf
 /docs/REFERENCES.md text eol=lf
 /docs/SUBMISSION.md text eol=lf
