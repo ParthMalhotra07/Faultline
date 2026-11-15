@@ -154,3 +154,13 @@ which this project does not use. Serve an animated FAULTLINE landing page at
 preview reads FAULTLINE's public API; no illustrative research activity or
 fabricated operational status is presented as live. Preserve reduced-motion
 accessibility and re-run the verified incident workflow after the route change.
+
+ADR-021 — USER-UPDATED 2026-11-15: the user started deploying the private
+GitHub repo on Render instead of the earlier Railway plan. The first Render
+build at `ae667f7` succeeded, but Render's health check targeted port 10000
+while the image listened on 8765. Remove the image-level port override and
+use Render's `PORT`, defaulting to 10000 for its Docker service. Keep the
+self-hosted open-source HydraDB engine inside the image. Render's free instance
+has ephemeral storage; a paid persistent disk mounted at `/data` is required
+before claiming graph persistence across restarts or redeploys. A public
+deployment remains unverified until the actual URL passes external checks.

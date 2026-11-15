@@ -14,6 +14,6 @@ COPY artifacts/pilot-transfer/result.json ./artifacts/pilot-transfer/result.json
 RUN python3 -m venv /opt/faultline-venv && /opt/faultline-venv/bin/pip install --no-cache-dir setuptools==80.9.0 pydantic==2.12.5 && /opt/faultline-venv/bin/pip install --no-build-isolation --no-deps -e .
 COPY scripts/run_hosted.sh /usr/local/bin/run-faultline-hosted
 RUN chmod +x /usr/local/bin/run-faultline-hosted
-ENV PATH="/opt/faultline-venv/bin:${PATH}" PORT=8765
+ENV PATH="/opt/faultline-venv/bin:${PATH}"
 EXPOSE 8765
 ENTRYPOINT ["/usr/local/bin/run-faultline-hosted"]

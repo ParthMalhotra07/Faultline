@@ -13,6 +13,9 @@ export GRAPH_NAMESPACE=default GRAPH_ID=default GRAPH_CELL_ID=cell-0 GRAPH_CELLS
 export GRAPH_BOLT_NODE_ADDRESSES=node-0=127.0.0.1:7687 GRAPH_ADVERTISED_BOLT_ADDR=127.0.0.1:7687
 export GRAPH_DATA_CACHE_DIR=/data/cache GRAPH_AUTH_TOKEN_FILE=/data/auth-token GRAPH_ALLOW_PLAINTEXT=true
 export RUST_MIN_STACK=33554432 HYDRADB_URL=http://127.0.0.1:8443 FAULTLINE_BIND_HOST=0.0.0.0
+# Render expects its web service on PORT=10000 unless the dashboard overrides it.
+# Keep the existing 8765 default for local Docker and Railway.
+if [ "${RENDER:-}" = true ] && [ -z "${PORT:-}" ]; then export PORT=10000; fi
 
 /usr/local/bin/graph-node >/data/graph.log 2>&1 &
 graphpid=$!

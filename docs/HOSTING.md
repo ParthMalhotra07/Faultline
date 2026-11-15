@@ -30,12 +30,47 @@ it is not evidence that any cloud deployment has happened.
 - Keep one replica/one writer. Do not expose the engine's 8443/9090 ports as
   public ingress. Health and actual learning must be checked after deployment.
 
-## Railway settings selected by the user
+## Render deployment now in progress
 
-The user selected Railway for the Docker deployment and will keep GitHub private
-until manually switching it to public before submission. Railway must be granted
-access to the private repo in its GitHub integration; no Railway project or live
-URL is recorded yet. Do not select Vercel for this service.
+The user started a Render Docker web-service deployment from commit `ae667f7`
+at `https://faultline-j7kn.onrender.com`. Its first build succeeded and started
+HydraDB and FAULTLINE, but Render's internal health check targeted port 10000
+while that image listened on 8765. The deployment was **not yet live or
+verified** at the time this was recorded. The subsequent image removes the
+hardcoded Docker `PORT` and defaults to 10000 when `RENDER=true`; a fresh local
+Render-mode container passed `/api/health`, the full graph workflow and restart
+transfer. See `artifacts/T23-render-*.log`.
+
+In Render's web-service settings, select **Docker** and `Dockerfile.demo` as
+the Dockerfile path. Leave the Docker command unset. For the new image, set
+`PORT=10000` explicitly or leave `PORT` unset; remove any earlier `PORT=8765`
+override. Set `FAULTLINE_PUBLIC_ORIGIN=https://faultline-j7kn.onrender.com`
+exactly, and configure `HYDRADB_TOKEN` as a freshly generated 32+ character
+secret in Render's Environment tab. Do not put its value in chat or Git.
+Set the HTTP health-check path to `/api/health`. The image binds to `0.0.0.0`
+and the configured `PORT`. A Render health check uses the service's public
+`onrender.com` Host, so the exact public origin also permits health reads.
+After the new deploy reports Live, run the public URL commands below with the
+Render origin and inspect the browser at `/` and `/workspace`.
+
+**Persistence constraint:** Render currently permits persistent disks only
+on paid web services. The user's screenshot shows a free instance, so `/data`
+there is ephemeral and the graph can reset when Render spins down or redeploys.
+That is a material demo limitation. To meet the original persistent-volume
+requirement on Render, use a paid web service with one disk mounted at `/data`
+and one instance. Do not claim restart persistence on the free instance.
+
+Render documentation: [Docker service and Dockerfile path](https://render.com/docs/docker),
+[port binding](https://render.com/docs/web-services#port-binding),
+[health checks](https://render.com/docs/health-checks), and
+[persistent disks](https://render.com/docs/disks).
+
+## Railway settings prepared earlier
+
+The user initially selected Railway, then began a Render deployment. These
+Railway settings remain a tested alternative. The GitHub repo remains private
+until the user manually changes its visibility before submission. Do not select
+Vercel for this service.
 
 In the Railway service dashboard:
 
@@ -89,7 +124,7 @@ docker stop faultline-railway-check
 docker rm faultline-railway-check
 ```
 
-After the Railway deployment is active, use the actual HTTPS domain below.
+After a Render or Railway deployment is active, use its actual HTTPS domain below.
 This script **resets the controlled demo graph** in its first phase, so run it
 before recording the Loom and avoid concurrent viewers. It checks results,
 replay, private-route rejection, wrong-Origin rejection, abstention, learning,

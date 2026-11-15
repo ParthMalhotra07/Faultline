@@ -57,10 +57,15 @@ remain unverified; do not claim those posts or buyer validation.
 
 ## Remaining public delivery
 
-1. Deploy the tested bundled image to Railway with one `/data` volume, port
-   8765 and the settings in `docs/HOSTING.md`. Configure
-   `FAULTLINE_PUBLIC_ORIGIN` to the exact HTTPS app origin and test the actual
-   public workflow. No Railway URL has been verified yet.
+1. Finish the Render Docker web-service deployment at
+   `https://faultline-j7kn.onrender.com` using the settings in
+   `docs/HOSTING.md`. The first image built but stalled at its port 10000
+   health check; a corrected image has passed local Render-mode testing.
+   Configure `FAULTLINE_PUBLIC_ORIGIN` to that exact HTTPS origin and test the
+   actual public workflow after Render reports Live. The screenshot shows a
+   free instance, which cannot mount the required persistent `/data` disk;
+   use a paid disk-backed instance for restart persistence or disclose the
+   ephemeral limitation. No usable public link has yet been verified.
 2. Keep the pushed GitHub repository private until the user manually changes
    its visibility to public immediately before the cutoff. Do not publish runtime
    credentials, local browser profiles, or large test recordings.

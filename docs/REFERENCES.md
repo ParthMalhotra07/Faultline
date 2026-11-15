@@ -38,3 +38,10 @@ Earlier planning briefs remain in C:/Users/am/Desktop/CC/output/. They are optio
 - Healthcheck Host, path and timeout: https://docs.railway.com/deployments/healthchecks
 - Public HTTPS domains: https://docs.railway.com/networking/public-networking
 - Deprecated config-as-code status: https://docs.railway.com/config-as-code/reference
+
+## Render deployment documentation checked November 15, 2026
+
+- Dockerfile path and runtime: https://render.com/docs/docker
+- Web service port binding and `PORT`: https://render.com/docs/web-services#port-binding
+- HTTP health-check Host and status: https://render.com/docs/health-checks
+- Paid-service persistent disks and mount rules: https://render.com/docs/disks
