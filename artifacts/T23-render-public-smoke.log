@@ -1,0 +1,6 @@
+/api/health HTTP 200 bytes=71
+/ HTTP 200 bytes=11592
+/workspace HTTP 200 bytes=6726
+/api/results HTTP 200 bytes=4269
+/api/graph HTTP 200 bytes=2018
+graph source=live HydraDB traversal nodes=8 edges=8

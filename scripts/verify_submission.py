@@ -38,4 +38,4 @@ landing=json.loads((root/'artifacts/ui/latest-landing.json').read_text())
 landing_report=json.loads((root/landing['directory']/'report.json').read_text())
 assert landing_report['status']=='PASS' and len(landing_report['checks'])>=8
 assert any(name.endswith('00-hero-desktop.png') for name in landing_report['screenshots'])
-print(f"PASS: 180-second silent rehearsal, browser report, and {len(names)}-file source/evidence archive verified; no public app, repo or Loom link inferred.")
+print(f"PASS: 180-second silent rehearsal, browser reports, and {len(names)}-file source/evidence archive verified; no public repo, Loom or submission inferred.")

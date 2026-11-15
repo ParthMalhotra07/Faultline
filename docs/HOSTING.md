@@ -2,9 +2,9 @@
 
 `Dockerfile.demo` builds one Linux container containing the pinned **open-source
 HydraDB 0.4.0 repository engine** and the FAULTLINE Python API/UI. The engine's
-HTTP query endpoint stays on container loopback; only the app port 8765 is
-exposed by the image. A persistent `/data` mount holds the HydraDB store/cache,
-auth file and graph manifest. The container is for a controlled judge demo,
+HTTP query endpoint stays on container loopback; the app uses port 8765 in
+local Docker and port 10000 on Render. A persistent `/data` mount can hold the
+HydraDB store/cache, auth file and graph manifest. The container is for a controlled judge demo,
 not a production multi-user incident service.
 
 The image was built locally and tested on November 15, 2026: a fresh container
@@ -13,14 +13,14 @@ with a different Origin, performed a real trigger/abstain/learn workflow through
 HydraDB, restarted, retained the graph manifest, and transferred learning to a
 different incident without another inspection. See `artifacts/T23-docker-build.log`,
 `T23-hosted-first.log` and `T23-hosted-after.log`. This is **local Docker proof**;
-it is not evidence that any cloud deployment has happened.
+the later Render deployment and browser checks are documented below.
 
 ## Required host settings
 
 - Build from `Dockerfile.demo` (some providers need an explicit Dockerfile path).
-- Mount durable writable storage at `/data`; allow one long-running service with
+- For restart persistence, mount durable writable storage at `/data`; allow one long-running service with
   enough memory for HydraDB and Python (local test used a 4 GiB cap).
-- Expose the container's `PORT` (default 8765) through the provider's HTTPS URL.
+- Route the container's `PORT` (local default 8765; Render 10000) through the provider's HTTPS URL.
 - Set `HYDRADB_TOKEN` to a freshly generated 32+ character secret **inside the
   host's environment/secret settings**. Do not put it in Git, the browser, or
   chat. The entrypoint writes it to `/data/auth-token` for the bundled engine.
@@ -30,16 +30,18 @@ it is not evidence that any cloud deployment has happened.
 - Keep one replica/one writer. Do not expose the engine's 8443/9090 ports as
   public ingress. Health and actual learning must be checked after deployment.
 
-## Render deployment now in progress
+## Verified Render web service
 
 The user started a Render Docker web-service deployment from commit `ae667f7`
-at `https://faultline-j7kn.onrender.com`. Its first build succeeded and started
-HydraDB and FAULTLINE, but Render's internal health check targeted port 10000
-while that image listened on 8765. The deployment was **not yet live or
-verified** at the time this was recorded. The subsequent image removes the
-hardcoded Docker `PORT` and defaults to 10000 when `RENDER=true`; a fresh local
-Render-mode container passed `/api/health`, the full graph workflow and restart
-transfer. See `artifacts/T23-render-*.log`.
+at `https://faultline-j7kn.onrender.com`. The first build started HydraDB and
+FAULTLINE but failed its health check because Render expected port 10000 while
+the app listened on 8765. The authenticated Render API changed **only** the
+service's `PORT` setting to 10000; a new deploy of commit `5320daf` reported
+Live on November 15. Public checks returned HTTP 200 for health, landing,
+workspace, results and graph. Isolated Chromium passed 8 landing and 9
+workspace checks, and the hosted API completed real trigger, abstain, learn and
+HydraDB traversal. See `artifacts/T23-render-public-*.log` and the latest UI
+reports. These checks establish a usable live demo, not durable graph storage.
 
 In Render's web-service settings, select **Docker** and `Dockerfile.demo` as
 the Dockerfile path. Leave the Docker command unset. For the new image, set
@@ -53,9 +55,10 @@ and the configured `PORT`. A Render health check uses the service's public
 `onrender.com` Host. Render's own `RENDER_EXTERNAL_URL` takes precedence at
 runtime for this service, so its public Host is used even if an older dashboard
 origin is stale.
-After the new deploy reports Live, run the public URL commands below with the
-Render origin and `--timeout 90` for possible free-instance cold starts, and
-inspect the browser at `/` and `/workspace`.
+To repeat the checks, use the Render origin and `--timeout 90` for possible
+free-instance cold starts, and inspect `/` and `/workspace` in a signed-out
+browser. The `first` hosted check resets the controlled demo graph, so run it
+before recording the Loom and avoid concurrent viewers.
 
 **Persistence constraint:** Render currently permits persistent disks only
 on paid web services. The user's screenshot shows a free instance, so `/data`

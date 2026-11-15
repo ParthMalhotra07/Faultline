@@ -1,6 +1,6 @@
 # Three-minute Loom narration
 
-Record the live app at the verified public URL after deployment. The silent
+Record the live app at https://faultline-j7kn.onrender.com. The silent
 `artifacts/submission/fallback-demo.webm` follows these stages and can guide
 timing, but it is not a Loom or narrated pitch. Keep failures, replay labels and
 counts visible. If live hosting is unavailable, say so plainly.

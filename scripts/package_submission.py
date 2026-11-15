@@ -46,8 +46,8 @@ manifest=dict(prepared_at=datetime.now(timezone.utc).isoformat(),archive=archive
     privacy='Whitelist package excludes runtime credentials, environment files, virtualenvs, user/browser profiles and config backups',
     private_evaluator='Gold fixtures/raw predictions included for reproducibility; public API and learner do not serve/read these files',
     fallback_video='fallback-demo.webm',rehearsal='rehearsal.json',
-    remaining=['Confirm exact organizer cutoff','Deploy and verify live HTTPS app plus self-run HydraDB',
-        'Create and verify open-source GitHub repo','Record and verify narrated Loom',
+    remaining=['Confirm exact organizer cutoff','Resolve or disclose free Render instance storage limits',
+        'Make and verify the existing GitHub repo public','Record and verify narrated Loom',
         'Publish truthful social posts with verified HydraDB handle','Submit and record actual confirmation'])
 (out/'package-manifest.json').write_text(json.dumps(manifest,indent=2)+'\n')
 print(json.dumps(dict(status='PASS',archive=str(archive.relative_to(root)),files=len(paths),bytes=archive.stat().st_size,sha256=manifest['sha256'],submitted=False),indent=2))

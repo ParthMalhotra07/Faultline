@@ -2,8 +2,9 @@
 
 The host requires three links: a **usable live app**, an **open-source GitHub
 repository**, and a **Loom walkthrough**. The user confirmed November 15, 2026
-IST as the submission date; the exact cutoff is still unknown. None of the three
-public links is recorded as delivered. Source was pushed to the user's private
+IST as the submission date; the exact cutoff is still unknown. The live app
+link is verified at `https://faultline-j7kn.onrender.com`; the public GitHub
+and Loom links remain undelivered. Source was pushed to the user's private
 repo at `https://github.com/ParthMalhotra07/Faultline`; make it public only
 after the owner reviews the disclosure. Do not put a localhost or silent fallback
 video URL into a submission form as if it were a live app or Loom.
@@ -57,15 +58,12 @@ remain unverified; do not claim those posts or buyer validation.
 
 ## Remaining public delivery
 
-1. Finish the Render Docker web-service deployment at
-   `https://faultline-j7kn.onrender.com` using the settings in
-   `docs/HOSTING.md`. The first image built but stalled at its port 10000
-   health check; a corrected image has passed local Render-mode testing.
-   Configure `FAULTLINE_PUBLIC_ORIGIN` to that exact HTTPS origin and test the
-   actual public workflow after Render reports Live. The screenshot shows a
-   free instance, which cannot mount the required persistent `/data` disk;
-   use a paid disk-backed instance for restart persistence or disclose the
-   ephemeral limitation. No usable public link has yet been verified.
+1. The Render app is live and its public health, landing, workspace, measured
+   results, graph traversal and browser workflow passed. The service uses the
+   free plan, which cannot mount the required persistent `/data` disk. Use a
+   paid disk-backed instance for restart persistence, or disclose the
+   ephemeral limitation in the Loom and submission. Do not claim restart
+   persistence from the public service until it is tested with a disk.
 2. Keep the pushed GitHub repository private until the user manually changes
    its visibility to public immediately before the cutoff. Do not publish runtime
    credentials, local browser profiles, or large test recordings.

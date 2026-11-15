@@ -6,11 +6,11 @@ Failed checks remain preserved in artifacts and the task ledger.
 
 ## Next executable step
 
-Check Render Deploys for source bcd1f9d and Live status; if the old ae667f7 deploy is still stuck, cancel it and deploy latest main. Then run public health, landing browser, and hosted workflow checks; decide whether to mount a paid /data disk.
+Decide whether to attach a paid Render disk at /data or disclose ephemeral graph state; then record the narrated Loom, make the GitHub repo public as planned, verify both links, and submit before the exact cutoff.
 
 ## Blockers
 
-- T23: The user-supplied first Render deploy at ae667f7 is waiting for port 10000 health while its app listens on 8765; corrected bcd1f9d is pushed but no public response or Live status has been verified.; The shown Render free instance has no persistent disk; /data graph state may reset after spin-down or redeploy. A paid disk decision is pending.; The GitHub repo remains private by user instruction and does not yet qualify as a public submission link.; The user will record a narrated Loom after deployment; no link is available yet.; X post is user-reported only; other social publication and the exact submission cutoff are unverified.
+- T23: Render app is Live and public workflow verified, but the free service has no persistent disk; graph state across spin-down or redeploy is unverified pending a paid-disk choice or explicit disclosure.; The GitHub repository remains private by user instruction; the user plans to make it public before submission.; The narrated Loom is the user's task and no share link has been verified.; The exact organizer cutoff and submission confirmation are not recorded.; The X thread is user-reported only; LinkedIn and other go-to-market publication remain unverified.
 
 ## Boundaries
 
