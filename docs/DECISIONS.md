@@ -164,3 +164,11 @@ self-hosted open-source HydraDB engine inside the image. Render's free instance
 has ephemeral storage; a paid persistent disk mounted at `/data` is required
 before claiming graph persistence across restarts or redeploys. A public
 deployment remains unverified until the actual URL passes external checks.
+
+ADR-022 — USER-REQUESTED 2026-11-15: run a same-evidence vector-store
+comparison because the host expects the graph to earn its place over vector
+search. Preserve frozen protocol v1 and use local Qdrant with a published
+FastEmbed model only as an **exploratory retrospective comparator** on the
+already seen cases. Freeze its corpus, query, ranking, abstention and scoring
+rules before producing results. The comparison may test this narrow vector
+retrieval setup; it cannot establish that all vector-store products are worse.

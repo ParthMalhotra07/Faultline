@@ -45,3 +45,10 @@ Earlier planning briefs remain in C:/Users/am/Desktop/CC/output/. They are optio
 - Web service port binding and `PORT`: https://render.com/docs/web-services#port-binding
 - HTTP health-check Host and status: https://render.com/docs/health-checks
 - Paid-service persistent disks and mount rules: https://render.com/docs/disks
+
+## Exploratory vector comparison sources checked November 15, 2026
+
+- Qdrant client local mode and `QdrantClient(":memory:")`: https://github.com/qdrant/qdrant-client/blob/master/README.md
+- Qdrant client Python collection, point and query API: https://python-client.qdrant.tech/
+- FastEmbed `TextEmbedding` usage and BGE-small model support: https://qdrant.github.io/fastembed/Getting%20Started/ and https://qdrant.github.io/fastembed/examples/Supported_Models/
+- Selected local packages and model file hash are recorded in `protocol/vector-exploratory-v2.json`; live API smoke is `artifacts/T27-vector-smoke.log`.

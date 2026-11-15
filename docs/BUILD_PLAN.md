@@ -393,3 +393,13 @@ Build: Make the root URL a FAULTLINE landing page that preserves Origyn's large 
 Acceptance: Root landing and workspace routes both work in the selected Docker image; landing CTAs navigate to the working demo; live preview matches public API responses; motion runs when enabled and respects reduced-motion preference; desktop and mobile render without page overflow or browser errors. The original nine workflow checks still pass from `/workspace`. Capture and inspect screenshots before DONE.
 
 Completion evidence: exact commands, exits, browser report/screenshots, changed files and remaining limitations in STATE.json and HANDOFF.md. T23 remains blocked on public deployment and submission artifacts.
+
+### T27 — Exploratory same-evidence vector-store comparison
+
+Phase: P6. Depends on: T22, T26. Required by the user's November 15 request after the host emphasized HydraDB's value over a vector store. T23 remains blocked on final submission deliverables.
+
+Build: Keep frozen protocol v1, its learned snapshots, raw predictions and `latest.json` unchanged. Use a local Qdrant vector store with a pinned published embedding model. Index only evidence records acquired in each adaptive snapshot. Query from the public incident DTO, rank only recent public candidates, preserve abstention and count all cases. Put experiment rules and code hashes in a separate exploratory protocol before reading results.
+
+Acceptance: Verify the selected Qdrant/FastEmbed APIs with a live smoke test; run all 7 adaptive snapshot points across the 3 original seeds and 12 cases without learner access to gold labels. Record raw predictions, aggregate counts, exact versions, model/cache details, snapshot hashes, and limitations. Compare to v1 adaptive on the same cases only as a **retrospective exploratory** result; do not claim a fresh confirmatory holdout or general superiority over vector systems.
+
+Completion evidence: exact commands, exits, protocol hash, raw output paths, unchanged v1 hashes, changed files and remaining limitations in STATE.json and HANDOFF.md.

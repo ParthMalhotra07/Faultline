@@ -1,0 +1,4 @@
+# Exploratory comparison only; install into a separate or existing local environment.
+qdrant-client[fastembed]==1.20.0
+fastembed==0.9.1
+onnxruntime==1.32.0

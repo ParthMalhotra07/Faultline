@@ -1,0 +1,35 @@
+{
+  "status": "FROZEN_EXPLORATORY",
+  "label": "Retrospective same-evidence vector comparison on the previously used controlled heldout cases; not a fresh confirmatory holdout",
+  "source_run_directory": "artifacts/eval/v1-20261114T064609Z-31b50c",
+  "seeds": [17, 29, 43],
+  "rounds": 7,
+  "cases_per_seed": 12,
+  "baseline_sha256": "d5e7b95aa033a3d4dac2b72ecbae4d588e049e6e61077f94b6d26d2fd24614e9",
+  "runner_sha256": "8755b78b0116df77c81d40d911a72cddd1ddf60e46427d1b0fc222e8c15dea43",
+  "v1_protocol_sha256": "63e44ebba5e8e4b46dd7ce7dd1fb0e839dc6f12d1ea3dae8dbf551776bf8d388",
+  "v1_snapshots_index_sha256": "b1301bc97ed321df4c6add95b61d77c8cfca4f6f1bfd4e865829c6f28c3a2147",
+  "model_name": "BAAI/bge-small-en-v1.5",
+  "model_cache_source": "Qdrant/bge-small-en-v1.5-onnx-Q",
+  "model_revision": "aa8f8b060edb00e03bfdd08813a2949946c8ba55",
+  "model_onnx_sha256": "51f1bd0addd6e859e42c2c8021a5e5461385bb676a649f4b269aa445449f2431",
+  "package_versions": {
+    "qdrant-client": "1.20.0",
+    "fastembed": "0.9.1",
+    "onnxruntime": "1.32.0"
+  },
+  "vector_store": "QdrantClient(:memory:) local Qdrant vector collection, cosine distance",
+  "corpus": "Only acquired evidence records with actual record payload in each adaptive v1 snapshot; one point per record, no graph links, gold, fault ID or private manifest",
+  "passage": "passage: service {service_id without kind prefix} {operation}s configuration {config_key_id without kind prefix}",
+  "query": "query: sorted failing public endpoint IDs, symptom codes and messages; no expected outcome",
+  "candidate_policy": "Only public change targets within RECENT_WINDOW_MS; best cosine score among all acquired records matching each candidate; no document or result truncation at the observed corpus sizes",
+  "abstention": "Insufficient evidence if no failing observation, no recent candidate, no acquired record or no matching record; ambiguous if top two candidate scores differ by at most 1e-6",
+  "scoring": "Top-1 correct / all 36 cases per round across 3 seeds; abstentions and errors count noncorrect. Private expected ID is read only by outer scorer after vector prediction.",
+  "limitations": [
+    "Existing heldout cases and acquired snapshots were already used for v1 evaluation; this is retrospective exploratory evidence only.",
+    "The comparator tests one local Qdrant collection, one published embedding model and one fixed text representation. It does not represent every possible vector architecture, hybrid retriever or tuned prompt.",
+    "The corpus contains only two or three acquired config-access records after round 0 and has a single small synthetic application topology.",
+    "The graph method and vector method use the same acquired evidence, but graph traversal uses the frozen topology and relationship semantics while this comparator ranks record text by cosine similarity.",
+    "Scores are measured on 12 controlled cases repeated across three acquisition seeds; this is not real incident or customer validation."
+  ]
+}
