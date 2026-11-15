@@ -1,0 +1,53 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_____________ test_landing_and_live_workspace_routes_are_distinct _____________
+
+    def test_landing_and_live_workspace_routes_are_distinct():
+        app=SimpleNamespace(lock=threading.RLock())
+        server=make_server(app,port=0)
+        thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+        base=f'http://127.0.0.1:{server.server_port}'
+        try:
+            with urllib.request.urlopen(base+'/') as response:
+                landing=response.read().decode()
+            with urllib.request.urlopen(base+'/workspace') as response:
+                workspace=response.read().decode()
+            assert 'id="particle-wave"' in landing
+            assert 'href="/workspace"' in landing
+            assert 'id="trigger"' in workspace
+            assert 'id="trigger"' not in landing
+>           assert 'class="identity" href="/"' in workspace
+E           assert 'class="identity" href="/"' in '<!doctype html>\n<html lang="en">\n<head>\n  <meta charset="utf-8">\n  <meta name="viewport" content="width=device-wi... remediation.</p></footer>\n      </main>\n    </div>\n  </div>\n  <script src="/app.js"></script>\n</body>\n</html>\n'
+
+tests\integration\test_public_api.py:69: AssertionError
+_____________________ test_public_demo_session_lifecycle ______________________
+
+    def test_public_demo_session_lifecycle():
+        app=SimpleNamespace(lock=threading.RLock())
+        server=make_server(app,port=0,public_origin='https://faultline.example')
+        thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+        base=f'http://127.0.0.1:{server.server_port}'
+    
+        def request(path,data=None,cookie=None,origin='https://faultline.example'):
+            headers={'Host':'faultline.example','X-Faultline-Local':'sandbox',
+                     'Content-Type':'application/json'}
+            if origin is not None: headers['Origin']=origin
+            if cookie: headers['Cookie']=cookie
+            req=urllib.request.Request(base+path,headers=headers,
+                data=json.dumps(data).encode() if data is not None else None)
+            try:
+                with urllib.request.urlopen(req) as response:
+                    return response.status,json.load(response),response.headers
+            except urllib.error.HTTPError as error:
+                return error.code,json.load(error),error.headers
+    
+        try:
+>           assert request('/api/demo/session')[1]['signed_in'] is False
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           KeyError: 'signed_in'
+
+tests\integration\test_public_api.py:94: KeyError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_public_api.py::test_landing_and_live_workspace_routes_are_distinct
+FAILED tests/integration/test_public_api.py::test_public_demo_session_lifecycle
+2 failed, 3 deselected in 1.30s

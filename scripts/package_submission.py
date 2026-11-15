@@ -30,6 +30,7 @@ landing=json.loads((root/'artifacts/ui/latest-landing.json').read_text())
 paths += [p for p in (root/landing['directory']).iterdir() if p.is_file() and p.suffix in ('.json','.png')]
 paths += [p for p in (root/'artifacts/pilot-transfer').glob('*.json')]
 paths += [root/'artifacts/protocol-freeze.json',root/'artifacts/eval/latest.json',root/'artifacts/load/latest.json',root/'artifacts/ui/latest-attempt.json',root/'artifacts/ui/latest-landing.json']
+paths += [root/'artifacts/T30-browser-report.json']
 paths += [p for p in (root/'artifacts').glob('T*.log') if 'handoff-audit' not in p.name]
 paths += [p for p in (root/'artifacts/hydra-smoke').iterdir() if p.is_file()]
 paths=sorted(set(paths))

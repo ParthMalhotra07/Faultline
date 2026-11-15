@@ -2,6 +2,51 @@
 
 An incident-search prototype that discovers missing configuration dependencies from bounded telemetry inspection, stores verified claims in HydraDB, and uses those relationships in later investigations.
 
+**[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Source repository](https://github.com/ParthMalhotra07/Faultline)** · **[Three-minute walkthrough script](docs/LOOM_SCRIPT.md)** · **[Deployment guide](docs/HOSTING.md)**
+
+![FAULTLINE landing page with the supplied logo and animated hero](docs/images/landing-final.png)
+
+The live demo runs the [open-source HydraDB engine](https://github.com/hydra-db/hydradb) in its Docker image. The GitHub repository is currently private by the builder's choice and will be made public for submission. Render's free disk is ephemeral; allow a cold start after inactivity.
+
+## Explore in two minutes
+
+1. Open the [live site](https://faultline-j7kn.onrender.com) and select **Open workspace**.
+2. The public test email and password are already filled in. Select **Enter demo workspace**, then use the five-step tour or **Skip tour**. **Take tour** in the sidebar replays it later.
+3. Select **Reset experiment graph**, **Trigger fault**, **Investigate**, then **Inspect & learn**. The first diagnosis abstains; learning adds evidence-backed HydraDB claims and supports a currency configuration hypothesis.
+4. Select **Restore app**, switch to the refunds transfer incident, and investigate again. The saved path supports that separate incident without another inspection.
+
+The test sign-in creates an eight-hour server-side demo cookie. It is a shared public entry flow, **not a private account or a security boundary**. Sandbox API routes remain public under the configured host and origin rules. Sessions end on sign-out or service restart; the tour completion flag stays only in that browser's local storage.
+
+| Public demo access | Guided tour | Live investigation |
+|:--:|:--:|:--:|
+| ![Public demo access with prefilled testing values](docs/images/demo-access.png) | ![Five-step tour highlighting the incident controls](docs/images/guided-tour.png) | ![Workspace showing real HydraDB paths](docs/images/workspace-final.png) |
+
+The [mobile workspace screenshot](docs/images/mobile-workspace.png) shows the same controls at a 390-pixel viewport. The images come from an isolated Chromium run against a local server backed by the real HydraDB container; [the browser report](artifacts/T30-browser-report.json) records checks and source paths.
+
+## How it works
+
+```mermaid
+flowchart LR
+    A[Executable commerce sandbox] --> B[Public observations]
+    B --> C[Bounded HydraDB traversal]
+    C --> D[Diagnosis or abstention]
+    D --> E[Gap selector]
+    E --> F[Bounded source inspection]
+    F --> G[Validated claim and evidence]
+    G --> C
+```
+
+Each learned relationship carries a source hash/version and evidence ID. Diagnosis follows actual endpoint, service, claim, and evidence paths from HydraDB; reachability supports a hypothesis and does not prove causation. See [architecture](docs/ARCHITECTURE.md), [frozen evaluation rules](docs/EVALUATION.md), and [design decisions](docs/DECISIONS.md).
+
+### Repository guide
+
+- [`src/faultline/`](src/faultline/) holds the sandbox, bounded graph adapter, diagnosis, evidence validation, learning, and public HTTP API.
+- [`web/`](web/) contains the buildless landing and workspace; the tour is in [`web/onboarding.js`](web/onboarding.js).
+- [`tests/`](tests/) checks API boundaries, graph behavior, and learning invariants. [`scripts/`](scripts/) contains live integration, browser, hosting, and package checks.
+- [`protocol/v1/`](protocol/v1/) freezes the held-out rules. [`artifacts/eval/`](artifacts/eval/) contains raw predictions and aggregates; [`artifacts/T30-browser-report.json`](artifacts/T30-browser-report.json) selects the latest onboarding browser proof.
+
+The browser calls `GET /api/observations`, `/api/graph`, `/api/sources`, and `/api/results` for live or recorded public views. `POST /local/trigger`, `/api/diagnose`, `/api/learn`, `/local/restore`, and `/local/reset-experiment` drive the bounded sandbox workflow. `/api/demo/session`, `/api/demo/sign-in`, and `/api/demo/sign-out` serve the public entry experience. See [`src/faultline/api.py`](src/faultline/api.py) for exact request fields, host checks, and error responses. No route accepts arbitrary graph queries, file paths, or shell commands.
+
 The executable sandbox has checkout, refunds and renewals. It uses no real payment provider. The diagnostic core is deterministic; no LLM or hosted API key is required. The buyer hypothesis is small platform teams rediscovering undocumented shared dependencies. There are no validated customers, savings estimates or production-performance claims.
 
 ## Run locally on Windows
@@ -19,13 +64,13 @@ $env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 .venv/Scripts/python.exe scripts/serve.py
 ```
 
-Open http://127.0.0.1:8765 for the animated landing page, then select **Open workspace** for the live investigation at http://127.0.0.1:8765/workspace. The default database and API bind only to loopback. The launcher generates a random local authentication file inside ignored `.runtime/`; never print or copy its value. No credentials are included in the source package. The public Render demo is at https://faultline-j7kn.onrender.com; its current free instance has ephemeral storage. See [docs/HOSTING.md](docs/HOSTING.md) for the exact deployment checks and limitation.
+Open http://127.0.0.1:8765 for the animated landing page, then select **Open workspace** for the live investigation at http://127.0.0.1:8765/workspace. Use the prefilled public demo values to enter, then complete or skip the tour. The default database and API bind only to loopback. The launcher generates a random local HydraDB authentication file inside ignored `.runtime/`; never print or copy its value. The prefilled UI values are intentionally public and unrelated to the HydraDB secret. The public Render demo is at https://faultline-j7kn.onrender.com; its current free instance has ephemeral storage. See [docs/HOSTING.md](docs/HOSTING.md) for exact deployment checks and limitations.
 
 HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880`, commit `916637477f3f34766b4905b270bd4292109d77e6`. It uses the engine HTTP API, not hosted memory search. See [the vendor application guide](https://github.com/hydra-db/hydradb/blob/916637477f3f34766b4905b270bd4292109d77e6/USING-HYDRADB.md) and captured smoke evidence in `artifacts/hydra-smoke/`.
 
 ## Demonstrate the learning loop
 
-1. Click **Reset experiment graph**. All three real acceptance checks recover; configuration-read evidence starts uninspected.
+1. Enter the public demo workspace and skip or complete the first-visit tour. Click **Reset experiment graph**. All three real acceptance checks recover; configuration-read evidence starts uninspected.
 2. Select **Checkout · shared currency fault**, then **Trigger fault** and **Investigate**. The initial graph abstains for insufficient evidence.
 3. Click **Inspect & learn**. One bounded shared-service telemetry source verifies configuration reads. HydraDB returns the new claim/evidence paths, and diagnosis selects `config:currency`.
 4. Click **Restore app**. Runtime health recovers and learned claims persist.
@@ -60,6 +105,7 @@ For repeatable headless browser QA, without desktop input:
 python scripts/start_ui_browser.py
 $env:FAULTLINE_PLAYWRIGHT_WS = 'ws://127.0.0.1:13000/'
 .venv/Scripts/python.exe scripts/verify_ui.py --results
+.venv/Scripts/python.exe scripts/verify_onboarding.py
 docker stop faultline-ui-browser
 ```
 

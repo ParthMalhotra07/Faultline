@@ -1,0 +1,1 @@
+PASS: Docker image serves logo, tour, workspace and server-backed demo session; Secure cookie manually replayed across local HTTP probe

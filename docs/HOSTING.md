@@ -7,6 +7,14 @@ local Docker and port 10000 on Render. A persistent `/data` mount can hold the
 HydraDB store/cache, auth file and graph manifest. The container is for a controlled judge demo,
 not a production multi-user incident service.
 
+The current workspace has a public demo entry screen with prefilled testing
+values. The server issues a temporary in-memory cookie and the browser stores
+tour completion locally. This is a shared judge-demo convenience, not private
+authentication: the sandbox API remains accessible within the existing Host and
+Origin controls. Service restart clears the demo sessions and, on Render's free
+plan, may also clear graph state. In the hosted walkthrough, enter the prefilled
+values and complete or skip the tour before using the graph controls.
+
 The image was built locally and tested on November 15, 2026: a fresh container
 served the 29 measured result points and recorded replay, rejected a request
 with a different Origin, performed a real trigger/abstain/learn workflow through

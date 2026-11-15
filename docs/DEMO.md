@@ -40,7 +40,7 @@ video, actual API-to-rendered-graph checks, mobile layout and explicit errors.
 
 ## Exact rehearsal controls
 
-Before presenting, open http://127.0.0.1:8765, click **Open workspace**, and use Reset experiment graph.
+Before presenting, open http://127.0.0.1:8765, click **Open workspace**, select **Enter demo workspace** with the prefilled public test values, then complete or skip the five-step tour. Use Reset experiment graph.
 Choose Checkout / shared currency fault. Trigger -> Investigate must abstain.
 Inspect & learn must show config:currency and actual orange READS_CONFIG claims.
 Restore app must show all healthy while retaining learned claims.

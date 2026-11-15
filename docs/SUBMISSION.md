@@ -9,6 +9,12 @@ repo at `https://github.com/ParthMalhotra07/Faultline`; make it public only
 after the owner reviews the disclosure. Do not put a localhost or silent fallback
 video URL into a submission form as if it were a live app or Loom.
 
+The judge flow starts at the landing page. Select **Open workspace**, enter
+with the prefilled public test values, then complete or skip the first-visit
+tour before resetting and triggering the demonstration fault. These values
+open an in-memory public demo session; they are not private accounts or
+HydraDB credentials. Recheck the hosted flow after the newest commit deploys.
+
 ## Ready local evidence
 
 - Live local app: `http://127.0.0.1:8765`, backed by the self-run open-source

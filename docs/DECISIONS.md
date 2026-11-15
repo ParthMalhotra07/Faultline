@@ -172,3 +172,13 @@ FastEmbed model only as an **exploratory retrospective comparator** on the
 already seen cases. Freeze its corpus, query, ranking, abstention and scoring
 rules before producing results. The comparison may test this narrow vector
 retrieval setup; it cannot establish that all vector-store products are worse.
+
+ADR-023 — USER-REQUESTED 2026-11-15: use the supplied logo screenshot in the
+navbar and favicon, make the workspace identity navigate to the landing page,
+and add a working first-visit guided tour. The prefilled test email/password
+create an expiring in-memory demo session with an HttpOnly cookie. They are
+public test values, not HydraDB credentials or a private-account system. Keep
+the sandbox API public under the existing bounded Host/Origin rules. Store tour
+completion only in browser local storage and offer replay. Render and local
+Docker must package the asset and JavaScript; browser QA must exercise real
+HydraDB controls after entry.

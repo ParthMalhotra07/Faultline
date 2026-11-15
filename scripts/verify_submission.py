@@ -2,6 +2,7 @@
 import hashlib
 import json
 from pathlib import Path
+import re
 import zipfile
 
 root=Path(__file__).resolve().parents[1]
@@ -24,7 +25,19 @@ with zipfile.ZipFile(archive) as z:
     names=set(z.namelist())
     assert len(names)==manifest['files']
     assert {'README.md','Dockerfile.demo','docs/SUBMISSION.md',
-        'docs/HOSTING.md','protocol/v1/protocol.json','src/faultline/graph/store.py'}<=names
+        'docs/HOSTING.md','protocol/v1/protocol.json','src/faultline/graph/store.py',
+        'web/faultline-logo.png','web/onboarding.js','artifacts/T30-browser-report.json',
+        'docs/images/landing-final.png','docs/images/demo-access.png',
+        'docs/images/guided-tour.png','docs/images/workspace-final.png',
+        'docs/images/mobile-workspace.png'}<=names
+    readme=z.read('README.md').decode('utf-8')
+    for target in re.findall(r'!?\[[^\]]*\]\(([^)]+)\)', readme):
+        if target.startswith(('https://','http://','#')):
+            continue
+        local_target=target.split('#',1)[0]
+        assert (local_target in names or
+                (local_target.endswith('/') and any(name.startswith(local_target) for name in names))), \
+            f'Broken README source link: {target}'
     internal={'AGENTS.md','CLAUDE.md','START_HERE.md','HANDOFF.md',
         'HANDOFF_VALIDATION.json','STATE.json','.cursor/rules/faultline.mdc',
         'docs/BUILD_PLAN.md','docs/WORK_LOG.md',

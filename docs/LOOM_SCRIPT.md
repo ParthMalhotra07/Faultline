@@ -6,7 +6,8 @@ timing, but it is not a Loom or narrated pitch. Keep failures, replay labels and
 counts visible. If live hosting is unavailable, say so plainly.
 
 **0:00–0:20 — Landing and healthy sandbox.** Show the animated landing page,
-then click **Open workspace**. “FAULTLINE is an incident search prototype
+then click **Open workspace** and enter with the prefilled public test values.
+Complete or skip the first-visit tour, then reset the graph. “FAULTLINE is an incident search prototype
 for small platform teams. Their service map can miss shared configuration
 dependencies. This executable commerce sandbox has checkout, refunds and
 renewals, and its dependency graph lives in the open-source HydraDB engine I
