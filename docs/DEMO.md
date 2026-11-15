@@ -4,7 +4,7 @@
 “Your service map shows who calls whom. It can miss the shared settings that make multiple features fail together. FAULTLINE investigates those gaps and stores verified connections in HydraDB, so the next incident starts with a better map.”
 
 ## Three-minute script
-0:00–0:20: show healthy executable app and explain the missing-dependency problem.
+0:00–0:20: show the animated landing, open the workspace, show healthy executable app and explain the missing-dependency problem.
 0:20–0:45: trigger a local configuration fault and show failing real checks.
 0:45–1:20: run honest diagnosis, display uncertainty and chosen evidence inspection.
 1:20–1:50: show newly committed HydraDB edges with source evidence and revised diagnosis.
@@ -40,7 +40,7 @@ video, actual API-to-rendered-graph checks, mobile layout and explicit errors.
 
 ## Exact rehearsal controls
 
-Before presenting, open http://127.0.0.1:8765 and use Reset experiment graph.
+Before presenting, open http://127.0.0.1:8765, click **Open workspace**, and use Reset experiment graph.
 Choose Checkout / shared currency fault. Trigger -> Investigate must abstain.
 Inspect & learn must show config:currency and actual orange READS_CONFIG claims.
 Restore app must show all healthy while retaining learned claims.

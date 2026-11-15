@@ -109,7 +109,8 @@ public URL as a substitute for Railway's actual deployment healthcheck.
 
 ## Verify the real public URL
 
-Open the HTTPS URL in a signed-out browser and run: Reset experiment graph →
+Open the HTTPS URL in a signed-out browser, verify the landing motion and live
+preview, click **Open workspace**, and run: Reset experiment graph →
 Checkout/shared currency → Trigger → Investigate (abstains) → Inspect & learn
 (source-backed READS_CONFIG edges) → Restore → Refunds/transfer → Trigger →
 Investigate (selects currency without another inspection). Also check Results

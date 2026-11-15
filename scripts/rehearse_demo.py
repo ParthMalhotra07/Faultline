@@ -4,14 +4,16 @@ import json
 import os
 from pathlib import Path
 import time
+from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright,expect
 
 ROOT=Path(__file__).resolve().parents[1]
+BASE=os.environ.get('FAULTLINE_BASE_URL','http://127.0.0.1:8765').rstrip('/')
 out=ROOT/'artifacts/submission'; out.mkdir(parents=True,exist_ok=True)
 report=dict(started_at=datetime.now(timezone.utc).isoformat(),label='Actual silent recording; live sandbox at capture time, recorded fallback when played',
             stages=[],console_errors=[],page_errors=[])
 with sync_playwright() as pw:
-    browser=pw.chromium.connect(os.environ['FAULTLINE_PLAYWRIGHT_WS'],expose_network='127.0.0.1:8765',timeout=30000)
+    browser=pw.chromium.connect(os.environ['FAULTLINE_PLAYWRIGHT_WS'],expose_network=urlsplit(BASE).netloc,timeout=30000)
     context=browser.new_context(viewport=dict(width=1440,height=1000),record_video_dir=str(out/'video'))
     context.tracing.start(screenshots=True,snapshots=True)
     page=context.new_page();page.set_default_timeout(15000)
@@ -28,7 +30,11 @@ with sync_playwright() as pw:
         report['stages'].append(dict(target_second=at,actual_second=round(time.monotonic()-start,2),stage=label))
         print(f'{at}s: {label}',flush=True)
     try:
-        page.goto('http://127.0.0.1:8765/',wait_until='networkidle')
+        page.goto(BASE+'/',wait_until='networkidle')
+        expect(page.locator('#hero-title')).to_contain_text('Watch the graph learn why')
+        page.screenshot(path=str(out/'landing.png'))
+        page.locator('.nav-workspace').click()
+        expect(page).to_have_url(BASE+'/workspace')
         click('reset','/local/reset-experiment')
         expect(page.locator('.health-card.healthy')).to_have_count(3)
         page.evaluate('scrollTo(0,0)')

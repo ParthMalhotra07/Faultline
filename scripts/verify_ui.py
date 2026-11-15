@@ -6,9 +6,11 @@ import os
 from pathlib import Path
 import re
 import time
+from urllib.parse import urlsplit
 from playwright.sync_api import sync_playwright,expect
 
 ROOT=Path(__file__).resolve().parents[1]
+BASE=os.environ.get('FAULTLINE_BASE_URL','http://127.0.0.1:8765').rstrip('/')
 os.environ.setdefault('PLAYWRIGHT_BROWSERS_PATH',str(ROOT/'.runtime/playwright-browsers'))
 p=argparse.ArgumentParser(); p.add_argument('--results',action='store_true'); a=p.parse_args()
 out=ROOT/'artifacts/ui'/time.strftime('%Y%m%dT%H%M%SZ',time.gmtime())
@@ -18,7 +20,7 @@ report=dict(started_at=datetime.now(timezone.utc).isoformat(),browser='Isolated 
             checks=[],console_errors=[],page_errors=[],failed_requests=[],http_errors=[],screenshots=[])
 with sync_playwright() as pw:
     ws=os.environ.get('FAULTLINE_PLAYWRIGHT_WS')
-    browser=(pw.chromium.connect(ws,expose_network='127.0.0.1:8765',timeout=30000) if ws else
+    browser=(pw.chromium.connect(ws,expose_network=urlsplit(BASE).netloc,timeout=30000) if ws else
              pw.chromium.launch(headless=True,channel=os.environ.get('FAULTLINE_PLAYWRIGHT_CHANNEL','chromium')))
     context=browser.new_context(viewport=dict(width=1440,height=1000),record_video_dir=str(out/'video'))
     context.tracing.start(screenshots=True,snapshots=True,sources=True)
@@ -37,9 +39,9 @@ with sync_playwright() as pw:
         expect(page.locator('#learn')).to_be_enabled()
         expect(page.locator('#notice')).to_contain_text(message)
     try:
-        response=page.goto('http://127.0.0.1:8765/',wait_until='networkidle')
+        response=page.goto(BASE+'/workspace',wait_until='networkidle')
         assert response.status==200
-        expect(page).to_have_url('http://127.0.0.1:8765/')
+        expect(page).to_have_url(BASE+'/workspace')
         expect(page.locator('#graph svg')).to_be_visible()
         report['browser_version']=browser.version
         click('reset','/local/reset-experiment')
@@ -58,7 +60,7 @@ with sync_playwright() as pw:
         expect(page.locator('#diagnosis-status')).to_have_text('SUPPORTED')
         expect(page.locator('.origin')).to_have_text('config:currency')
         expect(page.locator('#graph .edge.learned')).to_have_count(2)
-        graph=page.request.get('http://127.0.0.1:8765/api/graph').json()
+        graph=page.request.get(BASE+'/api/graph').json()
         actual_nodes=set(page.locator('#graph .node title').all_text_contents())
         assert actual_nodes=={n['id'] for n in graph['nodes']}
         assert page.locator('#graph .edge').count()==len(graph['edges'])
@@ -77,7 +79,7 @@ with sync_playwright() as pw:
         if a.results:
             expect(page.locator('#results-section')).to_be_visible()
             expect(page.locator('#chart circle')).to_have_count(28)
-            measured=page.request.get('http://127.0.0.1:8765/api/results').json()['rows']
+            measured=page.request.get(BASE+'/api/results').json()['rows']
             for point in page.locator('#chart circle').all():
                 method=point.get_attribute('data-method'); round_no=int(point.get_attribute('data-round'))
                 actual=next(r for r in measured if r['method']==method and r['round']==round_no)

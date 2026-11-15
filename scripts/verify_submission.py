@@ -12,7 +12,7 @@ assert not rehearsal['console_errors'] and not rehearsal['page_errors']
 assert len(rehearsal['stages'])>=8
 video=out/'fallback-demo.webm'
 assert video.is_file() and video.stat().st_size>1_000_000
-assert all((out/name).is_file() for name in ('healthy.png','learning.png','comparison.png'))
+assert all((out/name).is_file() for name in ('landing.png','healthy.png','learning.png','comparison.png'))
 
 manifest=json.loads((out/'package-manifest.json').read_text())
 archive=out/manifest['archive']
@@ -34,4 +34,8 @@ with zipfile.ZipFile(archive) as z:
 ui=json.loads((root/'artifacts/ui/latest-attempt.json').read_text())
 report=json.loads((root/ui['directory']/'report.json').read_text())
 assert report['status']=='PASS'
+landing=json.loads((root/'artifacts/ui/latest-landing.json').read_text())
+landing_report=json.loads((root/landing['directory']/'report.json').read_text())
+assert landing_report['status']=='PASS' and len(landing_report['checks'])>=8
+assert any(name.endswith('00-hero-desktop.png') for name in landing_report['screenshots'])
 print(f"PASS: 180-second silent rehearsal, browser report, and {len(names)}-file source/evidence archive verified; no public app, repo or Loom link inferred.")

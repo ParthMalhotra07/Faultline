@@ -145,3 +145,12 @@ already published, but no URL or independent verification is recorded. The
 user will record the narrated Loom after the live URL works. These updates do
 not establish a public app, a public repo, or a Loom link. Railway's official
 healthcheck Host requires a narrowly scoped HTTP allowance; see T25.
+
+ADR-020 — USER-CORRECTED 2026-11-15: the first Origyn adaptation omitted the
+original site's principal landing page and motion. The user wants that visual
+format integrated into FAULTLINE and permits removal of research functions
+which this project does not use. Serve an animated FAULTLINE landing page at
+`/` and keep the live incident workspace at `/workspace`. The landing's product
+preview reads FAULTLINE's public API; no illustrative research activity or
+fabricated operational status is presented as live. Preserve reduced-motion
+accessibility and re-run the verified incident workflow after the route change.

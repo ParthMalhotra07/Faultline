@@ -383,3 +383,13 @@ Build: Keep `Dockerfile.demo` and the bundled self-run HydraDB engine. Permit Ra
 Acceptance: A failing test demonstrates the healthcheck issue, then a passing test proves its narrow fix. Rebuild the bundled image and exercise the real graph workflow through a fresh local container with a durable `/data` volume, including restart persistence and a Railway-style health request. Do not claim a Railway deployment without its URL and actual remote checks.
 
 Completion evidence: exact commands, exits, local container output, changed files, and remaining public-delivery limitations in STATE.json and HANDOFF.md.
+
+### T26 — Restore the Origyn-style landing experience
+
+Phase: P6. Depends on: T24, T25. Required by the user's correction to the frontend request.
+
+Build: Make the root URL a FAULTLINE landing page that preserves Origyn's large hero, animated particle field, staged scroll reveals, live product preview, capability-section rhythm and closing workspace CTA. Remove Origyn research features that FAULTLINE does not implement. Keep the verified incident workspace at `/workspace` and retain its real HydraDB/API interactions. All displayed live facts must come from FAULTLINE's public API; schematic sections must be labeled as explanation, not live results.
+
+Acceptance: Root landing and workspace routes both work in the selected Docker image; landing CTAs navigate to the working demo; live preview matches public API responses; motion runs when enabled and respects reduced-motion preference; desktop and mobile render without page overflow or browser errors. The original nine workflow checks still pass from `/workspace`. Capture and inspect screenshots before DONE.
+
+Completion evidence: exact commands, exits, browser report/screenshots, changed files and remaining limitations in STATE.json and HANDOFF.md. T23 remains blocked on public deployment and submission artifacts.

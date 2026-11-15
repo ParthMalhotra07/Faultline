@@ -19,7 +19,7 @@ $env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 .venv/Scripts/python.exe scripts/serve.py
 ```
 
-Open http://127.0.0.1:8765. The default database and API bind only to loopback. The launcher generates a random local authentication file inside ignored `.runtime/`; never print or copy its value. No credentials are included in the source package. A separate, tested single-container judge deployment path is documented in [docs/HOSTING.md](docs/HOSTING.md); no cloud URL has yet been verified.
+Open http://127.0.0.1:8765 for the animated landing page, then select **Open workspace** for the live investigation at http://127.0.0.1:8765/workspace. The default database and API bind only to loopback. The launcher generates a random local authentication file inside ignored `.runtime/`; never print or copy its value. No credentials are included in the source package. A separate, tested single-container judge deployment path is documented in [docs/HOSTING.md](docs/HOSTING.md); no cloud URL has yet been verified.
 
 HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880`, commit `916637477f3f34766b4905b270bd4292109d77e6`. It uses the engine HTTP API, not hosted memory search. See [the vendor application guide](https://github.com/hydra-db/hydradb/blob/916637477f3f34766b4905b270bd4292109d77e6/USING-HYDRADB.md) and captured smoke evidence in `artifacts/hydra-smoke/`.
 
@@ -34,11 +34,12 @@ HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651
 
 The web controls operate the live demo process. CLI sandbox state is a separate ephemeral process; its reset does not restore the web process. Do not use a second CLI writer against the running web experiment. Use the web reset controls for that scope.
 
-The workspace presentation adapts the dark navigation and evidence-card language
-from the user's [Origyn frontend](https://github.com/ParthMalhotra07/origyn)
-(reference commit `44ffbdc`). FAULTLINE's controls and data remain backed by
-this repository's HydraDB graph and measured experiment. On a narrow screen,
-swipe the graph and result chart to view their full width.
+The landing page restores the user's [Origyn frontend](https://github.com/ParthMalhotra07/origyn)
+format: large animated particle hero, product-window preview, scroll reveals,
+capability sections and closing invitation (reference commit `44ffbdc`).
+Its preview reads the live public API and measured experiment; the separate
+workspace controls the real HydraDB demo. On a narrow screen, swipe the
+workspace graph and result chart to view their full width.
 
 ## Verification and evidence
 
