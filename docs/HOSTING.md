@@ -62,6 +62,15 @@ hosted test attempt completed the workflow but aborted one in-flight GET while
 navigating home; the verifier now waits for network idle before navigation.
 That failed attempt is retained locally.
 
+The T31 presentation update was verified after its Render deploy: eight
+landing checks and ten workspace checks passed against the public URL,
+including the real HydraDB learning flow, mobile layout and empty browser
+console. The rebuilt local bundled image also completed trigger, abstain,
+learn and graph traversal. See `artifacts/T31-render-landing-verified.log`,
+`artifacts/T31-render-browser-verified.log` and
+`artifacts/T31-docker-graph.log`. This adds no claim of hosted restart
+persistence.
+
 In Render's web-service settings, select **Docker** and `Dockerfile.demo` as
 the Dockerfile path. Leave the Docker command unset. For the new image, set
 `PORT=10000` explicitly or leave `PORT` unset; the entrypoint also corrects an

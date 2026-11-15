@@ -1,6 +1,6 @@
 # Architecture and implementation contracts
 
-Status: proposed design. Names and signatures below are application-owned specifications, not claims about existing HydraDB or third-party APIs. T02 validates the selected live interface before dependent implementation. Target Python 3.11+ if available; record the actual supported version. Proposed libraries: FastAPI, an HTTP client, pytest; pin verified compatible versions. React/TypeScript is the optional UI. Do not install until needed.
+Status: historical design contract, written before implementation. Names and signatures below are application-owned specifications, not claims about existing HydraDB or third-party APIs. The implemented architecture and runnable commands are documented in [README.md](../README.md#architecture-at-four-levels). In particular, the project now requires Python 3.12+, uses the standard-library HTTP server and buildless frontend, and tests the pinned HydraDB repository engine. Earlier framework and CLI suggestions below remain design history, not claims that those interfaces exist.
 
 ## Component map
 

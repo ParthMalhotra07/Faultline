@@ -54,3 +54,14 @@ Earlier planning briefs remain in C:/Users/am/Desktop/CC/output/. They are optio
 - Qdrant client Python collection, point and query API: https://python-client.qdrant.tech/
 - FastEmbed `TextEmbedding` usage and BGE-small model support: https://qdrant.github.io/fastembed/Getting%20Started/ and https://qdrant.github.io/fastembed/examples/Supported_Models/
 - Selected local packages and model file hash are recorded in `protocol/vector-exploratory-v2.json`; live API smoke is `artifacts/T27-vector-smoke.log`.
+
+## Public README structure references checked November 15, 2026
+
+The FAULTLINE README uses these repositories as examples of documentation
+organization only. Its architecture, commands, counts and claims are verified
+against this repository and its own artifacts.
+
+- [Microsoft AIOpsLab](https://github.com/microsoft/AIOpsLab/blob/main/README.md): front-door navigation, quick start, usage and project structure for an incident-research codebase.
+- [Qdrant](https://github.com/qdrant/qdrant/blob/master/README.md): concise product definition followed by a runnable start path and links to deeper references.
+- [Sentry self-hosted](https://github.com/getsentry/self-hosted/blob/master/README.md): explicit deployment scope and operational limitations for a proof-of-concept service.
+- [FastAPI](https://github.com/fastapi/fastapi/blob/master/README.md): discoverable examples with deeper documentation linked from the main entry point.

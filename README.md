@@ -4,6 +4,22 @@ When an app breaks, the visible error may be far from the setting that caused it
 
 **[Open the live demo](https://faultline-j7kn.onrender.com)** · **[Judge guide](docs/JUDGE_GUIDE.md)** · **[Three-minute walkthrough script](docs/LOOM_SCRIPT.md)** · **[Deployment guide](docs/HOSTING.md)**
 
+## Contents
+
+- [The problem and the demo](#the-problem-in-one-example)
+- [Architecture at four levels](#architecture-at-four-levels)
+- [Run locally](#run-locally-on-windows)
+- [Learning loop](#demonstrate-the-learning-loop)
+- [Verification and results](#verification-and-evidence)
+- [Limitations and delivery](#boundaries-and-remaining-work)
+
+**At a glance:** FAULTLINE is a deterministic, single-writer incident-search
+prototype for a controlled commerce app. A human triggers the demo fault and
+chooses when to inspect evidence. The system traverses the self-run HydraDB
+graph, abstains when a supporting path is missing, and commits only validated
+claims linked to source evidence. No LLM, hosted HydraDB account, real payment
+system, or autonomous remediation is involved.
+
 ![FAULTLINE landing page with the supplied logo and animated hero](docs/images/landing-final.png)
 
 The live demo runs the [open-source HydraDB engine](https://github.com/hydra-db/hydradb) in its Docker image. Render's free disk is ephemeral; allow a cold start after inactivity.
@@ -13,6 +29,12 @@ The live demo runs the [open-source HydraDB engine](https://github.com/hydra-db/
 Checkout fails after a shared currency setting changes. A service map shows checkout and pricing, but it does not yet show that pricing reads that setting. The initial search says **insufficient evidence**. When you select **Inspect & learn**, FAULTLINE checks one bounded telemetry source, saves the supported connection with its evidence, and uses it when a later refunds incident needs the same path. The person chooses when to start learning and what to fix; this prototype does not connect to a real company system.
 
 This is our [November HydraDB hackathon](https://luma.com/bqwllms4) Track 1 entry: a graph that improves through evidence-backed investigations. The event page asks entrants to make the graph earn its place over a vector store. [The judge guide](docs/JUDGE_GUIDE.md) points to the live workflow, actual HydraDB traversal, measured baselines, and the limits of our exploratory vector comparison.
+
+The proposed first buyer is a small platform team that repeatedly rediscovers
+shared dependencies during incidents. A future shadow-mode product could read
+approved exported telemetry and service metadata, then show evidence-backed
+paths for an engineer to review. This is a buyer hypothesis; no customer
+interviews, willingness-to-pay result, or production time savings are claimed.
 
 ## Explore in two minutes
 
@@ -29,31 +51,148 @@ The test sign-in creates an eight-hour server-side demo cookie. It is a shared p
 
 The [mobile workspace screenshot](docs/images/mobile-workspace.png) shows the same controls at a 390-pixel viewport. These README images came from an isolated Chromium run against a local server backed by the real HydraDB container. [The latest browser report](artifacts/T30-browser-report.json) points to a separate passing run against the public Render URL.
 
-## How it works
+## Architecture at four levels
+
+These diagrams describe the implemented demo. [Architecture contracts](docs/ARCHITECTURE.md)
+record the original design decisions; the source paths below show what runs.
+
+### Level 0 — Product and trust boundary
+
+An engineer sees failing checks and recent changes, investigates, and chooses
+whether to inspect a permitted telemetry source. The private fault controller
+creates controlled incidents for the demo and evaluation; it does not provide
+the expected answer to the investigator. The live workspace reads public
+observations and HydraDB-backed results.
 
 ```mermaid
 flowchart LR
-    A[Executable commerce sandbox] --> B[Public observations]
-    B --> C[Bounded HydraDB traversal]
-    C --> D[Diagnosis or abstention]
-    D --> E[Gap selector]
-    E --> F[Bounded source inspection]
-    F --> G[Validated claim and evidence]
-    G --> C
+    Human[Engineer / demo operator] --> UI[Landing and workspace]
+    UI --> API[FAULTLINE public API]
+    Sandbox[Executable commerce sandbox] -->|checks and public changes| API
+    API --> Core[Diagnosis and learning]
+    Core <-->|bounded queries and verified claims| Hydra[(Self-run HydraDB)]
+    Controller[Private fault controller] --> Sandbox
+    Controller -->|expected origin, scorer only| Eval[Private evaluator]
+    Core -->|public diagnosis only| Eval
 ```
 
-Each learned relationship carries a source hash/version and evidence ID. Diagnosis follows actual endpoint, service, claim, and evidence paths from HydraDB; reachability supports a hypothesis and does not prove causation. See [architecture](docs/ARCHITECTURE.md), [frozen evaluation rules](docs/EVALUATION.md), and [design decisions](docs/DECISIONS.md).
+The demo is a hypothesis engine. A reachable path explains why a candidate is
+worth investigating; it does not establish causation or repair the application.
 
-### Repository guide
+### Level 1 — Running processes and deployment
 
-- [`src/faultline/`](src/faultline/) holds the sandbox, bounded graph adapter, diagnosis, evidence validation, learning, and public HTTP API.
-- [`web/`](web/) contains the buildless landing and workspace; the tour is in [`web/onboarding.js`](web/onboarding.js).
-- [`tests/`](tests/) checks API boundaries, graph behavior, and learning invariants. [`scripts/`](scripts/) contains live integration, browser, hosting, and package checks.
-- [`protocol/v1/`](protocol/v1/) freezes the held-out rules. [`artifacts/eval/`](artifacts/eval/) contains raw predictions and aggregates; [`artifacts/T30-browser-report.json`](artifacts/T30-browser-report.json) selects the latest onboarding browser proof.
+[`Dockerfile.demo`](Dockerfile.demo) packages the pinned open-source HydraDB
+engine and the Python app in one container. [`scripts/run_hosted.sh`](scripts/run_hosted.sh)
+starts the graph node, waits for its readiness endpoint, then starts the app.
+HydraDB's query API stays on container loopback; the browser talks only to the
+FAULTLINE HTTP server. Local development can instead start HydraDB with
+[`scripts/start_hydra.py`](scripts/start_hydra.py) and run the app separately.
 
-The browser calls `GET /api/observations`, `/api/graph`, `/api/sources`, and `/api/results` for live or recorded public views. `POST /local/trigger`, `/api/diagnose`, `/api/learn`, `/local/restore`, and `/local/reset-experiment` drive the bounded sandbox workflow. `/api/demo/session`, `/api/demo/sign-in`, and `/api/demo/sign-out` serve the public entry experience. See [`src/faultline/api.py`](src/faultline/api.py) for exact request fields, host checks, and error responses. No route accepts arbitrary graph queries, file paths, or shell commands.
+```mermaid
+flowchart LR
+    Browser[Browser] -->|HTTP / HTTPS| Server[Python API + static UI]
+    Server -->|fixed query templates, bearer token| Engine[HydraDB graph node]
+    Engine --> Store[(Graph store)]
+    Server --> Manifest[(Application graph manifest)]
+    Server --> Assets[Recorded evaluation aggregates]
+```
 
-The executable sandbox has checkout, refunds and renewals. It uses no real payment provider. The diagnostic core is deterministic; no LLM or hosted API key is required. The buyer hypothesis is small platform teams rediscovering undocumented shared dependencies. There are no validated customers, savings estimates or production-performance claims.
+The hosted image uses `/data` for the graph store, cache, token file and
+experiment manifests. A durable mount can preserve those files. The current
+Render free instance has **ephemeral storage**, so persistence across a hosted
+spin-down or redeploy has not been verified. Local Docker restart persistence
+was tested with a mounted volume; see [hosting evidence](docs/HOSTING.md).
+
+### Level 2 — Components and request flow
+
+| Component | Responsibility | Implementation |
+| --- | --- | --- |
+| Executable sandbox | Runs checkout, refunds and renewals; produces checks and bounded config-access telemetry | [`sandbox/flows.py`](src/faultline/sandbox/flows.py), [`sandbox/config.py`](src/faultline/sandbox/config.py) |
+| HTTP boundary | Serves static UI, public observations, demo controls and measured aggregates; enforces request fields, Host and Origin rules | [`api.py`](src/faultline/api.py), [`web/`](web/) |
+| Graph boundary | Sends allowlisted parameterized queries to the pinned HydraDB HTTP API; rejects timeouts, truncation and malformed results | [`graph/adapter.py`](src/faultline/graph/adapter.py), [`graph/store.py`](src/faultline/graph/store.py) |
+| Diagnosis | Traverses committed graph paths, ranks recent public candidates and preserves abstention or ambiguity | [`diagnosis/ranker.py`](src/faultline/diagnosis/ranker.py), [`diagnosis/paths.py`](src/faultline/diagnosis/paths.py) |
+| Ingestion and learning | Selects one permitted source from public metadata, checks a budget, validates records and commits provenance-backed claims | [`learning/runner.py`](src/faultline/learning/runner.py), [`ingestion/`](src/faultline/ingestion/) |
+| Evaluation | Injects controlled faults privately and scores frozen, adaptive, random and ablated snapshots outside the learner | [`evaluation/`](src/faultline/evaluation/), [`protocol/v1/`](protocol/v1/) |
+
+One investigation follows this path:
+
+```mermaid
+sequenceDiagram
+    actor Operator
+    participant API as FAULTLINE API
+    participant Sandbox as Commerce sandbox
+    participant Graph as HydraDB
+    participant Source as Allowed telemetry source
+    Operator->>API: Trigger fault
+    API->>Sandbox: Execute configured incident and checks
+    Sandbox-->>API: Public failures and recent changes
+    Operator->>API: Investigate
+    API->>Graph: Traverse committed, evidence-linked claims
+    Graph-->>API: Bounded paths or an explicit error
+    API-->>Operator: Ranked hypothesis or insufficient evidence
+    Operator->>API: Inspect & learn
+    API->>Source: Inspect one selected source within budget
+    Source-->>API: Versioned config-access records
+    API->>Graph: Commit validated Evidence and Claim nodes
+    API->>Graph: Traverse updated graph
+    API-->>Operator: Supported path with claim and evidence IDs
+```
+
+The browser reads `GET /api/observations`, `/api/graph`, `/api/sources` and
+`/api/results`. Bounded demo actions use `POST /local/trigger`,
+`/api/diagnose`, `/api/learn`, `/local/restore` and
+`/local/reset-experiment`. Public entry uses `/api/demo/session`,
+`/api/demo/sign-in` and `/api/demo/sign-out`. See [`api.py`](src/faultline/api.py)
+for the exact request fields and errors; the server exposes no arbitrary
+Cypher, filesystem path or shell-command endpoint.
+
+### Level 3 — Graph representation and consistency
+
+HydraDB stores `Entity`, `Claim` and `Evidence` nodes. Each dependency is a
+reified claim: `Claim -[:FROM_ENTITY]-> Entity`,
+`Claim -[:TO_ENTITY]-> Entity` and `Claim -[:SUPPORTED_BY]-> Evidence`.
+Initial endpoint-handler and service-call claims come from the versioned app
+topology. Config-read claims enter only after source-backed inspection.
+
+```mermaid
+flowchart LR
+    EP[Entity: endpoint:checkout] <--|FROM_ENTITY| C1[Claim: HANDLED_BY]
+    C1 -->|TO_ENTITY| S1[Entity: service:checkout]
+    S1 <--|FROM_ENTITY| C2[Claim: CALLS]
+    C2 -->|TO_ENTITY| S2[Entity: service:pricing]
+    S2 <--|FROM_ENTITY| C3[Claim: READS_CONFIG]
+    C3 -->|TO_ENTITY| Key[Entity: config:currency]
+    C3 -->|SUPPORTED_BY| E[Evidence: source hash + version]
+```
+
+The fixed traversal templates cover one to three **domain** edges (each domain
+edge takes two graph hops through a Claim) and join Evidence nodes. The adapter
+limits requests to 5 seconds and at most 1,000 returned rows by default;
+incomplete pages, oversize responses and transport errors become explicit
+errors, never an empty successful path. Only committed claims with the current
+source version can support diagnosis. The application manifest records active
+claims and source hashes; deterministic IDs make retries idempotent. See the
+[verified graph queries](src/faultline/graph/queries/verified.json) and
+[implementation decisions](docs/DECISIONS.md).
+
+The source inspector reads an allowlisted catalog and is constrained by one
+source, 10,000 bytes, 100 records and a 1,000 ms inspection budget in the
+default learning round. The learner receives public observations and catalog
+metadata, never evaluator gold labels. A claim cannot be marked committed
+without a matching evidence ID, source hash and version. A failed or incomplete
+inspection cannot silently improve the graph. [The evaluation protocol](docs/EVALUATION.md)
+defines the separate learning and held-out data paths.
+
+**Why keep a graph here?** The question is whether a recent change can reach
+each failing endpoint through specific service dependencies while avoiding
+healthy endpoints, and which evidence supports every link. HydraDB performs
+that bounded relationship traversal; the application then ranks the returned
+paths. Text retrieval can find relevant records, but this implementation
+would still need to reconstruct and verify their endpoint-to-service-to-config
+connections to produce the same explanation. The [exploratory vector
+comparison](#frozen-experiment-and-measured-limits) tests one narrower text
+representation and does not prove that a stronger vector-based design could
+not solve the problem.
 
 ## Run locally on Windows
 
@@ -73,6 +212,22 @@ $env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 Open http://127.0.0.1:8765 for the animated landing page, then select **Open workspace** for the live investigation at http://127.0.0.1:8765/workspace. Use the prefilled public demo values to enter, then complete or skip the tour. The default database and API bind only to loopback. The launcher generates a random local HydraDB authentication file inside ignored `.runtime/`; never print or copy its value. The prefilled UI values are intentionally public and unrelated to the HydraDB secret. The public Render demo is at https://faultline-j7kn.onrender.com; its current free instance has ephemeral storage. See [docs/HOSTING.md](docs/HOSTING.md) for exact deployment checks and limitations.
 
 HydraDB is the official 0.4.0 repository-engine image pinned to `sha256:ab71d651fefee13ebb23eb56d72316065bdca563ff7587442e07be663f2bf880`, commit `916637477f3f34766b4905b270bd4292109d77e6`. It uses the engine HTTP API, not hosted memory search. See [the vendor application guide](https://github.com/hydra-db/hydradb/blob/916637477f3f34766b4905b270bd4292109d77e6/USING-HYDRADB.md) and captured smoke evidence in `artifacts/hydra-smoke/`.
+
+### Configuration and operating boundaries
+
+| Setting | Local development | Hosted demo |
+| --- | --- | --- |
+| HydraDB authentication | `HYDRADB_TOKEN_FILE` points to the generated, ignored local file | `HYDRADB_TOKEN` is configured in the host's secret settings and written to `/data/auth-token` at startup |
+| Graph API | `HYDRADB_URL` defaults to `http://127.0.0.1:18443` | Bundled engine listens on container loopback; its query port is not public ingress |
+| Web listener | `scripts/serve.py` defaults to `127.0.0.1:8765` | Binds to `0.0.0.0` and the host's `PORT` |
+| Public-origin rule | Loopback Host for local work | `FAULTLINE_PUBLIC_ORIGIN` must equal the external HTTPS origin; Render also supplies `RENDER_EXTERNAL_URL` |
+| State | Ignored `.runtime/` and the local graph store | `/data` holds the engine and experiment state; persistence requires a durable host disk |
+
+Do not put HydraDB tokens into a URL, browser, README, log, or commit. The
+prefilled demo email and password are deliberately public test values; they
+provide an eight-hour in-memory UI session, **not** private authentication.
+The sandbox API remains reachable under its Host and same-origin rules.
+This prototype has one writer and no customer tenancy or production connector.
 
 ## Demonstrate the learning loop
 
@@ -94,12 +249,26 @@ workspace graph and result chart to view their full width.
 
 ## Verification and evidence
 
+After starting local HydraDB, run from the repository root:
+
 ```powershell
+$env:HYDRADB_TOKEN_FILE = Join-Path (Get-Location) '.runtime/hydra/auth-token'
 .venv/Scripts/python.exe -m pytest -q
 .venv/Scripts/python.exe scripts/verify_evaluation.py
 ```
 
-The clean-environment check in `artifacts/T22-clean-demo.log` reproduces abstention, actual graph learning, restart persistence, runtime restoration and transfer in a fresh disposable namespace. The browser checks capture screenshots, a video, a trace and console events in `artifacts/ui/`; `latest-attempt.json` points to the last attempt, whose `report.json` explicitly says PASS or FAIL.
+The latest recorded full suite completed **50 tests**; see
+[`T31-full-tests.log`](artifacts/T31-full-tests.log). Integration tests use the
+real local HydraDB engine. [`T31-docker-graph.log`](artifacts/T31-docker-graph.log)
+records a fresh bundled-image trigger, abstain, learn and graph traversal.
+The clean-environment check in `artifacts/T22-clean-demo.log` reproduces
+abstention, learning, restart persistence, runtime restoration and transfer in
+a disposable local namespace. Browser checks record screenshots, traces and
+console events; the [hosted browser report](artifacts/T30-browser-report.json)
+selects ten passing workspace checks, and the
+[landing report](artifacts/ui/latest-landing.json) selects eight. A PASS
+report and its run URL are evidence for that run only, not a continuous uptime
+or production-performance guarantee.
 
 The [development timeline](docs/DEVELOPMENT_TIMELINE.md) separates November 14
 local evidence from the Git commits actually created on November 15.
@@ -121,7 +290,29 @@ This uses the pinned official Playwright 1.65.2 Linux image, isolated contexts a
 
 Protocol v1 is frozen in `protocol/v1/`. Learning processes six incidents, yielding seven snapshot points. Final evaluation uses twelve distinct controlled fixtures and three fixed seeds; each aggregate point pools 36 predictions, which are not 36 independent incident types. Final held-out diagnosis is read-only and cannot inspect fresh evidence.
 
-The original completed run is `artifacts/eval/v1-20261114T060320Z-2f47a2/`: 1,044 prediction records, 29 aggregate points and 63 unchanged evaluation snapshot hashes. Adaptive ingestion scored 24/36 after one learning incident versus random ingestion's 16/36; both scored 36/36 after acquiring both sources. Frozen stayed at 0/36. Same-evidence token overlap reached 12/36; it is lexical retrieval, not a vector/semantic baseline. Removing pricing-to-currency claims from the final graph reduced correct predictions to 24/36. These are small synthetic-fixture results, not evidence of general superiority.
+**Primary metric:** correct top-ranked origin divided by *all attempted* held-out
+cases. Wrong answers, abstentions, ambiguity and errors stay in the
+denominator. The recorded counts are:
+
+| Method | Before learning | After one incident | After two incidents | Final round |
+| --- | ---: | ---: | ---: | ---: |
+| Gap-driven HydraDB acquisition | 0/36 | **24/36** | 36/36 | 36/36 |
+| Equal-budget random acquisition | 0/36 | 16/36 | 36/36 | 36/36 |
+| Frozen graph | 0/36 | 0/36 | 0/36 | 0/36 |
+| Same-evidence token overlap | 0/36 | 0/36 | 12/36 | 12/36 |
+
+The adaptive advantage is at the **first** acquisition. Once the two available
+sources are known, adaptive and random tie. Removing pricing-to-currency
+claims in an isolated final graph changes 36/36 correct to **24/36**. That
+ablation shows this relationship matters on these fixtures. Token overlap is
+a lexical baseline, not a semantic/vector method.
+
+The original completed run is
+[`artifacts/eval/v1-20261114T060320Z-2f47a2/`](artifacts/eval/v1-20261114T060320Z-2f47a2/):
+1,044 prediction records, 29 aggregate points and 63 unchanged evaluation
+snapshot hashes. The [selected exact-protocol rerun](artifacts/eval/latest.json)
+reproduces the structural predictions and aggregate counts. These are small
+synthetic-fixture results on one topology, not evidence of general superiority.
 
 The first completed scoring process exited with an error during temporary-directory cleanup after saving its complete results. Those artifacts independently pass `verify_evaluation.py`. Earlier failed startup/scoring attempts are retained. Original text-baseline rows inherited graph timing/citation metadata; corrected rows mark text timing unmeasured and remove those citations, while preserving the originals. No selected answer or scoring count changed. An exact-protocol rerun completed with identical 29 aggregate points and 1,044 structural prediction rows; `artifacts/eval/latest.json` selects it.
 
