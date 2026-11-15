@@ -6,7 +6,7 @@
   "delivery_kind": "implementation_in_progress",
   "implementation_started": true,
   "current_task_id": "T23",
-  "next_action": "Configure an approved persistent Docker host and verify its public URL; make the GitHub repo public; record and upload the narrated Loom; publish truthful social posts and submit before the confirmed cutoff.",
+  "next_action": "User connects the private repo to Railway, sets Dockerfile.demo, one /data volume, PORT=8765, HYDRADB_TOKEN, FAULTLINE_PUBLIC_ORIGIN and FAULTLINE_RAILWAY_HEALTHCHECK=1, then provides the public HTTPS URL for the checks in docs/HOSTING.md. Keep GitHub private until the user toggles it; Loom follows the live URL.",
   "current_phase": "P6",
   "scope": "Solo Track 1; gap-driven evidence ingestion on a controlled executable app",
   "verified_facts": [
@@ -34,7 +34,7 @@
   "blockers": [
     {
       "task": "T23",
-      "prerequisite": "No verified live HTTPS URL: a durable hosting account is needed; automatic approval review rejected the temporary tunnel.; The GitHub repository is pushed but still private; host requires public visibility.; No narrated Loom share link, published social posts, validated buyer responses or exact cutoff are available."
+      "prerequisite": "Railway is selected, but no account deployment or live HTTPS URL has been verified.; The GitHub repo must remain private until the user manually makes it public before submission.; The user will record the narrated Loom after deployment; no share link exists yet.; The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.; The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available."
     }
   ],
   "gates": [
@@ -1410,6 +1410,13 @@
           "exit_code": 0,
           "status": "PASS",
           "output_path": "artifacts/T24-package-verify.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-package-verify.log"
         }
       ],
       "evidence_paths": [
@@ -1426,16 +1433,19 @@
         "artifacts/T23-submission-local-verify.log",
         "artifacts/T23-tunnel-policy-rejection.txt",
         "artifacts/T24-package-verify.log",
+        "artifacts/T25-package-verify.log",
         "artifacts/submission/package-manifest.json",
         "artifacts/submission/rehearsal.json"
       ],
       "limitations": [
-        "No verified live HTTPS URL: a durable hosting account is needed; automatic approval review rejected the temporary tunnel.",
-        "The GitHub repository is pushed but still private; host requires public visibility.",
-        "No narrated Loom share link, published social posts, validated buyer responses or exact cutoff are available."
+        "Railway is selected, but no account deployment or live HTTPS URL has been verified.",
+        "The GitHub repo must remain private until the user manually makes it public before submission.",
+        "The user will record the narrated Loom after deployment; no share link exists yet.",
+        "The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.",
+        "The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available."
       ],
-      "blocker": "No verified live HTTPS URL: a durable hosting account is needed; automatic approval review rejected the temporary tunnel.; The GitHub repository is pushed but still private; host requires public visibility.; No narrated Loom share link, published social posts, validated buyer responses or exact cutoff are available.",
-      "next_action": "Configure an approved persistent Docker host and verify its public URL; make the GitHub repo public; record and upload the narrated Loom; publish truthful social posts and submit before the confirmed cutoff.",
+      "blocker": "Railway is selected, but no account deployment or live HTTPS URL has been verified.; The GitHub repo must remain private until the user manually makes it public before submission.; The user will record the narrated Loom after deployment; no share link exists yet.; The user reports the X thread is live, but no URL/content/tag check is recorded; LinkedIn and other socials remain unverified.; The user says the hackathon requires November 14 commits; none exist, and the exact rule text or acceptable alternative evidence is not yet available.",
+      "next_action": "User connects the private repo to Railway, sets Dockerfile.demo, one /data volume, PORT=8765, HYDRADB_TOKEN, FAULTLINE_PUBLIC_ORIGIN and FAULTLINE_RAILWAY_HEALTHCHECK=1, then provides the public HTTPS URL for the checks in docs/HOSTING.md. Keep GitHub private until the user toggles it; Loom follows the live URL.",
       "artifact_sha256": {
         "README.md": "7c11439173eef2966cb26390bb57eac3b450f1724e7b73c1d47240c01320910f",
         "START_HERE.md": "2eaa584635dfad9efe7afd68396f381a70de6d51a969022b2e4c9e6a743dbe21",
@@ -1600,6 +1610,137 @@
         "artifacts/T24-rehearsal.log": "b804e9176ec3afe3d4fccf9e32396eaf113055b63b68672ba3f3382228effcfc",
         "scripts/audit_handoff.py": "e3c4caf9900dd208293e399f8d4029446a1310736b71ba48b108e89eae2d0bae"
       }
+    },
+    {
+      "id": "T25",
+      "phase": "P6",
+      "title": "Prepare Railway Docker deployment",
+      "depends_on": [
+        "T24"
+      ],
+      "status": "DONE",
+      "required": true,
+      "expected_outputs": [
+        "docs/HOSTING.md",
+        "scripts/verify_hosted.py",
+        "artifacts/T25-hosted-first.log",
+        "artifacts/T25-hosted-after.log"
+      ],
+      "changed_files": [
+        "HANDOFF.md",
+        "README.md",
+        "STATE.json",
+        "artifacts/T25-container-config.log",
+        "artifacts/T25-full-tests.log",
+        "artifacts/T25-git-history.log",
+        "artifacts/T25-healthcheck-final.log",
+        "artifacts/T25-healthcheck-red.log",
+        "artifacts/T25-hosted-after.log",
+        "artifacts/T25-hosted-first.log",
+        "artifacts/T25-image-build.log",
+        "docs/BUILD_PLAN.md",
+        "docs/DECISIONS.md",
+        "docs/DEMO.md",
+        "docs/DEVELOPMENT_TIMELINE.md",
+        "docs/HOSTING.md",
+        "docs/REFERENCES.md",
+        "docs/SOCIAL_POSTS.md",
+        "docs/SUBMISSION.md",
+        "scripts/serve.py",
+        "scripts/verify_hosted.py",
+        "src/faultline/api.py",
+        "tests/integration/test_public_api.py"
+      ],
+      "checks": [
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health (before implementation)",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 1,
+          "status": "FAIL",
+          "output_path": "artifacts/T25-healthcheck-red.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-healthcheck-green.log"
+        },
+        {
+          "command": "docker build -f Dockerfile.demo -t faultline-demo:railway-local .",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-image-build.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase first --state .runtime/railway-smoke/manifest.json --railway-healthcheck",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-hosted-first.log"
+        },
+        {
+          "command": "HYDRADB_TOKEN_FILE=.runtime/hydra/auth-token .venv/Scripts/python.exe -m pytest -q",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-full-tests.log"
+        },
+        {
+          "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_explicit_public_origin_allows_only_that_host_and_same_origin_writes tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-healthcheck-final.log"
+        },
+        {
+          "command": "docker restart faultline-railway-smoke; .venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase after --state .runtime/railway-smoke/manifest.json --railway-healthcheck",
+          "working_directory": "C:\\Users\\am\\Desktop\\Faultline",
+          "exit_code": 0,
+          "status": "PASS",
+          "output_path": "artifacts/T25-hosted-after.log"
+        }
+      ],
+      "evidence_paths": [
+        "artifacts/T25-full-tests.log",
+        "artifacts/T25-healthcheck-final.log",
+        "artifacts/T25-healthcheck-green.log",
+        "artifacts/T25-healthcheck-red.log",
+        "artifacts/T25-hosted-after.log",
+        "artifacts/T25-hosted-first.log",
+        "artifacts/T25-image-build.log"
+      ],
+      "limitations": [
+        "The Railway account has not been configured and no public HTTPS URL or remote healthcheck has been verified.",
+        "The local smoke used a simulated public origin and a durable local Docker volume; it does not prove cloud behavior.",
+        "November 14 development artifacts are not November 14 Git commits."
+      ],
+      "blocker": null,
+      "next_action": "T23: connect the private repo to Railway, set Dockerfile.demo and one /data volume, configure host variables and exact HTTPS origin, then run the public URL checks in docs/HOSTING.md.",
+      "artifact_sha256": {
+        "src/faultline/api.py": "5bd9f5173a5d6f859d52316edf1b2aad9326cc3688e83b0ceb794f5d0b034ce6",
+        "scripts/serve.py": "c2f66ad9474633d942adbdee18d197cf460a9888f7387e4c934a2c9ba081ccb7",
+        "scripts/verify_hosted.py": "7222a2e91df8993b5b7113ba42d9d88df9458cc1bcb0c93f6c8576ca622d2931",
+        "tests/integration/test_public_api.py": "d6bd1b212ab84208d7380d12a8e119f4b34c228d91c413ab886af11b22113585",
+        "README.md": "df1400eba370596f20e5d27d9ee703876849a4fa71e6142568de70e457eb33af",
+        "docs/BUILD_PLAN.md": "1ab9447728cbefa0c9b7a52939da83a0254262e62cc0dcd45b50a36298afb964",
+        "docs/DECISIONS.md": "29c38c802008b597600186b74268a9616efef19f99961b928329f58e7650946c",
+        "docs/DEMO.md": "f5598cbfd6b5b89fdce9ec6ac705a866778423f3993fa4096b422cf142a47611",
+        "docs/HOSTING.md": "eb19bab8b971d62e3bc64e1c39dbab3d105e355736400e163daf6ebd7c65b9ce",
+        "docs/REFERENCES.md": "f1fad989ceb8df0ad7bc91cace69cc31c78972462e13f115ae33e687d26bc2f3",
+        "docs/SOCIAL_POSTS.md": "6d0e1807217d3b6b8b8bc42ed56f547d68f7910c424e3f3971be984cdbf0abd0",
+        "docs/SUBMISSION.md": "310c7e9cb3b7e047a5a09211f1c1de82605d1bd1ecffd9c99f22fb69c2e2e887",
+        "docs/DEVELOPMENT_TIMELINE.md": "9b189a007501e47de15270946493386adfd6f347a34859a0ddf5f67912741bfb",
+        "artifacts/T25-healthcheck-red.log": "8ba8d499b48a3e79a027812ba8704793f68cfa9fc69d5e318d0ab6983d6d8543",
+        "artifacts/T25-healthcheck-final.log": "2d777308e56487c0080501f3258d5d8697cf7288c65d17645cc504e94163b476",
+        "artifacts/T25-image-build.log": "71da10a418aa53964a928a862169b6291dad113575dbe30c1fc229921a8f2372",
+        "artifacts/T25-hosted-first.log": "6ce4f9ce0e9c3d5e42b2c7020762fd92279c9bc65afe17389725b492aca1a108",
+        "artifacts/T25-hosted-after.log": "f16be6e31174d78653b3a6f150b3a3ffd7f1bd4d7c16bafe8e63769fcf9ccc38",
+        "artifacts/T25-full-tests.log": "85d327c049bce495bcdb7ad26bb70a10e5820c65ab34ece4b8b8a9027100976c",
+        "artifacts/T25-container-config.log": "939b991a6fdda933bab597626139729a521beda1731b0e652d206611f9883419",
+        "artifacts/T25-git-history.log": "bd226974af16277cb970a5823be66d502837d873d15f626487dc5aa441ea030e"
+      }
     }
   ],
   "check_record_template": {
@@ -1611,7 +1752,7 @@
     "summary": "Never replace real output with invented success"
   },
   "experiment": null,
-  "last_verified_implementation_task": "T24",
+  "last_verified_implementation_task": "T25",
   "session_log": [
     {
       "at": "2026-11-14T05:40:40.503Z",
@@ -2072,6 +2213,76 @@
       "status": "BLOCKED",
       "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
       "output": "artifacts/T24-package-verify.log"
+    },
+    {
+      "at": "2026-11-15T05:48:29.030321+00:00",
+      "task": "T23",
+      "status": "BLOCKED",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T05:48:29.110200+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health (before implementation)",
+      "output": "artifacts/T25-healthcheck-red.log"
+    },
+    {
+      "at": "2026-11-15T05:54:40.705012+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health",
+      "output": "artifacts/T25-healthcheck-green.log"
+    },
+    {
+      "at": "2026-11-15T05:54:40.822771+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": "docker build -f Dockerfile.demo -t faultline-demo:railway-local .",
+      "output": "artifacts/T25-image-build.log"
+    },
+    {
+      "at": "2026-11-15T05:54:40.928585+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase first --state .runtime/railway-smoke/manifest.json --railway-healthcheck",
+      "output": "artifacts/T25-hosted-first.log"
+    },
+    {
+      "at": "2026-11-15T05:54:41.023425+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": "HYDRADB_TOKEN_FILE=.runtime/hydra/auth-token .venv/Scripts/python.exe -m pytest -q",
+      "output": "artifacts/T25-full-tests.log"
+    },
+    {
+      "at": "2026-11-15T05:54:41.104836+00:00",
+      "task": "T25",
+      "status": "IN_PROGRESS",
+      "command": ".venv/Scripts/python.exe -m pytest -q tests/integration/test_public_api.py::test_explicit_public_origin_allows_only_that_host_and_same_origin_writes tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health",
+      "output": "artifacts/T25-healthcheck-final.log"
+    },
+    {
+      "at": "2026-11-15T05:54:55.248577+00:00",
+      "task": "T25",
+      "status": "DONE",
+      "command": "docker restart faultline-railway-smoke; .venv/Scripts/python.exe scripts/verify_hosted.py --base http://127.0.0.1:18767 --origin https://faultline.example --phase after --state .runtime/railway-smoke/manifest.json --railway-healthcheck",
+      "output": "artifacts/T25-hosted-after.log"
+    },
+    {
+      "at": "2026-11-15T05:55:08.785186+00:00",
+      "task": "T23",
+      "status": "BLOCKED",
+      "command": "",
+      "output": null
+    },
+    {
+      "at": "2026-11-15T05:55:25.201842+00:00",
+      "task": "T23",
+      "status": "BLOCKED",
+      "command": ".venv/Scripts/python.exe scripts/verify_submission.py",
+      "output": "artifacts/T25-package-verify.log"
     }
   ],
   "delivery_deadline": {
@@ -2088,11 +2299,14 @@
       "technical implementation 50%",
       "go-to-market 50%"
     ],
-    "social_requirement": "Post on Twitter, LinkedIn and other socials and tag the verified HydraDB account; no posts verified.",
+    "social_requirement": "User reports the X thread is live; URL and content not independently verified. LinkedIn and other social publication remain unverified.",
     "public_links": {
       "app": null,
       "github": "https://github.com/ParthMalhotra07/Faultline (private; not qualifying)",
       "loom": null
-    }
+    },
+    "deployment_choice": "User chose Railway, Dockerfile.demo, one persistent /data volume, and port 8765; no live URL supplied yet.",
+    "repo_visibility_plan": "Keep the GitHub repository private until the user manually makes it public before submission.",
+    "loom_plan": "User will record narrated Loom with docs/LOOM_SCRIPT.md after the deployment URL is active."
   }
 }

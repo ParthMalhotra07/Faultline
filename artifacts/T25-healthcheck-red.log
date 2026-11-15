@@ -1,0 +1,14 @@
+F                                                                        [100%]
+================================== FAILURES ===================================
+_____________ test_railway_healthcheck_host_can_only_read_health ______________
+
+    def test_railway_healthcheck_host_can_only_read_health():
+        app=SimpleNamespace(lock=threading.RLock())
+>       server=make_server(app,port=0,public_origin='https://faultline.example',allow_railway_healthcheck=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: make_server() got an unexpected keyword argument 'allow_railway_healthcheck'
+
+tests\integration\test_public_api.py:36: TypeError
+=========================== short test summary info ===========================
+FAILED tests/integration/test_public_api.py::test_railway_healthcheck_host_can_only_read_health
+1 failed in 0.23s

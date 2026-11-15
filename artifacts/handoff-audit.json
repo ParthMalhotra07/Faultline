@@ -1,5 +1,5 @@
 {
-  "done": 23,
+  "done": 24,
   "blocked": [
     "T23"
   ],
@@ -7,6 +7,6 @@
   "optional_skipped": [
     "T21"
   ],
-  "current_task_verified_files": 17,
+  "current_task_verified_files": 10,
   "artifact_changes": []
 }
