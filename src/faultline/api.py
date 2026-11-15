@@ -1,8 +1,12 @@
 """Loopback-only demo HTTP API, no arbitrary queries/files or private DTOs."""
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
+from http.cookies import CookieError, SimpleCookie
+import hmac
 import json
 from pathlib import Path
+import secrets
 import threading
+import time
 from urllib.parse import urlsplit
 from faultline.contracts import PublicIncident
 from faultline.diagnosis.ranker import diagnose
@@ -14,6 +18,9 @@ from faultline.learning.runner import learn_round
 from faultline.sandbox.flows import Sandbox
 
 ROOT=Path(__file__).resolve().parents[2]
+PUBLIC_DEMO_EMAIL='judge@faultline.demo'
+PUBLIC_DEMO_PASSWORD='FaultlineDemo2026!'  # Published test value, never a private credential.
+DEMO_SESSION_SECONDS=8 * 60 * 60
 
 
 class App:
@@ -67,15 +74,36 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                 or parsed.path or parsed.query or parsed.fragment or public_origin.rstrip('/')!=public_origin):
             raise ValueError('Public origin must be an exact HTTPS origin')
         public_host=parsed.netloc
+    demo_sessions={}
     class Handler(BaseHTTPRequestHandler):
         def log_message(self,*args):
             pass  # Do not log arbitrary request payloads/paths.
 
-        def send(self,status,value):
+        def send(self,status,value,extra_headers=()):
             raw=json.dumps(value).encode()
             self.send_response(status); self.send_header('Content-Type','application/json')
             self.send_header('Cache-Control','no-store'); self.send_header('X-Content-Type-Options','nosniff')
+            for name,header_value in extra_headers:
+                self.send_header(name,header_value)
             self.send_header('Content-Length',str(len(raw))); self.end_headers(); self.wfile.write(raw)
+
+        def demo_token(self):
+            cookie=SimpleCookie()
+            try: cookie.load(self.headers.get('Cookie',''))
+            except CookieError: return None
+            morsel=cookie.get('faultline_demo')
+            token=morsel.value if morsel else None
+            if not token: return None
+            expires=demo_sessions.get(token,0)
+            if expires<=time.monotonic():
+                demo_sessions.pop(token,None)
+                return None
+            return token
+
+        def demo_cookie(self,token,remote_host,max_age=DEMO_SESSION_SECONDS):
+            value=token or ''
+            secure='; Secure' if remote_host else ''
+            return f'faultline_demo={value}; Path=/; Max-Age={max_age}; HttpOnly; SameSite=Lax{secure}'
 
         def do_GET(self): self.dispatch('GET')
         def do_POST(self): self.dispatch('POST')
@@ -92,7 +120,8 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
             if not (local_host or remote_host or railway_health):
                 return self.send(403,dict(error='Configured demo Host required'))
             if method=='POST':
-                if path not in ('/local/trigger','/local/restore','/local/reset-experiment','/api/diagnose','/api/learn'):
+                if path not in ('/local/trigger','/local/restore','/local/reset-experiment',
+                                '/api/diagnose','/api/learn','/api/demo/sign-in','/api/demo/sign-out'):
                     return self.send(404,dict(error='Route not found'))
                 origin=self.headers.get('Origin')
                 expected_origin=public_origin if remote_host else 'http://'+raw_host
@@ -105,7 +134,8 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                     if not 0<=length<=2048: raise ValueError()
                     data=json.loads(self.rfile.read(length) or b'{}')
                     if not isinstance(data,dict): raise ValueError()
-                    allowed={'scenario'} if path=='/local/trigger' else set()
+                    allowed={'scenario'} if path=='/local/trigger' else (
+                        {'email','password'} if path=='/api/demo/sign-in' else set())
                     if set(data)-allowed: raise ValueError()
                 except (ValueError,TypeError):
                     return self.send(400,dict(error='Invalid or extra request fields'))
@@ -113,6 +143,11 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                 with app.lock:
                     if method=='GET':
                         if path=='/api/health': return self.send(200,dict(status='ok',database='HydraDB',scope='railway healthcheck' if railway_health else 'public sandbox demo' if remote_host else 'local sandbox'))
+                        if path=='/api/demo/session':
+                            token=self.demo_token()
+                            return self.send(200,dict(signed_in=bool(token),
+                                email=PUBLIC_DEMO_EMAIL if token else None,
+                                scope='public_demo'))
                         if path=='/api/observations': return self.send(200,app.public.model_dump())
                         if path=='/api/graph': return self.send(200,app.graph_view())
                         if path=='/api/sources': return self.send(200,[m.model_dump() | dict(inspected=m.sha256 in app.graph.manifest['sources']) for m in app.catalog.metadata()])
@@ -134,16 +169,42 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                                 public_input=trace['public_input'],inspection=trace['inspection'],ledger=trace['ledger']))
                         static_files={'/':'landing.html','/workspace':'index.html','/workspace/':'index.html',
                                       '/landing.css':'landing.css','/landing.js':'landing.js',
-                                      '/app.js':'app.js','/style.css':'style.css'}
+                                      '/app.js':'app.js','/style.css':'style.css',
+                                      '/onboarding.js':'onboarding.js',
+                                      '/faultline-logo.png':'faultline-logo.png'}
                         if path in static_files:
                             name=static_files[path]
                             file=ROOT/'web'/name
                             if file.exists():
                                 raw=file.read_bytes(); self.send_response(200)
                                 self.send_header('Content-Type','text/html; charset=utf-8' if name.endswith('.html') else
-                                                 'text/javascript; charset=utf-8' if name.endswith('.js') else 'text/css; charset=utf-8')
+                                                 'text/javascript; charset=utf-8' if name.endswith('.js') else
+                                                 'image/png' if name.endswith('.png') else 'text/css; charset=utf-8')
+                                self.send_header('X-Content-Type-Options','nosniff')
                                 self.send_header('Content-Length',str(len(raw))); self.end_headers(); self.wfile.write(raw); return
                     if method=='POST':
+                        if path=='/api/demo/sign-in':
+                            email=data.get('email'); password=data.get('password')
+                            if (not isinstance(email,str) or not isinstance(password,str)
+                                    or len(email)>254 or len(password)>128):
+                                return self.send(400,dict(error='Invalid demo sign-in fields'))
+                            if (not hmac.compare_digest(email.casefold(),PUBLIC_DEMO_EMAIL)
+                                    or not hmac.compare_digest(password,PUBLIC_DEMO_PASSWORD)):
+                                return self.send(401,dict(error='Invalid public demo credentials'))
+                            now=time.monotonic()
+                            for token,expires in tuple(demo_sessions.items()):
+                                if expires<=now: demo_sessions.pop(token,None)
+                            if len(demo_sessions)>=256:
+                                demo_sessions.pop(next(iter(demo_sessions)))
+                            token=secrets.token_urlsafe(32)
+                            demo_sessions[token]=now+DEMO_SESSION_SECONDS
+                            return self.send(200,dict(signed_in=True,email=PUBLIC_DEMO_EMAIL,scope='public_demo'),
+                                [('Set-Cookie',self.demo_cookie(token,remote_host))])
+                        if path=='/api/demo/sign-out':
+                            token=self.demo_token()
+                            if token: demo_sessions.pop(token,None)
+                            return self.send(200,dict(signed_in=False,scope='public_demo'),
+                                [('Set-Cookie',self.demo_cookie(None,remote_host,0))])
                         if path=='/local/trigger': return self.send(200,app.trigger(data.get('scenario')))
                         if path=='/local/restore': return self.send(200,app.restore())
                         if path=='/local/reset-experiment':

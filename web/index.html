@@ -3,15 +3,15 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <link rel="icon" href="data:,">
+  <link rel="icon" type="image/png" href="/faultline-logo.png">
   <title>FAULTLINE · Incident workspace</title>
   <link rel="stylesheet" href="/style.css">
 </head>
-<body>
+<body class="access-open">
   <a class="skip-link" href="#overview">Skip to workspace</a>
-  <div class="shell">
+  <div class="shell" inert>
     <aside class="sidebar" aria-label="Workspace navigation">
-      <a class="identity" href="#overview" aria-label="Faultline workspace home"><span class="brand-symbol" aria-hidden="true"><span></span></span><span>Faultline</span></a>
+      <a class="identity" href="/" aria-label="Faultline home"><span class="brand-logo" aria-hidden="true"></span><span class="brand-wordmark">FAULT<span>LINE</span></span></a>
       <p class="workspace-label">Current workspace</p>
       <div class="workspace-name"><span class="workspace-initial">F</span><span>Incident lab</span><span class="workspace-chevron">⌄</span></div>
       <nav class="side-nav" aria-label="Sections">
@@ -21,7 +21,7 @@
         <a class="nav-item" href="#results-section"><span class="nav-icon" aria-hidden="true">▥</span>Results</a>
         <a class="nav-item" href="#evidence-section"><span class="nav-icon" aria-hidden="true">≡</span>Evidence IDs</a>
       </nav>
-      <div class="sidebar-bottom"><span id="mode" class="demo-label">● LIVE SANDBOX</span><p>Controlled faults only. Graph claims come from the self-run HydraDB engine.</p><span class="sidebar-foot">TRACK 1 / PROTOTYPE</span></div>
+      <div class="sidebar-bottom"><span id="mode" class="demo-label">● LIVE SANDBOX</span><p>Controlled faults only. Graph claims come from the self-run HydraDB engine.</p><div class="demo-tools"><button id="take-tour" type="button">Take tour</button><button id="signout" type="button">Sign out</button></div><span class="sidebar-foot">TRACK 1 / PROTOTYPE</span></div>
     </aside>
 
     <div class="app-main">
@@ -42,6 +42,35 @@
       </main>
     </div>
   </div>
+  <div id="demo-gate" class="demo-gate" role="dialog" aria-modal="true" aria-labelledby="demo-gate-title">
+    <div class="demo-gate-card">
+      <a class="brand" href="/" aria-label="Faultline home"><span class="brand-logo" aria-hidden="true"></span><span class="brand-wordmark">FAULT<span>LINE</span></span></a>
+      <p class="eyebrow">PUBLIC SANDBOX ACCESS</p>
+      <h2 id="demo-gate-title">Explore the incident lab.</h2>
+      <p>Use the shared demo account to investigate a controlled fault and see real HydraDB paths.</p>
+      <form id="demo-form">
+        <label for="demo-email">Demo email</label>
+        <input id="demo-email" name="email" type="email" value="judge@faultline.demo" autocomplete="off" required>
+        <label for="demo-password">Demo password</label>
+        <input id="demo-password" name="password" type="password" value="FaultlineDemo2026!" autocomplete="off" required>
+        <p class="demo-credentials-note">These values are prefilled for hackathon testing. This opens a temporary public demo session; it does not create a personal account.</p>
+        <p id="demo-error" class="demo-error" role="alert" hidden></p>
+        <button type="submit">Enter demo workspace <span aria-hidden="true">→</span></button>
+      </form>
+      <a class="demo-back" href="/">← Back to home</a>
+    </div>
+  </div>
+  <div id="tour" class="tour" role="dialog" aria-modal="true" aria-labelledby="tour-title" hidden>
+    <div id="tour-shade" class="tour-shade"></div>
+    <div id="tour-highlight" class="tour-highlight" aria-hidden="true"></div>
+    <div id="tour-card" class="tour-card">
+      <p id="tour-progress" class="eyebrow"></p>
+      <h2 id="tour-title"></h2>
+      <p id="tour-description"></p>
+      <div class="tour-actions"><button id="tour-skip" type="button">Skip tour</button><button id="tour-back" type="button">Back</button><button id="tour-next" type="button">Next</button></div>
+    </div>
+  </div>
+  <script src="/onboarding.js"></script>
   <script src="/app.js"></script>
 </body>
 </html>

@@ -66,6 +66,42 @@ def test_landing_and_live_workspace_routes_are_distinct():
         assert 'href="/workspace"' in landing
         assert 'id="trigger"' in workspace
         assert 'id="trigger"' not in landing
+        assert 'class="identity" href="/"' in workspace
+    finally:
+        server.shutdown();server.server_close()
+
+
+def test_public_demo_session_lifecycle():
+    app=SimpleNamespace(lock=threading.RLock())
+    server=make_server(app,port=0,public_origin='https://faultline.example')
+    thread=threading.Thread(target=server.serve_forever,daemon=True); thread.start()
+    base=f'http://127.0.0.1:{server.server_port}'
+
+    def request(path,data=None,cookie=None,origin='https://faultline.example'):
+        headers={'Host':'faultline.example','X-Faultline-Local':'sandbox',
+                 'Content-Type':'application/json'}
+        if origin is not None: headers['Origin']=origin
+        if cookie: headers['Cookie']=cookie
+        req=urllib.request.Request(base+path,headers=headers,
+            data=json.dumps(data).encode() if data is not None else None)
+        try:
+            with urllib.request.urlopen(req) as response:
+                return response.status,json.load(response),response.headers
+        except urllib.error.HTTPError as error:
+            return error.code,json.load(error),error.headers
+
+    try:
+        assert request('/api/demo/session')[1]['signed_in'] is False
+        credentials={'email':'judge@faultline.demo','password':'FaultlineDemo2026!'}
+        assert request('/api/demo/sign-in',credentials | {'password':'wrong'})[0]==401
+        assert request('/api/demo/sign-in',credentials,origin='https://other.example')[0]==403
+        status,result,headers=request('/api/demo/sign-in',credentials)
+        assert status==200 and result['signed_in'] is True
+        cookie=headers['Set-Cookie']
+        assert 'HttpOnly' in cookie and 'SameSite=Lax' in cookie and 'Secure' in cookie
+        assert request('/api/demo/session',cookie=cookie.split(';',1)[0])[1]['signed_in'] is True
+        assert request('/api/demo/sign-out',{},cookie=cookie.split(';',1)[0])[0]==200
+        assert request('/api/demo/session',cookie=cookie.split(';',1)[0])[1]['signed_in'] is False
     finally:
         server.shutdown();server.server_close()
 

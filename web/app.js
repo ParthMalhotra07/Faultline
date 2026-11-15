@@ -6,6 +6,60 @@ document.querySelectorAll('.nav-item').forEach(item=>item.addEventListener('clic
   item.classList.add('active');
 }));
 async function api(path,data){const r=await fetch(path,{method:data===undefined?'GET':'POST',headers:{'Content-Type':'application/json','X-Faultline-Local':'sandbox'},body:data===undefined?undefined:JSON.stringify(data)});const value=await r.json();if(!r.ok)throw Error(value.error||value.gap_reason||`Request failed (${r.status})`);return value;}
+const demoGate=$('demo-gate');
+const demoForm=$('demo-form');
+const demoError=$('demo-error');
+
+async function enterWorkspace(){
+  demoGate.hidden=true;
+  document.querySelector('.shell').inert=false;
+  document.body.classList.remove('access-open');
+  try{
+    await Promise.all([refresh(),loadResults()]);
+    notice('Public demo ready. Start with Trigger fault.');
+  }catch(error){notice(error.message,true);}
+  window.FaultlineTour.maybeStart();
+}
+
+demoForm.addEventListener('submit',async event=>{
+  event.preventDefault();
+  const submit=demoForm.querySelector('button[type="submit"]');
+  submit.disabled=true;
+  demoError.hidden=true;
+  try{
+    await api('/api/demo/sign-in',{
+      email:$('demo-email').value.trim(),
+      password:$('demo-password').value,
+    });
+    await enterWorkspace();
+  }catch(error){
+    demoError.textContent=error.message;
+    demoError.hidden=false;
+  }finally{submit.disabled=false;}
+});
+
+$('take-tour').addEventListener('click',()=>window.FaultlineTour.start(true));
+$('signout').addEventListener('click',async()=>{
+  try{
+    await api('/api/demo/sign-out',{});
+    window.FaultlineTour.stop(false);
+    document.querySelector('.shell').inert=true;
+    demoGate.hidden=false;
+    document.body.classList.add('access-open');
+    $('demo-email').focus();
+  }catch(error){notice(error.message,true);}
+});
+
+async function bootstrapDemo(){
+  try{
+    const session=await api('/api/demo/session');
+    if(session.signed_in){await enterWorkspace();return;}
+    $('demo-email').focus();
+  }catch(error){
+    demoError.textContent='Demo access is temporarily unavailable: '+error.message;
+    demoError.hidden=false;
+  }
+}
 function notice(text,error=false){$('notice').textContent=text;$('notice').className=error?'error':'';}
 function health(publicData){const byId=Object.fromEntries(publicData.observations.map(o=>[o.endpoint_id,o]));$('health').innerHTML=['checkout','refunds','renewals'].map(name=>{const o=byId[`endpoint:${name}`];return `<div class="health-card ${esc(o?.status||'unknown')}"><b>${esc(name)}</b><span>${o?(o.status==='healthy'?'● Healthy':'● Acceptance failed'):'○ Not monitored'}</span></div>`;}).join('');}
 function diagnosis(d,inspection){$('diagnosis-status').textContent=d.status.replaceAll('_',' ').toUpperCase();const title=d.selected_origin_id||({'ambiguous':'Evidence is tied','insufficient_evidence':'A dependency is missing','error':'Retrieval failed'}[d.status])||'No selection';$('diagnosis').innerHTML=`<div class="diagnosis-body"><p class="eyebrow">${d.selected_origin_id?'SUPPORTED HYPOTHESIS':'INVESTIGATION STATE'}</p><div class="origin">${esc(title)}</div><p>${esc(d.gap_reason||'Supported by the current dependency paths. Graph reachability is a diagnostic heuristic.')}</p>${inspection?`<p>Inspected <b>${esc(inspection.source_id)}</b> · ${inspection.estimated_bytes} bytes</p>`:''}${d.ranked_candidates.slice(0,4).map(c=>`<div class="rank"><b>${esc(c.entity_id)}</b><span>${c.failing_coverage} failing / ${c.healthy_contradictions} healthy</span></div>`).join('')}<p>${d.evidence_ids.length} evidence references · ${Number(d.elapsed_ms).toFixed(1)} ms</p></div>`;}
@@ -43,8 +97,7 @@ $('learn').onclick=()=>action('Inspecting bounded evidence and committing claims
 $('restore').onclick=()=>action('Restoring sandbox configuration',async()=>{await api('/local/restore',{});$('diagnosis-status').textContent='RESTORED';$('diagnosis').innerHTML='<div class="empty"><h3>Healthy again.</h3><p>Learned relationships remain. Trigger the refunds transfer incident to investigate with the improved map.</p></div>';});
 $('reset').onclick=()=>action('Resetting only this demo experiment',async()=>{await api('/local/reset-experiment',{});$('diagnosis-status').textContent='RESET';$('diagnosis').innerHTML='<div class="empty"><h3>Back to the initial map.</h3><p>Known handlers and calls remain. Configuration evidence is uninspected.</p></div>';});
 // Results and replay are added from verified artifacts, never placeholder metrics.
-refresh().then(()=>notice('Local sandbox ready. Start with Trigger fault.')).catch(e=>notice(e.message,true));
 const methodStyles={frozen:{label:'Frozen graph',color:'#777b87',dash:'3 5'},random:{label:'Random ingestion',color:'#a8a0c9',dash:'8 4'},adaptive:{label:'Gap-driven ingestion',color:'#e4e2ed',dash:''},'same-evidence-token-overlap':{label:'Same-evidence token overlap',color:'#cdb987',dash:'3 4'}};
 async function loadResults(){try{const data=await api('/api/results');const rows=data.rows.filter(r=>!r.method.startsWith('ablation'));$('results-section').hidden=false;$('result-caption').textContent=`Controlled executable commerce fixtures · protocol ${data.protocol} · ${data.cases_per_seed} distinct held-out scenarios × ${data.seeds.length} fixed seeds (${data.seeds.join(', ')}) · counts pooled across seeds. Two telemetry sources; no statistical superiority claim.`;let svg='<svg viewBox="0 0 1080 280" role="img" aria-label="Actual held-out top-1 accuracy over six learning incidents">';const x=r=>75+r*155,y=v=>220-v*1.75;for(const value of [0,25,50,75,100])svg+=`<line class="gridline" x1="75" y1="${y(value)}" x2="1005" y2="${y(value)}"/><text class="chart-label" x="58" y="${y(value)+4}" text-anchor="end">${value}%</text>`;for(let round=0;round<=6;round++)svg+=`<text class="chart-label" x="${x(round)}" y="243" text-anchor="middle">${round}</text>`;svg+='<text class="chart-label" x="75" y="24">Held-out top-1 accuracy (%)</text><text class="chart-label" x="540" y="270" text-anchor="middle">Learning incidents processed</text>';for(const [method,style]of Object.entries(methodStyles)){const points=rows.filter(r=>r.method===method).sort((a,b)=>a.round-b.round);svg+=`<polyline fill="none" stroke="${style.color}" stroke-width="${method==='random'?4:2}" stroke-dasharray="${style.dash}" points="${points.map(r=>`${x(r.round)},${y(r.accuracy*100)}`).join(' ')}"/>`;for(const r of points)svg+=`<circle cx="${x(r.round)}" cy="${y(r.accuracy*100)}" r="${method==='random'?5:3}" fill="${style.color}" data-method="${method}" data-round="${r.round}" data-correct="${r.correct}" data-total="${r.total}"><title>${esc(style.label)} · round ${r.round}: ${r.correct}/${r.total} correct, ${r.abstentions} abstentions, ${r.errors} errors</title></circle>`;}$('chart').innerHTML=svg+'</svg>';$('result-legend').innerHTML=Object.entries(methodStyles).map(([m,s])=>`<span><i style="background:${s.color}"></i>${esc(s.label)}</span>`).join('');const ablation=data.rows.find(r=>r.method.startsWith('ablation')),adaptive=data.rows.find(r=>r.method==='adaptive'&&r.round===6);$('ablation').textContent=`Structural ablation: removing pricing → currency claims from an isolated final graph changed correct answers from ${adaptive.correct}/${adaptive.total} to ${ablation.correct}/${ablation.total}. This supports a structural effect on these fixtures. Random ingestion also reaches ${adaptive.correct}/${adaptive.total} after both sources are acquired. Token overlap is lexical retrieval, not a semantic/vector baseline.`;const details=document.createElement('details');details.className='result-counts';details.innerHTML='<summary>All observed counts, abstentions and errors</summary><div>'+data.rows.map(r=>`<p>${esc(methodStyles[r.method]?.label||'Ablation: no pricing → currency')} · round ${r.round}: <b>${r.correct}/${r.total}</b> correct · ${r.abstentions} abstentions · ${r.errors} errors</p>`).join('')+'</div>';$('results-section').append(details);}catch(e){notice('Measured results unavailable: '+e.message,true);}}
 $('replay').onclick=async()=>{document.querySelectorAll('button').forEach(b=>b.disabled=true);try{const r=await api('/api/replay');replay=true;$('mode').textContent='◷ RECORDED DEVELOPMENT RUN';health(r.public_input);diagnosis(r.after,r.inspection);graph(r.graph);$('evidence').textContent=JSON.stringify({before:r.before,after:r.after,inspection:r.inspection,ledger:r.ledger},null,2);notice('Recorded pilot replay. These are saved HydraDB paths and evidence; no live fault or graph mutation occurred.');$('diagnosis').scrollIntoView({behavior:'smooth',block:'center'});}catch(e){notice(e.message,true);}finally{document.querySelectorAll('button').forEach(b=>b.disabled=false);}};
-loadResults();
+bootstrapDemo();

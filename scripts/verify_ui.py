@@ -42,6 +42,11 @@ with sync_playwright() as pw:
         response=page.goto(BASE+'/workspace',wait_until='networkidle')
         assert response.status==200
         expect(page).to_have_url(BASE+'/workspace')
+        expect(page.locator('#demo-gate')).to_be_visible()
+        page.locator('#demo-form button[type="submit"]').click()
+        expect(page.locator('#demo-gate')).to_be_hidden()
+        expect(page.locator('#tour')).to_be_visible()
+        page.locator('#tour-skip').click()
         expect(page.locator('#graph svg')).to_be_visible()
         report['browser_version']=browser.version
         click('reset','/local/reset-experiment')

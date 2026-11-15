@@ -11,3 +11,23 @@
 @media(max-width:1000px){.hero{padding-top:125px}.section-head{gap:45px}.principles{gap:20px}.principles article+article{padding-left:20px}.workflow-stages{grid-template-columns:repeat(3,1fr);row-gap:25px}.preview-body{padding:40px 30px}.demo-sidebar{width:190px}}
 @media(max-width:700px){.wrap{width:calc(100% - 38px)}.header{height:66px}.brand{font-size:19px;gap:9px}.brand-symbol{width:27px;height:27px}.nav-actions{gap:10px}.nav-contact,.nav-explore{display:none}.nav-workspace{font-size:12px;padding:10px 12px;border-radius:8px}.nav-workspace span{display:none}.hero{padding-top:92px;padding-bottom:55px}.hero-kicker{font-size:10px;margin-bottom:18px}.hero h1{font-size:clamp(44px,10.5vw,64px);letter-spacing:-.06em}.hero-sub{display:block;margin:30px 0 44px}.hero-sub p{font-size:15px}.hero-sub .text-link{display:inline-block;margin-top:23px}.hero-window{height:470px}.demo-sidebar{display:none}.window-toolbar{font-size:9px;padding:0 15px;gap:8px}.window-toolbar>span:last-child{display:none}.preview-body{padding:31px 18px}.preview-intro h2{font-size:23px}.preview-intro>p:last-child{font-size:12px}.preview-grid{grid-template-columns:1fr;gap:10px;margin-top:24px}.preview-card{min-height:0;padding:14px}.preview-card h3{padding-bottom:9px}.preview-list{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.preview-list>div{display:block;border-bottom:0;padding:9px 0}.preview-list>div span{display:block;text-align:left;margin-top:5px}.preview-graph-card{display:none}.preview-footnote{font-size:10px;margin-top:15px}.section{padding:80px 0 65px}.workflow-strip{padding:43px 0 60px}.workflow-strip>p{font-size:9px}.workflow-stages{grid-template-columns:repeat(2,1fr);gap:22px 8px;margin-top:28px}.workflow-stages span{font-size:21px}.workflow-stages b{font-size:15px}.overview{padding-top:45px}.statement{font-size:30px}.principles{grid-template-columns:1fr;gap:30px;margin-top:48px}.principles article+article{border-left:0;border-top:1px solid var(--line);padding:26px 0 0}.figure{height:175px;max-width:370px;margin-inline:auto}.section-head{grid-template-columns:1fr;gap:24px;margin-bottom:34px}.section-head h2{font-size:clamp(38px,9vw,49px)}.section-head>div>p:not(.eyebrow){font-size:15px;margin-bottom:18px}.visual-panel{height:410px}.visual-caption{left:18px;top:20px;font-size:9px}.visual-inset,.source-window,.results-window{width:calc(100% - 30px);margin-top:65px;padding:18px}.feature-health{gap:7px}.feature-health>div{min-height:98px;padding:16px 8px}.feature-health b{font-size:12px;margin-bottom:16px}.feature-health span{font-size:10px}.inset-heading,.source-window-head,.results-head{font-size:13px}.source-window-head span:last-child{display:none}.source-row{gap:8px;font-size:11px}.source-row small{font-size:10px}.source-row em{font-size:9px}.feature-footer{grid-template-columns:1fr;gap:9px;margin-top:22px}.feature-footer p{font-size:13px}.graph-visual-inner{gap:6px;padding:0 12px;margin-top:80px}.graph-summary{padding:13px 8px}.graph-summary span{font-size:28px}.graph-summary small{font-size:8px}.feature-edges{padding:30px 15px 0;gap:6px}.feature-edges>span{font-size:10px;padding:8px}.feature-edges>i{font-size:10px}.graph-caption{font-size:10px;margin-top:20px}.results-window{margin-top:60px}.feature-chart{height:175px}.feature-legend{gap:9px;font-size:9px}.why-head{grid-template-columns:1fr;gap:22px}.why-head h2{font-size:41px}.why-head>p:last-child{font-size:15px}.why-grid{grid-template-columns:1fr;gap:28px;margin-top:50px}.why-grid h3{margin:14px 0 8px}.closing{display:block;padding:95px 0}.closing h2{font-size:47px}.closing .button{margin-top:32px}.footer-main{display:block;padding:48px 0}.footer-main nav{margin-top:32px}.footer-bottom{display:block;font-size:10px}.footer-bottom span{display:block;margin-bottom:10px}}
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{animation:none!important;transition:none!important}.reveal-ready{opacity:1;transform:none}}
+
+/* Supplied FAULTLINE mark. The bitmap stays unchanged; CSS frames its icon. */
+.brand-logo {
+  display: inline-block;
+  flex: 0 0 43px;
+  width: 43px;
+  height: 43px;
+  border-radius: 12px;
+  background: url('/faultline-logo.png') -27px -10px / 113px 88px no-repeat;
+}
+.brand-wordmark {
+  font-size: 16px;
+  font-weight: 650;
+  letter-spacing: .18em;
+}
+.brand-wordmark span { color: #9573f5; }
+@media (max-width: 700px) {
+  .brand-logo { flex-basis: 37px; width: 37px; height: 37px; background-size: 99px 77px; background-position: -24px -9px; }
+  .brand-wordmark { font-size: 12px; letter-spacing: .13em; }
+}
