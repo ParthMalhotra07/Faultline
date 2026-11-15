@@ -1,0 +1,44 @@
+{
+  "status": "DRAFT_NOT_FROZEN",
+  "source_version": "00a3aed10892ce0eda46c47f684001f1d01eaca1bba9138b7470fc36d6145edb",
+  "split": {
+    "development": [
+      "development-01",
+      "development-02"
+    ],
+    "learning": [
+      "learning-01",
+      "learning-02",
+      "learning-03",
+      "learning-04",
+      "learning-05",
+      "learning-06"
+    ],
+    "heldout": [
+      "heldout-01",
+      "heldout-02",
+      "heldout-03",
+      "heldout-04",
+      "heldout-05",
+      "heldout-06",
+      "heldout-07",
+      "heldout-08",
+      "heldout-09",
+      "heldout-10",
+      "heldout-11",
+      "heldout-12"
+    ]
+  },
+  "file_hashes": {
+    "fixtures/private/development.json": "4bc7c2fd3ddfb357323073b909944e60f1c64c06eda95053ccec6a1411a5399d",
+    "fixtures/private/learning.json": "b3cc233da0c295043feb10c0863fabd26c09dc891b81f537712c1450f4b48c04",
+    "fixtures/private/heldout.json": "4852798d4f212368d9c4b5d58304519abad180ad37f076fee886871182dbf661"
+  },
+  "rounds": 6,
+  "snapshot_points": 7,
+  "budgets": null,
+  "seeds": null,
+  "ranking": "coverage descending, contradictions ascending, shortest path; evidence ties abstain",
+  "holdout_inspections": false,
+  "holdout_executed": false
+}
