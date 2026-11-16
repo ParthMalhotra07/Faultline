@@ -32,9 +32,15 @@ five-step tour. Then:
    **Refunds · transfer incident**, trigger it, and investigate. The earlier
    relationship supports this different incident without another inspection.
 
-The app is a shared single-writer demo. Reset before recording, and avoid a
-second viewer changing its state during the walkthrough. Render's free disk is
-ephemeral, so a cold start or redeploy can reset the hosted graph.
+The app is a shared single-writer demo. **Reset experiment graph before every
+new recording take**, then confirm the source cards have no checkmarks. **Restore
+app** clears the active fault but deliberately keeps learned claims; a second
+investigation can therefore return a supported hypothesis immediately. Avoid a
+second viewer changing the shared state during a walkthrough. Render's free
+disk is ephemeral, so a cold start or redeploy can reset the hosted graph.
+With both sources learned in an earlier practice session, the checkout demo
+can rank an inventory hypothesis ahead of currency. The supported badge means
+a graph path exists; it is not a correctness guarantee for every graph state.
 
 ## Where the graph does real work
 
