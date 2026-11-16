@@ -5,6 +5,9 @@ import urllib.error
 import uuid
 from types import SimpleNamespace
 from faultline.api import App, make_server
+from faultline.ingestion.inspector import Inspector
+from faultline.ingestion.commit import ingest
+from faultline.learning.runner import DEFAULT_BUDGET
 
 
 def test_explicit_public_origin_allows_only_that_host_and_same_origin_writes():
@@ -139,3 +142,31 @@ def test_real_http_workflow_and_private_boundary(tmp_path):
         assert all(o['status']=='healthy' for o in request('/api/observations')[1]['observations'])
     finally:
         server.shutdown(); server.server_close(); app.graph.reset()
+
+
+def test_public_demo_abstains_when_learned_paths_do_not_distinguish_settings(tmp_path):
+    """A shorter graph path alone cannot establish the changed setting's cause."""
+    app=App('api-ambiguity-'+uuid.uuid4().hex,tmp_path)
+    server=None
+    try:
+        for round_number,source_id in enumerate(('source:shared','source:checkout'),start=1):
+            records=Inspector(app.catalog,DEFAULT_BUDGET,app.graph.version,
+                              app.graph.manifest['sources']).inspect(source_id)
+            ingest(app.graph,app.catalog,records,round_number)
+        app.trigger('demo-currency')
+        server=make_server(app,port=0)
+        thread=threading.Thread(target=server.serve_forever,daemon=True)
+        thread.start()
+        req=urllib.request.Request(f'http://127.0.0.1:{server.server_port}/api/diagnose',
+            headers={'X-Faultline-Local':'sandbox','Content-Type':'application/json'},data=b'{}')
+        with urllib.request.urlopen(req,timeout=15) as response:
+            answer=json.load(response)
+        assert answer['status']=='ambiguous'
+        assert answer['selected_origin_id'] is None
+        assert {'config:currency','config:inventory'} <= {
+            row['entity_id'] for row in answer['ranked_candidates']}
+        assert 'shorter' in answer['gap_reason'].lower()
+    finally:
+        if server:
+            server.shutdown();server.server_close()
+        app.graph.reset()

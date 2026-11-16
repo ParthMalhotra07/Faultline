@@ -286,6 +286,12 @@ denominator. The recorded counts are:
 | Frozen graph | 0/36 | 0/36 | 0/36 | 0/36 |
 | Same-evidence token overlap | 0/36 | 0/36 | 12/36 | 12/36 |
 
+These are the frozen **v1 ranking-policy** results. The interactive demo now
+adds a conservative display guard: if two changed settings cover the same
+failed and healthy endpoints, a shorter graph path alone no longer selects a
+cause. The live response says **ambiguous** in that case. This post-evaluation
+guard was not part of v1 and has no separate held-out accuracy claim.
+
 The adaptive advantage is at the **first** acquisition. Once the two available
 sources are known, adaptive and random tie. Removing pricing-to-currency
 claims in an isolated final graph changes 36/36 correct to **24/36**. That

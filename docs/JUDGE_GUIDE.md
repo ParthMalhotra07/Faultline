@@ -39,8 +39,10 @@ investigation can therefore return a supported hypothesis immediately. Avoid a
 second viewer changing the shared state during a walkthrough. Render's free
 disk is ephemeral, so a cold start or redeploy can reset the hosted graph.
 With both sources learned in an earlier practice session, the checkout demo
-can rank an inventory hypothesis ahead of currency. The supported badge means
-a graph path exists; it is not a correctness guarantee for every graph state.
+previously ranked an inventory hypothesis ahead of currency using a shorter
+path. The live app now abstains as **ambiguous** when those candidates explain
+the same failed and healthy endpoints. The frozen v1 chart still reports the
+original policy; this later safety guard has no separate held-out score.
 
 ## Where the graph does real work
 

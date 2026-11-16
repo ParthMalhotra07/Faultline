@@ -10,6 +10,7 @@ import time
 from urllib.parse import urlsplit
 from faultline.contracts import PublicIncident
 from faultline.diagnosis.ranker import diagnose
+from faultline.diagnosis.live_guard import guard_live_diagnosis
 from faultline.evaluation.controller import Controller, load_scenarios
 from faultline.graph.adapter import GraphError
 from faultline.graph.store import GraphStore
@@ -211,10 +212,12 @@ def make_server(app,port=8765,public_origin=None,bind_host='127.0.0.1',allow_rai
                             app.restore(); app.graph.reset(); app.graph.seed()
                             return self.send(200,dict(manifest_hash=app.graph.manifest_hash()))
                         if path=='/api/diagnose':
-                            app.last=diagnose(app.graph,app.public).model_dump()
+                            app.last=guard_live_diagnosis(diagnose(app.graph,app.public).model_dump())
                             return self.send(503 if app.last['status']=='error' else 200,app.last)
                         if path=='/api/learn':
                             trace=learn_round(app.graph,app.public,app.catalog)
+                            trace['before']=guard_live_diagnosis(trace['before'])
+                            trace['after']=guard_live_diagnosis(trace['after'])
                             app.last=trace['after']
                             return self.send(200,{k:trace[k] for k in ['before','after','inspection','ledger','budget','exhausted']})
                     return self.send(404,dict(error='Route not found'))
